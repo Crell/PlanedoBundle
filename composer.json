@@ -17,8 +17,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Crell\\Bundle\\PlanedoBundle\\Tests\\": "tests",
-            "Crell\\Bundle\\PlanedoBundle\\Benchmarks\\": "benchmarks"
+            "Crell\\Bundle\\Planedo\\Tests\\": "tests",
+            "Crell\\Bundle\\Planedo\\Benchmarks\\": "benchmarks"
         }
     },
     "extra": {

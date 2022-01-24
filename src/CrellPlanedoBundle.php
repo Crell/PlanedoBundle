@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Crell\Bundle\PlanedoBundle;
+namespace Crell\Bundle\Planedo;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
