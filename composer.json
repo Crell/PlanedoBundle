@@ -20,5 +20,10 @@
             "Crell\\Bundle\\PlanedoBundle\\Tests\\": "tests",
             "Crell\\Bundle\\PlanedoBundle\\Benchmarks\\": "benchmarks"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }
