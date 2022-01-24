@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://www.garfieldtech.com/">
+  <channel>
+    <title>Fake Blog</title>
+    <link>https://www.example.com/</link>
+    <description/>
+    <language>en</language>
+    <item>
+      <title>Title A</title>
+      <link>https://www.example.com/blog/a</link>
+      <description>Description A</description>
+      <pubDate>Wed, 01 Dec 2021 16:27:46 +0000</pubDate>
+      <dc:creator>Larry</dc:creator>
+      <guid isPermaLink="false">295 at https://www.garfieldtech.com</guid>
+    </item>
+    <item>
+      <title>Title B</title>
+      <link>https://www.example.com/blog/b</link>
+      <description>Description B</description>
+      <pubDate>Tue, 30 Nov 2021 17:13:06 +0000</pubDate>
+      <dc:creator>Larry</dc:creator>
+      <guid isPermaLink="false">294 at https://www.garfieldtech.com</guid>
+    </item>
+    <item>
+      <title>Title C</title>
+      <link>https://www.example.com/blog/c</link>
+      <description>Description C</description>
+      <pubDate>Fri, 17 Nov 2021 20:07:05 +0000</pubDate>
+      <dc:creator>Larry</dc:creator>
+      <guid isPermaLink="false">292 at https://www.garfieldtech.com</guid>
+    </item>
+  </channel>
+</rss>

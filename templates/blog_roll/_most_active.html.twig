@@ -1,0 +1,16 @@
+{# blog_roll/_most_active.html.twig #}
+{% if feeds|length > 0 %}
+    <aside class="most-active">
+        <h2>Popular feeds</h2>
+        <ul>
+            {% for feed in feeds  %}
+                {% if feed.link %}
+                    <li><a href="{{ feed.link }}">{{ feed.title }}</a></li>
+                {% else %}
+                    <li>{{ feed.title }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <div><a href="{{ path('blog_roll') }}">All feeds</a></div>
+    </aside>
+{% endif %}

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://www.garfieldtech.com/">
+  <channel>
+    <title>GarfieldTech - Technical thoughts, tutorials, and musings</title>
+    <link>https://www.garfieldtech.com/</link>
+    <description/>
+    <language>en</language>
+    
+    <item>
+  <title>Advanced PHPUnit shenanigans</title>
+  <link>https://www.garfieldtech.com/blog/phpunit-data-providers-advanced</link>
+  <description>
+&lt;article data-history-node-id="295" role="article" about="https://www.garfieldtech.com/blog/phpunit-data-providers-advanced" class="node node--type-story node--promoted node--view-mode-teaser clearfix"&gt;&lt;header&gt;&lt;h2 class="node__title"&gt;
+        &lt;a href="https://www.garfieldtech.com/blog/phpunit-data-providers-advanced" rel="bookmark"&gt;&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;Advanced PHPUnit shenanigans&lt;/span&gt;
+&lt;/a&gt;
+      &lt;/h2&gt;
+        
+          &lt;div class="node__meta"&gt;
+        &lt;article typeof="schema:Person" about="https://www.garfieldtech.com/user/larry" class="profile"&gt;&lt;/article&gt;&lt;span&gt;
+          Submitted by &lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span lang="" about="https://www.garfieldtech.com/user/larry" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Larry&lt;/span&gt;&lt;/span&gt;
+ on &lt;span class="field field--name-created field--type-created field--label-hidden"&gt;1 September 2021 - 11:27am&lt;/span&gt;
+        &lt;/span&gt;
+        
+      &lt;/div&gt;
+      &lt;/header&gt;&lt;div class="node__content clearfix"&gt;
+    
+            &lt;div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;In my &lt;a href="https://peakd.com/hive-168588/@crell/fun-with-phpunit-data-providers"&gt;last post&lt;/a&gt;, we talked about PHPUnit's data providers, and how to leverage them to write more maintainable tests. Today, I want to talk about two more test-writing techniques that I've found to be very helpful.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Continue reading this post on &lt;a href="https://peakd.com/hive-168588/@crell/advanced-phpunit-shenanigans"&gt;PeakD&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+        &lt;div class="node__links"&gt;
+    &lt;ul class="links inline"&gt;&lt;li class="node-readmore"&gt;&lt;a href="https://www.garfieldtech.com/blog/phpunit-data-providers-advanced" rel="tag" title="Advanced PHPUnit shenanigans" hreflang="en"&gt;Read more&lt;span class="visually-hidden"&gt; about Advanced PHPUnit shenanigans&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/article&gt;</description>
+  <pubDate>Wed, 01 Sep 2021 16:27:46 +0000</pubDate>
+    <dc:creator>Larry</dc:creator>
+    <guid isPermaLink="false">295 at https://www.garfieldtech.com</guid>
+    </item>
+<item>
+  <title>Fun with PHPUnit Data Providers</title>
+  <link>https://www.garfieldtech.com/blog/phpunit-data-providers</link>
+  <description>
+&lt;article data-history-node-id="294" role="article" about="https://www.garfieldtech.com/blog/phpunit-data-providers" class="node node--type-story node--promoted node--view-mode-teaser clearfix"&gt;&lt;header&gt;&lt;h2 class="node__title"&gt;
+        &lt;a href="https://www.garfieldtech.com/blog/phpunit-data-providers" rel="bookmark"&gt;&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;Fun with PHPUnit Data Providers&lt;/span&gt;
+&lt;/a&gt;
+      &lt;/h2&gt;
+        
+          &lt;div class="node__meta"&gt;
+        &lt;article typeof="schema:Person" about="https://www.garfieldtech.com/user/larry" class="profile"&gt;&lt;/article&gt;&lt;span&gt;
+          Submitted by &lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span lang="" about="https://www.garfieldtech.com/user/larry" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Larry&lt;/span&gt;&lt;/span&gt;
+ on &lt;span class="field field--name-created field--type-created field--label-hidden"&gt;24 August 2021 - 12:13pm&lt;/span&gt;
+        &lt;/span&gt;
+        
+      &lt;/div&gt;
+      &lt;/header&gt;&lt;div class="node__content clearfix"&gt;
+    
+            &lt;div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;Most PHP developers are familiar with PHPUnit these days.  It is the most widely used testing framework for PHP by a wide margin (although others do exist).  One of its more under-utilized features, though is data providers.&lt;/p&gt;
+&lt;p&gt;Data providers are a PHPUnit feature (and many testing frameworks have an equivalent) that lets you run a single test method multiple times but with different data.  Often it's presented as a way to save typing, but I find it is also a useful architectural tool, too.  And there are ways to use them that are even nicer than what most people tend to do.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Continue reading this post on &lt;a href="https://peakd.com/hive-168588/@crell/fun-with-phpunit-data-providers"&gt;PeakD&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+        &lt;div class="node__links"&gt;
+    &lt;ul class="links inline"&gt;&lt;li class="node-readmore"&gt;&lt;a href="https://www.garfieldtech.com/blog/phpunit-data-providers" rel="tag" title="Fun with PHPUnit Data Providers" hreflang="en"&gt;Read more&lt;span class="visually-hidden"&gt; about Fun with PHPUnit Data Providers&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/article&gt;</description>
+  <pubDate>Tue, 24 Aug 2021 17:13:06 +0000</pubDate>
+    <dc:creator>Larry</dc:creator>
+    <guid isPermaLink="false">294 at https://www.garfieldtech.com</guid>
+    </item>
+<item>
+  <title>The case for partials and pipes in PHP</title>
+  <link>https://www.garfieldtech.com/blog/case-for-partial-pipes</link>
+  <description>
+&lt;article data-history-node-id="292" role="article" about="https://www.garfieldtech.com/blog/case-for-partial-pipes" class="node node--type-story node--promoted node--view-mode-teaser clearfix"&gt;&lt;header&gt;&lt;h2 class="node__title"&gt;
+        &lt;a href="https://www.garfieldtech.com/blog/case-for-partial-pipes" rel="bookmark"&gt;&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;The case for partials and pipes in PHP&lt;/span&gt;
+&lt;/a&gt;
+      &lt;/h2&gt;
+        
+          &lt;div class="node__meta"&gt;
+        &lt;article typeof="schema:Person" about="https://www.garfieldtech.com/user/larry" class="profile"&gt;&lt;/article&gt;&lt;span&gt;
+          Submitted by &lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span lang="" about="https://www.garfieldtech.com/user/larry" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Larry&lt;/span&gt;&lt;/span&gt;
+ on &lt;span class="field field--name-created field--type-created field--label-hidden"&gt;23 June 2021 - 3:07pm&lt;/span&gt;
+        &lt;/span&gt;
+        
+      &lt;/div&gt;
+      &lt;/header&gt;&lt;div class="node__content clearfix"&gt;
+    
+            &lt;div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;The &lt;a href="https://wiki.php.net/rfc/partial_function_application"&gt;Partial Function Application RFC&lt;/a&gt; is currently in voting, and right now it's a close vote to the negative. I wanted to take this opportunity to try and make the broader case for partial application and for its related RFC, the pipe operator, in a way that is more appropriate for a blog post than the RFC body (which is, by design, more concerned with the finer details of "what").&lt;/p&gt;
+&lt;p&gt;The main pushback on the RFC so far is that the benefits don't outweigh the cost of yet-more-syntax in the language. Which is a fair position to hold, albeit one I hope to convince you is incorrect. That is, I believe the benefits vastly outweigh the syntax and implementation cost.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Continue reading this post on &lt;a href="https://peakd.com/hive-168588/@crell/the-case-for-partials-and-pipes-in-php"&gt;PeakD&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+        &lt;div class="node__links"&gt;
+    &lt;ul class="links inline"&gt;&lt;li class="node-readmore"&gt;&lt;a href="https://www.garfieldtech.com/blog/case-for-partial-pipes" rel="tag" title="The case for partials and pipes in PHP" hreflang="en"&gt;Read more&lt;span class="visually-hidden"&gt; about The case for partials and pipes in PHP&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/article&gt;</description>
+  <pubDate>Wed, 23 Jun 2021 20:07:05 +0000</pubDate>
+    <dc:creator>Larry</dc:creator>
+    <guid isPermaLink="false">292 at https://www.garfieldtech.com</guid>
+    </item>
+<item>
+  <title>Good technical writing is hard</title>
+  <link>https://www.garfieldtech.com/blog/good-technical-writing</link>
+  <description>
+&lt;article data-history-node-id="291" role="article" about="https://www.garfieldtech.com/blog/good-technical-writing" class="node node--type-story node--promoted node--view-mode-teaser clearfix"&gt;&lt;header&gt;&lt;h2 class="node__title"&gt;
+        &lt;a href="https://www.garfieldtech.com/blog/good-technical-writing" rel="bookmark"&gt;&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;Good technical writing is hard&lt;/span&gt;
+&lt;/a&gt;
+      &lt;/h2&gt;
+        
+          &lt;div class="node__meta"&gt;
+        &lt;article typeof="schema:Person" about="https://www.garfieldtech.com/user/larry" class="profile"&gt;&lt;/article&gt;&lt;span&gt;
+          Submitted by &lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span lang="" about="https://www.garfieldtech.com/user/larry" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Larry&lt;/span&gt;&lt;/span&gt;
+ on &lt;span class="field field--name-created field--type-created field--label-hidden"&gt;31 May 2021 - 8:07pm&lt;/span&gt;
+        &lt;/span&gt;
+        
+      &lt;/div&gt;
+      &lt;/header&gt;&lt;div class="node__content clearfix"&gt;
+    
+            &lt;div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;A few days ago, I randomly tossed this out on &lt;a href="https://twitter.com/Crell/status/1397935606534189056"&gt;Twitter&lt;/a&gt; without context:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Technical writing requires assuming the reader is simultaneously highly intelligent and utterly ignorant, without making them feel like you think they're utterly ignorant.&lt;/p&gt;
+&lt;p&gt;That shit is hard, yo.
+&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Someone asked for ideas on how to achieve that goal, and it seemed like a topic worthy of discussion so here we are.&lt;/p&gt;
+&lt;h3&gt;Technical writing is not for Dummies&lt;/h3&gt;
+&lt;p&gt;I would expand the statement above a bit, actually.  Good technical writing requires:&lt;/p&gt;&lt;/div&gt;
+        &lt;div class="node__links"&gt;
+    &lt;ul class="links inline"&gt;&lt;li class="node-readmore"&gt;&lt;a href="https://www.garfieldtech.com/blog/good-technical-writing" rel="tag" title="Good technical writing is hard" hreflang="en"&gt;Read more&lt;span class="visually-hidden"&gt; about Good technical writing is hard&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/article&gt;</description>
+  <pubDate>Tue, 01 Jun 2021 01:07:25 +0000</pubDate>
+    <dc:creator>Larry</dc:creator>
+    <guid isPermaLink="false">291 at https://www.garfieldtech.com</guid>
+    </item>
+<item>
+  <title>One year of functional PHP; now in Russian!</title>
+  <link>https://www.garfieldtech.com/blog/thinking-functionally-php-russian</link>
+  <description>
+&lt;article data-history-node-id="290" role="article" about="https://www.garfieldtech.com/blog/thinking-functionally-php-russian" class="node node--type-story node--promoted node--view-mode-teaser clearfix"&gt;&lt;header&gt;&lt;h2 class="node__title"&gt;
+        &lt;a href="https://www.garfieldtech.com/blog/thinking-functionally-php-russian" rel="bookmark"&gt;&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;One year of functional PHP; now in Russian!&lt;/span&gt;
+&lt;/a&gt;
+      &lt;/h2&gt;
+        
+          &lt;div class="node__meta"&gt;
+        &lt;article typeof="schema:Person" about="https://www.garfieldtech.com/user/larry" class="profile"&gt;&lt;/article&gt;&lt;span&gt;
+          Submitted by &lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span lang="" about="https://www.garfieldtech.com/user/larry" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Larry&lt;/span&gt;&lt;/span&gt;
+ on &lt;span class="field field--name-created field--type-created field--label-hidden"&gt;11 May 2021 - 8:14pm&lt;/span&gt;
+        &lt;/span&gt;
+        
+      &lt;/div&gt;
+      &lt;/header&gt;&lt;div class="node__content clearfix"&gt;
+    
+            &lt;div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;A year ago, I published my first solo book, &lt;a href="https://leanpub.com/thinking-functionally-in-php"&gt;Thinking Functionally in PHP&lt;/a&gt;.  The reception has been extremely positive; almost everyone that's read it (that has bothered to talk to me about it) has found it clear, helpful, and enlightening.  Mission accomplished!&lt;/p&gt;
+&lt;p&gt;To celebrate the one year anniversary of the book's publication, I am happy to make two announcements.&lt;/p&gt;
+&lt;p&gt;First, Thinking Functionally in PHP is &lt;a href="https://leanpub.com/thinkingfunctionallyinphprussian"&gt;now available in Russian&lt;/a&gt;!  The translation is by &lt;a href="https://twitter.com/lex111_"&gt;Alexey Pyltsyn&lt;/a&gt;, who is responsible for the &lt;a href="https://www.php.net/manual/ru/index.php"&gt;Russian translation of the PHP documentation&lt;/a&gt; as well as &lt;a href="https://leanpub.com/u/lex111"&gt;numerous other tech book translations&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+        &lt;div class="node__links"&gt;
+    &lt;ul class="links inline"&gt;&lt;li class="node-readmore"&gt;&lt;a href="https://www.garfieldtech.com/blog/thinking-functionally-php-russian" rel="tag" title="One year of functional PHP; now in Russian!" hreflang="en"&gt;Read more&lt;span class="visually-hidden"&gt; about One year of functional PHP; now in Russian!&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/article&gt;</description>
+  <pubDate>Wed, 12 May 2021 01:14:22 +0000</pubDate>
+    <dc:creator>Larry</dc:creator>
+    <guid isPermaLink="false">290 at https://www.garfieldtech.com</guid>
+    </item>
+<item>
+  <title>I made a TYPO</title>
+  <link>https://www.garfieldtech.com/blog/starting-typo3</link>
+  <description>
+&lt;article data-history-node-id="289" role="article" about="https://www.garfieldtech.com/blog/starting-typo3" class="node node--type-story node--promoted node--view-mode-teaser clearfix"&gt;&lt;header&gt;&lt;h2 class="node__title"&gt;
+        &lt;a href="https://www.garfieldtech.com/blog/starting-typo3" rel="bookmark"&gt;&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;I made a TYPO&lt;/span&gt;
+&lt;/a&gt;
+      &lt;/h2&gt;
+        
+          &lt;div class="node__meta"&gt;
+        &lt;article typeof="schema:Person" about="https://www.garfieldtech.com/user/larry" class="profile"&gt;&lt;/article&gt;&lt;span&gt;
+          Submitted by &lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span lang="" about="https://www.garfieldtech.com/user/larry" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Larry&lt;/span&gt;&lt;/span&gt;
+ on &lt;span class="field field--name-created field--type-created field--label-hidden"&gt;5 May 2021 - 4:55pm&lt;/span&gt;
+        &lt;/span&gt;
+        
+      &lt;/div&gt;
+      &lt;/header&gt;&lt;div class="node__content clearfix"&gt;
+    
+            &lt;div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;I am a firm believer in "anything worth doing is worth doing right."  So when given the opportunity to get paid to do that, it's hard for me to say no.  Which is why I didn't.&lt;/p&gt;
+&lt;p&gt;I am happy to report that this is my first week in my new role as Staff Engineer on the TYPO3 core contributors team.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Continue reading on &lt;a href="https://peakd.com/php/@crell/i-made-a-typo"&gt;PeakD&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;!--break --&gt;&lt;/div&gt;
+        &lt;div class="node__links"&gt;
+    &lt;ul class="links inline"&gt;&lt;li class="node-readmore"&gt;&lt;a href="https://www.garfieldtech.com/blog/starting-typo3" rel="tag" title="I made a TYPO" hreflang="en"&gt;Read more&lt;span class="visually-hidden"&gt; about I made a TYPO&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/article&gt;</description>
+  <pubDate>Wed, 05 May 2021 21:55:03 +0000</pubDate>
+    <dc:creator>Larry</dc:creator>
+    <guid isPermaLink="false">289 at https://www.garfieldtech.com</guid>
+    </item>
+<item>
+  <title>Object properties, part 2: Examples</title>
+  <link>https://www.garfieldtech.com/blog/php-properties-immutability-examples</link>
+  <description>
+&lt;article data-history-node-id="288" role="article" about="https://www.garfieldtech.com/blog/php-properties-immutability-examples" class="node node--type-story node--promoted node--view-mode-teaser clearfix"&gt;&lt;header&gt;&lt;h2 class="node__title"&gt;
+        &lt;a href="https://www.garfieldtech.com/blog/php-properties-immutability-examples" rel="bookmark"&gt;&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;Object properties, part 2: Examples&lt;/span&gt;
+&lt;/a&gt;
+      &lt;/h2&gt;
+        
+          &lt;div class="node__meta"&gt;
+        &lt;article typeof="schema:Person" about="https://www.garfieldtech.com/user/larry" class="profile"&gt;&lt;/article&gt;&lt;span&gt;
+          Submitted by &lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span lang="" about="https://www.garfieldtech.com/user/larry" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Larry&lt;/span&gt;&lt;/span&gt;
+ on &lt;span class="field field--name-created field--type-created field--label-hidden"&gt;9 January 2021 - 6:33pm&lt;/span&gt;
+        &lt;/span&gt;
+        
+      &lt;/div&gt;
+      &lt;/header&gt;&lt;div class="node__content clearfix"&gt;
+    
+            &lt;div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;In my &lt;a href="https://peakd.com/hive-168588/@crell/object-properties-and-immutability"&gt;last post&lt;/a&gt;, I went over some of the pros and cons of various proposals for making PHP objects more immutable-ish, and the contexts in which they would be useful.  I also posted the link to the PHP Internals list, where it generated some &lt;a href="https://externals.io/message/112627"&gt;interesting if meandering discussion&lt;/a&gt; (as is par for the course on Internals).&lt;/p&gt;
+&lt;p&gt;One of the requests was for sample code to demonstrate why I felt particular feature proposals were better than others. Fair enough! This post is in response to that request, and I think it will help illuminate the challenges better.&lt;/p&gt;
+&lt;p&gt;For this exercise, I chose to experiment with a junior version of the PSR-7 request object as a concrete example. The code below is not exactly PSR-7; it's a representative sample of portions of a naive, slightly reduced scope version of PSR-7 requests only, and using all PHP 8.0 features available. The goal is not a complete working object, but sufficient real-world representative examples of situations that an immutability plan would need to address.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Continue reading this post on &lt;a href="https://peakd.com/hive-168588/@crell/object-properties-part-2-examples"&gt;PeakD&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+        &lt;div class="node__links"&gt;
+    &lt;ul class="links inline"&gt;&lt;li class="node-readmore"&gt;&lt;a href="https://www.garfieldtech.com/blog/php-properties-immutability-examples" rel="tag" title="Object properties, part 2: Examples" hreflang="en"&gt;Read more&lt;span class="visually-hidden"&gt; about Object properties, part 2: Examples&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/article&gt;</description>
+  <pubDate>Sun, 10 Jan 2021 00:33:31 +0000</pubDate>
+    <dc:creator>Larry</dc:creator>
+    <guid isPermaLink="false">288 at https://www.garfieldtech.com</guid>
+    </item>
+<item>
+  <title>Object properties and immutability</title>
+  <link>https://www.garfieldtech.com/blog/php-properties-immutability</link>
+  <description>
+&lt;article data-history-node-id="287" role="article" about="https://www.garfieldtech.com/blog/php-properties-immutability" class="node node--type-story node--promoted node--view-mode-teaser clearfix"&gt;&lt;header&gt;&lt;h2 class="node__title"&gt;
+        &lt;a href="https://www.garfieldtech.com/blog/php-properties-immutability" rel="bookmark"&gt;&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;Object properties and immutability&lt;/span&gt;
+&lt;/a&gt;
+      &lt;/h2&gt;
+        
+          &lt;div class="node__meta"&gt;
+        &lt;article typeof="schema:Person" about="https://www.garfieldtech.com/user/larry" class="profile"&gt;&lt;/article&gt;&lt;span&gt;
+          Submitted by &lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span lang="" about="https://www.garfieldtech.com/user/larry" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Larry&lt;/span&gt;&lt;/span&gt;
+ on &lt;span class="field field--name-created field--type-created field--label-hidden"&gt;28 December 2020 - 5:30pm&lt;/span&gt;
+        &lt;/span&gt;
+        
+      &lt;/div&gt;
+      &lt;/header&gt;&lt;div class="node__content clearfix"&gt;
+    
+            &lt;div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;There has been much discussion in recent weeks in PHP circles about how to make objects more immutable.  There have been a number of proposals made either formally or informally that relate to object property access, all aimed at making objects safer through restricting write access in some way.&lt;/p&gt;
+&lt;p&gt;Since my &lt;a href="https://peakd.com/php/@crell/improving-php-s-object-ergonomics"&gt;last mega post on PHP object ergonomics&lt;/a&gt; was so well-received and successful (it resulted in both constructor promotion and named arguments being added to PHP 8.0, thanks Nikita!), I figure I'll offer another summary of the problem space in the hopes of a deeper analysis suggesting a unified way forward.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Continue reading on &lt;a href="https://peakd.com/hive-168588/@crell/object-properties-and-immutability"&gt;PeakD&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+        &lt;div class="node__links"&gt;
+    &lt;ul class="links inline"&gt;&lt;li class="node-readmore"&gt;&lt;a href="https://www.garfieldtech.com/blog/php-properties-immutability" rel="tag" title="Object properties and immutability" hreflang="en"&gt;Read more&lt;span class="visually-hidden"&gt; about Object properties and immutability&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/article&gt;</description>
+  <pubDate>Mon, 28 Dec 2020 23:30:38 +0000</pubDate>
+    <dc:creator>Larry</dc:creator>
+    <guid isPermaLink="false">287 at https://www.garfieldtech.com</guid>
+    </item>
+<item>
+  <title>Byte-sized functional programming: Composition over inheritance for functions, too</title>
+  <link>https://www.garfieldtech.com/blog/byte-fp-compsition-over-inheritance</link>
+  <description>
+&lt;article data-history-node-id="286" role="article" about="https://www.garfieldtech.com/blog/byte-fp-compsition-over-inheritance" class="node node--type-story node--promoted node--view-mode-teaser clearfix"&gt;&lt;header&gt;&lt;h2 class="node__title"&gt;
+        &lt;a href="https://www.garfieldtech.com/blog/byte-fp-compsition-over-inheritance" rel="bookmark"&gt;&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;Byte-sized functional programming: Composition over inheritance for functions, too&lt;/span&gt;
+&lt;/a&gt;
+      &lt;/h2&gt;
+        
+          &lt;div class="node__meta"&gt;
+        &lt;article typeof="schema:Person" about="https://www.garfieldtech.com/user/larry" class="profile"&gt;&lt;/article&gt;&lt;span&gt;
+          Submitted by &lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span lang="" about="https://www.garfieldtech.com/user/larry" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Larry&lt;/span&gt;&lt;/span&gt;
+ on &lt;span class="field field--name-created field--type-created field--label-hidden"&gt;15 August 2020 - 10:07am&lt;/span&gt;
+        &lt;/span&gt;
+        
+      &lt;/div&gt;
+      &lt;/header&gt;&lt;div class="node__content clearfix"&gt;
+    
+            &lt;div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;A popular refrain in object-oriented code is to favor object composition over inheritance.  It offers more flexibility, less overhead, and ends up being easier to reason about.  The same concept applies to functions, too!&lt;/p&gt;
+&lt;p&gt;A common pattern is to have a function that does some work and then calls another function, which does some work and calls another function, and so on.  The problem is that the first function then cannot be used or tested without the entire chain of other functions it calls.  This is the function equivalent of "inheritance."&lt;/p&gt;
+&lt;p&gt;Instead, we can compose functions, that is, pipe them together. Instead, take the output of the first function and pass it to the second, then take the second's output and pass it to the third, etc.  That way, each of the functions can be reused, tested, and understood in isolation, then we can stick them together like LEGO blocks to build whatever series of steps we want.&lt;/p&gt;
+&lt;p&gt;That is, instead of this:&lt;/p&gt;
+&lt;div class="codeblock"&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;&lt;?php&lt;br /&gt;&lt;/span&gt;&lt;span&gt;function &lt;/span&gt;&lt;span&gt;A&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$in&lt;/span&gt;&lt;span&gt;)&lt;br /&gt;{&lt;br /&gt;   &lt;/span&gt;&lt;span&gt;// ...&lt;br /&gt;   &lt;/span&gt;&lt;span&gt;return &lt;/span&gt;&lt;span&gt;B&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$out&lt;/span&gt;&lt;span&gt;);&lt;br /&gt;}
+&lt;p&gt;function &lt;/p&gt;&lt;/span&gt;&lt;span&gt;B&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$in&lt;/span&gt;&lt;span&gt;)&lt;br /&gt;{&lt;br /&gt;   &lt;/span&gt;&lt;span&gt;// ...&lt;br /&gt;   &lt;/span&gt;&lt;span&gt;return &lt;/span&gt;&lt;span&gt;C&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$out&lt;/span&gt;&lt;span&gt;);&lt;br /&gt;}
+&lt;p&gt;function &lt;/p&gt;&lt;/span&gt;&lt;span&gt;C&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$in&lt;/span&gt;&lt;span&gt;)&lt;br /&gt;{&lt;br /&gt;   &lt;/span&gt;&lt;span&gt;// ...&lt;br /&gt;   &lt;/span&gt;&lt;span&gt;return &lt;/span&gt;&lt;span&gt;$out&lt;/span&gt;&lt;span&gt;;&lt;br /&gt;}&lt;br /&gt;&lt;/span&gt;&lt;span&gt;?&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/div&gt;
+&lt;p&gt;Structure it like this:&lt;/p&gt;
+&lt;div class="codeblock"&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;&lt;?php&lt;br /&gt;&lt;/span&gt;&lt;span&gt;function &lt;/span&gt;&lt;span&gt;A&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$in&lt;/span&gt;&lt;span&gt;)&lt;br /&gt;{&lt;br /&gt;    &lt;/span&gt;&lt;span&gt;// ...&lt;br /&gt;    &lt;/span&gt;&lt;span&gt;return &lt;/span&gt;&lt;span&gt;$out&lt;/span&gt;&lt;span&gt;;&lt;br /&gt;}
+&lt;p&gt;function &lt;/p&gt;&lt;/span&gt;&lt;span&gt;B&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$in&lt;/span&gt;&lt;span&gt;)&lt;br /&gt;{&lt;br /&gt;    &lt;/span&gt;&lt;span&gt;// ...&lt;br /&gt;    &lt;/span&gt;&lt;span&gt;return &lt;/span&gt;&lt;span&gt;$out&lt;/span&gt;&lt;span&gt;;&lt;br /&gt;}
+&lt;p&gt;function &lt;/p&gt;&lt;/span&gt;&lt;span&gt;C&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$in&lt;/span&gt;&lt;span&gt;)&lt;br /&gt;{&lt;br /&gt;    &lt;/span&gt;&lt;span&gt;// ...&lt;br /&gt;    &lt;/span&gt;&lt;span&gt;return &lt;/span&gt;&lt;span&gt;$out&lt;/span&gt;&lt;span&gt;;&lt;br /&gt;}
+&lt;p&gt;function &lt;/p&gt;&lt;/span&gt;&lt;span&gt;doit&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$in&lt;/span&gt;&lt;span&gt;) {&lt;br /&gt;    &lt;/span&gt;&lt;span&gt;$out &lt;/span&gt;&lt;span&gt;= &lt;/span&gt;&lt;span&gt;A&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$in&lt;/span&gt;&lt;span&gt;);&lt;br /&gt;    &lt;/span&gt;&lt;span&gt;$out &lt;/span&gt;&lt;span&gt;= &lt;/span&gt;&lt;span&gt;B&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$out&lt;/span&gt;&lt;span&gt;);&lt;br /&gt;    &lt;/span&gt;&lt;span&gt;$out &lt;/span&gt;&lt;span&gt;= &lt;/span&gt;&lt;span&gt;C&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$out&lt;/span&gt;&lt;span&gt;);&lt;br /&gt;    return &lt;/span&gt;&lt;span&gt;$out&lt;/span&gt;&lt;span&gt;;&lt;br /&gt;}&lt;br /&gt;&lt;/span&gt;&lt;span&gt;?&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/div&gt;
+&lt;p&gt;Now `A()`, `B()`, and `C()` are all easier to read, understand, and test, and we can more easily add a step B2 or D if we want.  So powerful is this concept that many languages have a native operator for piping functions together like that.  PHP doesn't, yet, but it's straightforward enough to do in user space anyway.&lt;/p&gt;
+&lt;hr /&gt;&lt;p&gt;Want to know more about functional programming and PHP? Read the whole book on the topic: &lt;a href="https://leanpub.com/thinking-functionally-in-php"&gt;Thinking Functionally in PHP&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;br /&gt;&lt;a href="https://leanpub.com/thinking-functionally-in-php"&gt;&lt;img width="256px" src="https://files.peakd.com/file/peakd-hive/crell/OoS8gnwV-Cover-small.png" alt="Thinking Functionally in PHP" /&gt;&lt;/a&gt;&lt;br /&gt;&lt;/div&gt;
+        &lt;div class="node__links"&gt;
+    &lt;ul class="links inline"&gt;&lt;li class="node-readmore"&gt;&lt;a href="https://www.garfieldtech.com/blog/byte-fp-compsition-over-inheritance" rel="tag" title="Byte-sized functional programming: Composition over inheritance for functions, too" hreflang="en"&gt;Read more&lt;span class="visually-hidden"&gt; about Byte-sized functional programming: Composition over inheritance for functions, too&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/article&gt;</description>
+  <pubDate>Sat, 15 Aug 2020 15:07:45 +0000</pubDate>
+    <dc:creator>Larry</dc:creator>
+    <guid isPermaLink="false">286 at https://www.garfieldtech.com</guid>
+    </item>
+<item>
+  <title>Byte-sized functional programming: Filter first</title>
+  <link>https://www.garfieldtech.com/blog/byte-fp-filter</link>
+  <description>
+&lt;article data-history-node-id="285" role="article" about="https://www.garfieldtech.com/blog/byte-fp-filter" class="node node--type-story node--promoted node--view-mode-teaser clearfix"&gt;&lt;header&gt;&lt;h2 class="node__title"&gt;
+        &lt;a href="https://www.garfieldtech.com/blog/byte-fp-filter" rel="bookmark"&gt;&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;Byte-sized functional programming: Filter first&lt;/span&gt;
+&lt;/a&gt;
+      &lt;/h2&gt;
+        
+          &lt;div class="node__meta"&gt;
+        &lt;article typeof="schema:Person" about="https://www.garfieldtech.com/user/larry" class="profile"&gt;&lt;/article&gt;&lt;span&gt;
+          Submitted by &lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span lang="" about="https://www.garfieldtech.com/user/larry" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Larry&lt;/span&gt;&lt;/span&gt;
+ on &lt;span class="field field--name-created field--type-created field--label-hidden"&gt;3 August 2020 - 1:47pm&lt;/span&gt;
+        &lt;/span&gt;
+        
+      &lt;/div&gt;
+      &lt;/header&gt;&lt;div class="node__content clearfix"&gt;
+    
+            &lt;div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;Often when working with a list, we only want to work with a subset of a list that meets some criteria.  All non-zero values, for example, or all users that have a given role.  The procedural way to do that is to stick an &lt;code&gt;if&lt;/code&gt; statement inside a &lt;code&gt;foreach&lt;/code&gt; loop:&lt;/p&gt;
+&lt;div class="codeblock"&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;&lt;?php&lt;br /&gt;&lt;/span&gt;&lt;span&gt;foreach (&lt;/span&gt;&lt;span&gt;$list &lt;/span&gt;&lt;span&gt;as &lt;/span&gt;&lt;span&gt;$value&lt;/span&gt;&lt;span&gt;) {&lt;br /&gt;    If (!&lt;/span&gt;&lt;span&gt;meets_criteria&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$value&lt;/span&gt;&lt;span&gt;)) {&lt;br /&gt;        continue;&lt;br /&gt;    }&lt;br /&gt;    &lt;/span&gt;&lt;span&gt;// ...&lt;br /&gt;&lt;/span&gt;&lt;span&gt;}&lt;br /&gt;&lt;/span&gt;&lt;span&gt;?&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/div&gt;
+&lt;p&gt;That mixes up the filtering with the iteration, though.  It also doesn't work if we're using `array_map()`.&lt;/p&gt;
+&lt;p&gt;Instead, we can make stripping down the list a separate operation called "filter."  PHP offers the &lt;code&gt;array_filter()&lt;/code&gt; function for that purpose.&lt;/p&gt;
+&lt;div class="codeblock"&gt;&lt;code&gt;&lt;span&gt;&lt;span&gt;&lt;?php&lt;br /&gt;$criteria &lt;/span&gt;&lt;span&gt;= fn(&lt;/span&gt;&lt;span&gt;User $user&lt;/span&gt;&lt;span&gt;): &lt;/span&gt;&lt;span&gt;bool &lt;/span&gt;&lt;span&gt;=&gt; &lt;/span&gt;&lt;span&gt;$user&lt;/span&gt;&lt;span&gt;-&gt;&lt;/span&gt;&lt;span&gt;hasRole&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;'moderator'&lt;/span&gt;&lt;span&gt;);
+&lt;p&gt;&lt;/p&gt;&lt;/span&gt;&lt;span&gt;$filtered &lt;/span&gt;&lt;span&gt;= &lt;/span&gt;&lt;span&gt;array_filter&lt;/span&gt;&lt;span&gt;(&lt;/span&gt;&lt;span&gt;$users&lt;/span&gt;&lt;span&gt;, &lt;/span&gt;&lt;span&gt;$criteria&lt;/span&gt;&lt;span&gt;);&lt;br /&gt;&lt;/span&gt;&lt;span&gt;?&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/div&gt;
+&lt;p&gt;Now we can work with the `$filtered` list, which has only the values we want.  That could be a simple &lt;code&gt;foreach&lt;code&gt; loop, or, better, it's now ideally suited for use with &lt;code&gt;array_map()&lt;/code&gt;.&lt;/p&gt;
+&lt;hr /&gt;&lt;p&gt;Want to know more about functional programming and PHP? Read the whole book on the topic: &lt;a href="https://leanpub.com/thinking-functionally-in-php"&gt;Thinking Functionally in PHP&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;br /&gt;&lt;a href="https://leanpub.com/thinking-functionally-in-php"&gt;&lt;img width="256px" src="https://files.peakd.com/file/peakd-hive/crell/OoS8gnwV-Cover-small.png" alt="Thinking Functionally in PHP" /&gt;&lt;/a&gt;&lt;br /&gt;&lt;/div&gt;
+        &lt;div class="node__links"&gt;
+    &lt;ul class="links inline"&gt;&lt;li class="node-readmore"&gt;&lt;a href="https://www.garfieldtech.com/blog/byte-fp-filter" rel="tag" title="Byte-sized functional programming: Filter first" hreflang="en"&gt;Read more&lt;span class="visually-hidden"&gt; about Byte-sized functional programming: Filter first&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/article&gt;</description>
+  <pubDate>Mon, 03 Aug 2020 18:47:04 +0000</pubDate>
+    <dc:creator>Larry</dc:creator>
+    <guid isPermaLink="false">285 at https://www.garfieldtech.com</guid>
+    </item>
+
+  </channel>
+</rss>

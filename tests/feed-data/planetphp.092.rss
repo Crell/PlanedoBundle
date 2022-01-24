@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="planetphp.092_files/style.css" type="text/css"?>
+<rss version="0.91">
+<script/>
+<script id="__gaOptOutExtension"/>
+<channel>
+    <title>Planet PHP</title>
+    <link>http://planet-php.net</link>
+    <description>People blogging about PHP</description>
+    <language>en</language>
+    <item>
+        <title>PHP 8.1.0 RC 6 available for testing - PHP: Hypertext Preprocessor</title>
+        <link>https://www.php.net/index.php#id2021-11-11-1</link>
+        <pubDate>Thu, 11 Nov 2021 00:00:00 +0000</pubDate>
+        <description><![CDATA[The PHP team is pleased to announce the release of PHP 8.1.0, RC 6. This is the sixth and final release candidate, continuing the PHP 8.1 release cycle, the rough outline of which is specified in the PHP Wiki. For source downloads of PHP 8.1.0, RC 6 please visit the download page. Please carefully test this version and report any issues found in the bug reporting system. Please DO NOT use this version in production, it is an early test version. For more information on the new features and other changes, you can read the NEWS file or the UPGRADING file for a complete list of upgrading notes. These files can also be found in the release archive. The next release will be the production-ready, general availability release, planned for 25 November 2021. The signatures for the release can be found in the manifest or on the QA site. Thank you for helping us make PHP better.]]></description></item><item><title>Interview with Joshua Ray Copeland - Voices of the ElePHPant</title><link>http://feedproxy.google.com/~r/VoicesOfTheElephpant/~3/u6_T5Ne5-J8/</link><pubDate>Fri, 29 Oct 2021 13:33:03 +0000</pubDate><description><![CDATA[]]></description></item><item><title>Ep#364 – Interview with Michael Bodnarchuk - Voices of the ElePHPant</title><link>https://voicesoftheelephpant.com/2021/10/28/ep364-interview-davert/</link><pubDate>Fri, 29 Oct 2021 03:30:52 +0000</pubDate><description><![CDATA[<h4>About</h4>
+<div style="padding:20px 4px 40px 10px;">
+<blockquote><p>
+   Listen as host Khayrattee Wasseem talks with Michael Bodnarchuk creator of Codeception & CodeceptJS. This is a deep dive into the journey of someone who started from scratch creating & releasing opensource softwares.
+</p></blockquote>
+</div>
+<h4>Transcript</h4>
+<p>Download the transcript (pdf) <a href="https://voicesoftheelephpant.com/wp-content/uploads/2021/10/Ep364-Interview-Michael-Bodnarchuk.pdf">Ep364-Interview-Michael-Bodnarchuk</a></p>
+<div class="row">
+<div class="col-md-6">
+<div class="speaker-photo">
+<p><img src="https://voicesoftheelephpant.com/wp-content/uploads/2021/10/364.jpg" alt="Picture of Michael Bodnarchuk" class="alignnone size-full wp-image-3071" /></p>
+<div class="twitter-link">
+		<i aria-hidden="true" class="fa fa-twitter"></i><a href="https://twitter.com/davert">@davert</a>
+	</div>
+</div>
+</div>
+<div class="col-md-6 show-notes">
+<h3><i class="fa fa-sticky-note" aria-hidden="true"></i> Show Notes</h3>
+<ul>
+<li><a href="https://twitter.com/davert" rel="noopener noreferrer" target="_blank">Michael Bodnarchuk on Twitter</a></li>
+<li><a href="https://github.com/DavertMik" rel="noopener noreferrer" target="_blank">Michael Bodnarchuk&#039;s Github</a></li>
+<li><a href="https://codeception.com" rel="noopener noreferrer" target="_blank">Codeception</a></li>
+<li><a href="https://codecept.io" rel="noopener noreferrer" target="_blank">CodeceptJS</a></li>
+<li><a href="https://7php.com/tools-davert" rel="noopener noreferrer" target="_blank">WHAT TOOLS DOES THE PHPRINCE OF PERSIA USE IN HIS DAILY ADVENTURES?!</a></li>
+</ul></div>
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="podcast-link">
+<h3><i class="fa fa-headphones" aria-hidden="true"></i> Audio</h3>
+</div>
+</p></div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<h3 style="margin:50px 0 0 0;">This episode is sponsored by <br /><a href="https://developers.ringcentral.com/" target="_blank" rel="noopener noreferrer">RingCentral Developers</a></h3>
+</p></div>
+<div class="col-md-6">
+		<a href="https://developers.ringcentral.com/" target="_blank" rel="noopener noreferrer"><br />
+    <img src="https://voicesoftheelephpant.com/wp-content/uploads/2020/06/color_ver-e1593475653896.png" alt="Sponsor Logo" class="alignnone size-full" /></a>
+	</div>
+</div>
+<p>The post <a rel="nofollow" href="https://voicesoftheelephpant.com/2021/10/28/ep364-interview-davert/">Ep#364 – Interview with Michael Bodnarchuk</a> appeared first on <a rel="nofollow" href="https://voicesoftheelephpant.com">Voices of the ElePHPant</a>.</p>
+<div class="feedflare">
+<a href="http://feeds.feedburner.com/~ff/VoicesOfTheElephpant?a=AUaGLcpeIZs:rt5xPvkjFY4:yIl2AUoC8zA"><img src="http://feeds.feedburner.com/~ff/VoicesOfTheElephpant?d=yIl2AUoC8zA" border="0"></img></a> <a href="http://feeds.feedburner.com/~ff/VoicesOfTheElephpant?a=AUaGLcpeIZs:rt5xPvkjFY4:qj6IDK7rITs"><img src="http://feeds.feedburner.com/~ff/VoicesOfTheElephpant?d=qj6IDK7rITs" border="0"></img></a>
+</div>]]></description></item>
+<item><title>PHP 8.1.0 RC 5 available for testing - PHP: Hypertext Preprocessor</title><link>https://www.php.net/index.php#id2021-10-28-2</link><pubDate>Thu, 28 Oct 2021 00:00:00 +0000</pubDate><description><![CDATA[The PHP team is pleased to announce the release of PHP 8.1.0, RC 5. This is the fifth release candidate, continuing the PHP 8.1 release cycle, the rough outline of which is specified in the PHP Wiki. For source downloads of PHP 8.1.0, RC 5 please visit the download page. Please carefully test this version and report any issues found in the bug reporting system. Please DO NOT use this version in production, it is an early test version. For more information on the new features and other changes, you can read the NEWS file or the UPGRADING file for a complete list of upgrading notes. These files can also be found in the release archive. The next release will be the sixth and last release candidate (RC 6), planned for 11 November 2021. The signatures for the release can be found in the manifest or on the QA site. Thank you for helping us make PHP better.]]></description></item><item><title>PHP 8.1.0 RC 4 available for testing - PHP: Hypertext Preprocessor</title><link>https://www.php.net/index.php#id2021-10-14-1</link><pubDate>Thu, 14 Oct 2021 00:00:00 +0000</pubDate><description><![CDATA[The PHP team is pleased to announce the release of PHP 8.1.0, RC 4. This is the fourth release candidate, continuing the PHP 8.1 release cycle, the rough outline of which is specified in the PHP Wiki. For source downloads of PHP 8.1.0, RC 4 please visit the download page. Please carefully test this version and report any issues found in the bug reporting system. Please DO NOT use this version in production, it is an early test version. For more information on the new features and other changes, you can read the NEWS file or the UPGRADING file for a complete list of upgrading notes. These files can also be found in the release archive. The next release will be the fifth release candidate (RC 5), planned for 28 October 2021. The signatures for the release can be found in the manifest or on the QA site. Thank you for helping us make PHP better.]]></description></item><item><title>Interview with Alan Seiden - Voices of the ElePHPant</title><link>http://feedproxy.google.com/~r/VoicesOfTheElephpant/~3/IUy</link><pubDate>Tue, 05 Oct 2021 23:33:24 +0000</pubDate><description><![CDATA[]]></description></item><item><title>Interview with Philippe Gamache - Voices of the ElePHPant</title><link>http://feedproxy.google.com/~r/VoicesOfTheElephpant/~3/y-6VKKmUwxg/</link><pubDate>Fri, 01 Oct 2021 03:06:31 +0000</pubDate><description><![CDATA[]]></description></item><item><title>Ep#363 – Interview with  Mike Stowe - Voices of the ElePHPant</title><link>https://voicesoftheelephpant.com/2021/09/30/ep363-interview-mike-stowe/</link><pubDate>Fri, 01 Oct 2021 01:27:31 +0000</pubDate><description><![CDATA[<div style="padding:20px 4px 40px 10px;">
+<blockquote><p>
+	Listen as host Khayrattee Wasseem talks with Mike Stowe. This is thorough explanation of the role of a developer marketing – the why, the how, the responsibilities, how not to cross boundaries and specially how to transition from dev to dev rel, including difference between Developer Evangelist, Developer Relations, Developer Advocacy & Developer Marketing.
+</p></blockquote>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="speaker-photo">
+<p><img src="https://voicesoftheelephpant.com/wp-content/uploads/2021/09/363.jpg" alt="Picture of Mike Stowe" class="alignnone size-full wp-image-3071" /></p>
+<div class="twitter-link">
+		<i aria-hidden="true" class="fa fa-twitter"></i><a href="https://twitter.com/mikegstowe">@mikegstowe</a>
+	</div>
+</div>
+</div>
+<div class="col-md-6 show-notes">
+<h3><i class="fa fa-sticky-note" aria-hidden="true"></i> Show Notes</h3>
+<ul>
+<li><a href="https://twitter.com/mikegstowe" rel="noopener noreferrer" target="_blank">Mike Stowe on Twitter</a></li>
+<li><a href="http://www.mikestowe.com" rel="noopener noreferrer" target="_blank">Mike Stowe&#039;s Website</a></li>
+<li><a href="https://nomadphp.com" rel="noopener noreferrer" target="_blank">NomadPHP</a></li>
+</ul></div>
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="podcast-link">
+<h3><i class="fa fa-headphones" aria-hidden="true"></i> Audio</h3>
+</div>
+</p></div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<h3 style="margin:50px 0 0 0;">This episode is sponsored by <br /><a href="https://developers.ringcentral.com/" target="_blank" rel="noopener noreferrer">RingCentral Developers</a></h3>
+</p></div>
+<div class="col-md-6">
+		<a href="https://developers.ringcentral.com/" target="_blank" rel="noopener noreferrer"><br />
+    <img src="https://voicesoftheelephpant.com/wp-content/uploads/2020/06/color_ver-e1593475653896.png" alt="Sponsor Logo" class="alignnone size-full" /></a>
+	</div>
+</div>
+<p>The post <a rel="nofollow" href="https://voicesoftheelephpant.com/2021/09/30/ep363-interview-mike-stowe/">Ep#363 – Interview with  Mike Stowe</a> appeared first on <a rel="nofollow" href="https://voicesoftheelephpant.com">Voices of the ElePHPant</a>.</p>
+<div class="feedflare">
+<a href="http://feeds.feedburner.com/~ff/VoicesOfTheElephpant?a=XQEHi6YQ6zc:M4VtjECq9ao:yIl2AUoC8zA"><img src="http://feeds.feedburner.com/~ff/VoicesOfTheElephpant?d=yIl2AUoC8zA" border="0"></img></a> <a href="http://feeds.feedburner.com/~ff/VoicesOfTheElephpant?a=XQEHi6YQ6zc:M4VtjECq9ao:qj6IDK7rITs"><img src="http://feeds.feedburner.com/~ff/VoicesOfTheElephpant?d=qj6IDK7rITs" border="0"></img></a>
+</div>]]></description></item><item><title>PHP 8.1.0 RC 3 available for testing - PHP: Hypertext Preprocessor</title><link>https://www.php.net/index.php#id2021-09-30-1</link><pubDate>Thu, 30 Sep 2021 00:00:00 +0000</pubDate><description><![CDATA[The PHP team is pleased to announce the release of PHP 8.1.0, RC 3. This is the third release candidate, continuing the PHP 8.1 release cycle, the rough outline of which is specified in the PHP Wiki. For source downloads of PHP 8.1.0, RC 3 please visit the download page. Please carefully test this version and report any issues found in the bug reporting system. Please DO NOT use this version in production, it is an early test version. For more information on the new features and other changes, you can read the NEWS file or the UPGRADING file for a complete list of upgrading notes. These files can also be found in the release archive. The next release will be the fourth release candidate (RC 4), planned for 14 October 2021. The signatures for the release can be found in the manifest or on the QA site. Thank you for helping us make PHP better.]]></description></item><item><title>Interview with Colin O’Dell - Voices of the ElePHPant</title><link>http://feedproxy.google.com/~r/VoicesOfTheElephpant/~3/Gy3qBEfN5vA/</link><pubDate>Fri, 24 Sep 2021 05:00:19 +0000</pubDate><description><![CDATA[]]></description></item></channel></rss>

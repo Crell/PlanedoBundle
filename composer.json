@@ -3,6 +3,14 @@
     "description": "Feed aggregator bundle for Symfony 6 and later.",
     "type": "symfony-bundle",
     "license": "AGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Larry Garfield",
+            "email": "larry@garfieldtech.com",
+            "homepage": "https://www.garfieldtech.com",
+            "role": "Lead Developer"
+        }
+    ],
     "require": {
         "php": "~8.1"
     },
@@ -12,13 +20,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Crell\\Bundle\\Planedo\\": "src"
+            "Crell\\Bundle\\Planedo\\": "src",
+            "Crell\\Bundle\\Planedo\\Tests\\": "tests"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Crell\\Bundle\\Planedo\\Tests\\": "tests",
-            "Crell\\Bundle\\Planedo\\Benchmarks\\": "benchmarks"
+            "Crell\\Bundle\\Planedo\\Tests\\": "tests"
         }
     },
     "extra": {

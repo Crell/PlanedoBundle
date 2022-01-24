@@ -1,0 +1,6 @@
+<article>
+    <h2><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
+    <h3><a href="{{ entry.feed.link }}">{{ entry.feed.title }}</a> </h3>
+    <p>{{ entry.dateCreated | date }}</p>
+    {{ entry.description | raw }}
+</article>

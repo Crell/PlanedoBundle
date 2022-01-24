@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Feeds on this site{% endblock %}
+
+{% block page_contents %}
+
+    {% if feeds|length > 0 %}
+        <ul>
+            {% for feed in feeds  %}
+                {% if feed.link %}
+                    <li><a href="{{ feed.link }}">{{ feed.title }}</a></li>
+                {% else %}
+                    <li>{{ feed.title }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <div>
+            {% if previous >= 0 %}
+                <a href="{{ path('html_main', { offset: previous }) }}" rel="prev">Previous</a>
+            {% endif %}
+
+            {% if next < feeds|length %}
+                <a href="{{ path('html_main', { offset: next }) }}" rel="next">Next</a>
+            {% endif %}
+        </div>
+
+    {% else %}
+        <div>No feeds are listed on this site.</div>
+    {% endif %}
+
+{% endblock %}
