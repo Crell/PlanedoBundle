@@ -1,23 +1,24 @@
 {
-    "name": "crell/*",
+    "name": "crell/planedo-bundle",
+    "description": "Feed aggregator bundle for Symfony 6 and later.",
+    "type": "symfony-bundle",
+    "license": "AGPL-3.0-or-later",
     "require": {
-        "php": "~8.0"
+        "php": "~8.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "phpbench/phpbench": "^1.1",
-        "phpstan/phpstan": "^1.0",
-        "vishnubob/wait-for-it": "dev-master"
+        "phpstan/phpstan": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "Crell\\Foo\\": "src"
+            "Crell\\Bundle\\Planedo\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Crell\\Foo\\": "tests",
-            "Crell\\Foo\\Benchmarks\\": "benchmarks"
+            "Crell\\Bundle\\PlanedoBundle\\Tests\\": "tests",
+            "Crell\\Bundle\\PlanedoBundle\\Benchmarks\\": "benchmarks"
         }
     }
 }
