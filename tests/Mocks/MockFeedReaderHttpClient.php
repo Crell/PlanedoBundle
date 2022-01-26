@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests\Mocks;
 
-use Crell\Bundle\Planedo\Tests\Mocks\MockResponse;
 use Laminas\Feed\Reader\Http\ClientInterface;
 use Laminas\Feed\Reader\Http\ResponseInterface;
 

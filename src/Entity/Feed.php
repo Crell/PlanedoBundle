@@ -2,7 +2,6 @@
 
 namespace Crell\Bundle\Planedo\Entity;
 
-use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Repository\FeedRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use Laminas\Feed\Reader\Http\ClientInterface as FeedReaderHttpClientInterface;
 use Laminas\Feed\Reader\Http\Psr7ResponseDecorator;
 use Psr\Http\Client\ClientInterface;

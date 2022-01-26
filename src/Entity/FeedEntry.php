@@ -3,7 +3,6 @@
 namespace Crell\Bundle\Planedo\Entity;
 
 use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
-use Crell\Bundle\Planedo\Entity\Feed;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FeedEntryRepository::class)]

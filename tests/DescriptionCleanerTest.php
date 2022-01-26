@@ -6,7 +6,6 @@ namespace Crell\Bundle\Planedo\Tests;
 
 use Crell\Bundle\Planedo\Entity\FeedEntry;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Config\Definition\Builder\EnumNodeDefinition;
 
 class DescriptionCleanerTest extends TestCase
 {

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests;
 
-use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
-use Crell\Bundle\Planedo\Tests\SetupUtils;
-use Crell\Bundle\Planedo\Tests\UserUtils;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**

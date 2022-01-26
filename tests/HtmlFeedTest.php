@@ -2,8 +2,6 @@
 
 namespace Crell\Bundle\Planedo\Tests;
 
-use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
-use Crell\Bundle\Planedo\Tests\SetupUtils;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**

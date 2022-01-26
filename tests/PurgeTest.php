@@ -4,13 +4,7 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests;
 
-use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Message\PurgeOldEntries;
-use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
-use Crell\Bundle\Planedo\Tests\Mocks\SettableClock;
-use Crell\Bundle\Planedo\Tests\SetupUtils;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Clock\ClockInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Messenger\MessageBusInterface;
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests\Command;
 
-use Crell\Bundle\Planedo\Tests\Command\CommandUtils;
 use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\UserUtils;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
