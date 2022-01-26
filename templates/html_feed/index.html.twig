@@ -1,4 +1,4 @@
-{% extends 'layout.html.twig' %}
+{% extends '@CrellPlanedo/layout.html.twig' %}
 
 {% block title %}Latest articles{% endblock %}
 
@@ -6,16 +6,16 @@
 
     {% if entries|length > 0 %}
         {% for entry in entries  %}
-            {{ include('html_feed/_entry.html.twig', {entry: entry}) }}
+            {{ include('@CrellPlanedo/html_feed/_entry.html.twig', {entry: entry}) }}
         {% endfor %}
 
         <div>
         {% if previous >= 0 %}
-            <a href="{{ path('html_main', { offset: previous }) }}" rel="prev">Previous</a>
+            <a href="{{ path('crell_planedo_html_main', { offset: previous }) }}" rel="prev">Previous</a>
         {% endif %}
 
         {% if next < entries|length %}
-            <a href="{{ path('html_main', { offset: next }) }}" rel="next">Next</a>
+            <a href="{{ path('crell_planedo_html_main', { offset: next }) }}" rel="next">Next</a>
         {% endif %}
         </div>
 

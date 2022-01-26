@@ -22,7 +22,7 @@ class BlogRollController extends AbstractController
 
         $feeds = $this->repository->paginatedByName($offset);
 
-        return $this->render('blog_roll/index.html.twig', [
+        return $this->render('@CrellPlanedo/blog_roll/index.html.twig', [
             'controller_name' => 'BlogRollController',
             'feeds' => $feeds,
             'previous' => $offset - $this->itemsPerPage,
@@ -35,7 +35,7 @@ class BlogRollController extends AbstractController
     {
         $feeds = $this->repository->getMostActive($max);
 
-        return $this->render('blog_roll/_most_active.html.twig', [
+        return $this->render('@CrellPlanedo/blog_roll/_most_active.html.twig', [
             'controller_name' => 'BlogRollController',
             'feeds' => $feeds,
         ]);

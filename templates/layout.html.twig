@@ -1,5 +1,4 @@
-{# templates/blog/layout.html.twig #}
-{% extends 'base.html.twig' %}
+{% extends '@CrellPlanedo/base.html.twig' %}
 
 {% block body %}
     <h1>{% block title %}{% endblock %}</h1>
@@ -11,10 +10,10 @@
 
         <div class="sidebar">
             {{ render(controller(
-                'App\\Controller\\BlogRollController::mostActive', {max: 3}
+                'Crell\\Bundle\\Planedo\\Controller\\BlogRollController::mostActive', {max: 3}
             )) }}
 
-            {{ include('_feeds.html.twig') }}
+            {{ include('@CrellPlanedo/_feeds.html.twig') }}
         </div>
     </div>
 {% endblock %}

@@ -23,13 +23,14 @@ class FeedEntryRepository extends ServiceEntityRepository
 
     public function latestEntriesPaginator(int $offset): Paginator
     {
+        $class = FeedEntry::class;
         // Filter out unapproved entries and entries of a feed that is disabled.
         $query = $this->getEntityManager()
-            ->createQuery('SELECT e FROM App\\Entity\\FeedEntry e 
+            ->createQuery("SELECT e FROM $class e 
                 JOIN e.feed f 
                 WHERE e.approved = :approved
                     AND f.active = :activeFeed
-                ORDER BY e.dateModified DESC')
+                ORDER BY e.dateModified DESC")
             ->setMaxResults($this->itemsPerPage)
             ->setFirstResult($offset)
             ->setParameter('approved', true)
