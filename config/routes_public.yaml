@@ -1,0 +1,17 @@
+# Public facing routes
+
+crell_planedo_blog_roll:
+  path: /blogroll
+  controller: Crell\Bundle\Planedo\Controller\BlogRollController::index
+
+crell_planedo_atom_main:
+  path: /atom
+  controller: Crell\Bundle\Planedo\Controller\FeedController::atomFeed
+
+crell_planedo_rss_main:
+  path: /rss
+  controller: Crell\Bundle\Planedo\Controller\FeedController::rssFeed
+
+crell_planedo_html_main:
+  path: /
+  controller: Crell\Bundle\Planedo\Controller\HtmlFeedController::index
