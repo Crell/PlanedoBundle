@@ -1,0 +1,36 @@
+# Public facing routes
+
+crell_planedo_blog_roll:
+  path: /blogroll
+  controller: Crell\Bundle\Planedo\Controller\BlogRollController::index
+
+crell_planedo_atom_main:
+  path: /atom
+  controller: Crell\Bundle\Planedo\Controller\FeedController::atomFeed
+
+crell_planedo_rss_main:
+  path: /rss
+  controller: Crell\Bundle\Planedo\Controller\FeedController::rssFeed
+
+crell_planedo_html_main:
+  path: /
+  controller: Crell\Bundle\Planedo\Controller\HtmlFeedController::index
+
+# Admin-facing routes
+
+crell_planedo_login:
+  path: /login
+  controller: Crell\Bundle\Planedo\Controller\LoginController::index
+
+crell_planedo_logout:
+  path: /logout
+  controller: Crell\Bundle\Planedo\Controller\LoginController::logout
+
+
+crell_planedo_admin:
+  path: /admin
+  controller: Crell\Bundle\Planedo\Controller\Admin\DashboardController::index
+
+crell_planedo_user_settings:
+  path: /admin/user-settings
+  controller: Crell\Bundle\Planedo\Controller\UserSettingsController::index

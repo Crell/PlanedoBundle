@@ -37,7 +37,7 @@ class LoginController extends AbstractController
             // the URL users are redirected to after the login (default: '/admin')
             // @TODO This is buggy. it's resulting in a double index.php in the URL,
             // which breaks.  WTF?
-            'target_path' => $this->generateUrl('admin'),
+            'target_path' => $this->generateUrl('crell_planedo_admin'),
 
             'username_label' => 'Email address',
 

@@ -19,7 +19,7 @@ class UserSettingsController extends AbstractController
         private readonly AdminUrlGenerator $adminUrlGenerator,
     ) {}
 
-    #[Route('/admin/user-settings', name: 'user_settings')]
+    //#[Route('/admin/user-settings', name: 'user_settings')]
     public function index(#[CurrentUser] $user, Request $request): Response
     {
         $form = $this->createForm(UserSettingsType::class, $user);
@@ -33,13 +33,13 @@ class UserSettingsController extends AbstractController
             $this->addFlash('success', 'User information updated.');
 
             $url = $this->adminUrlGenerator
-                ->setRoute('user_settings')
+                ->setRoute('crell_planedo_user_settings')
                 ->generateUrl();
 
             return $this->redirect($url);
         }
 
-        return $this->renderForm('user_settings/index.html.twig', [
+        return $this->renderForm('@CrellPlanedo/user_settings/index.html.twig', [
             'form' => $form,
         ]);
     }

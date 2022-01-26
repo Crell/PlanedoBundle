@@ -80,7 +80,7 @@ class DashboardController extends AbstractDashboardController
 
             // you can use any type of menu item, except submenus
             ->addMenuItems([
-                MenuItem::linkToRoute('Profile', 'fa fa-id-card', 'user_settings',),
+                MenuItem::linkToRoute('Profile', 'fa fa-id-card', 'crell_planedo_user_settings',),
             ]);
     }
 
