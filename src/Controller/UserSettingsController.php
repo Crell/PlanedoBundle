@@ -2,14 +2,12 @@
 
 namespace Crell\Bundle\Planedo\Controller;
 
-use Crell\Bundle\Planedo\Entity\User;
 use Crell\Bundle\Planedo\Form\UserSettingsType;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class UserSettingsController extends AbstractController
@@ -19,7 +17,6 @@ class UserSettingsController extends AbstractController
         private readonly AdminUrlGenerator $adminUrlGenerator,
     ) {}
 
-    //#[Route('/admin/user-settings', name: 'user_settings')]
     public function index(#[CurrentUser] $user, Request $request): Response
     {
         $form = $this->createForm(UserSettingsType::class, $user);

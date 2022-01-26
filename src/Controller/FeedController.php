@@ -9,7 +9,6 @@ use Laminas\Feed\Writer\Feed;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FeedController extends AbstractController
@@ -18,7 +17,6 @@ class FeedController extends AbstractController
         protected FeedEntryRepository $repository,
     ) {}
 
-    #[Route('/atom', name: 'atom_main')]
     public function atomFeed(Request $request, bool $plainTextFeeds = false): Response
     {
         $offset = max(0, $request->query->getInt('offset', 0));
@@ -31,7 +29,6 @@ class FeedController extends AbstractController
         );
     }
 
-    #[Route('/rss', name: 'rss_main')]
     public function rssFeed(Request $request, bool $plainTextFeeds = false): Response
     {
         $offset = max(0, $request->query->getInt('offset', 0));

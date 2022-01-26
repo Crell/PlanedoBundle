@@ -2,7 +2,6 @@
 
 namespace Crell\Bundle\Planedo\Controller\Admin;
 
-use Crell\Bundle\Planedo\Controller\Admin\FeedCrudController;
 use Crell\Bundle\Planedo\Entity\Feed;
 use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Entity\User;
@@ -15,7 +14,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class DashboardController extends AbstractDashboardController
@@ -31,7 +29,6 @@ class DashboardController extends AbstractDashboardController
         $this->entryRepo = $em->getRepository(FeedEntry::class);
     }
 
-    #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
         return $this->redirect($this->routeBuilder->setController(FeedCrudController::class)->generateUrl());

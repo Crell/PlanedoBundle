@@ -3,7 +3,6 @@
 namespace Crell\Bundle\Planedo\Controller\Admin;
 
 use Crell\Bundle\Planedo\Entity\Feed;
-use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Message\UpdateFeed;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;

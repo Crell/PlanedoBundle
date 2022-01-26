@@ -6,7 +6,6 @@ use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class HtmlFeedController extends AbstractController
 {
@@ -15,7 +14,6 @@ class HtmlFeedController extends AbstractController
         protected int $itemsPerPage,
     ) {}
 
-    #[Route('/', name: 'html_main')]
     public function index(Request $request): Response
     {
         $offset = max(0, $request->query->getInt('offset', 0));
