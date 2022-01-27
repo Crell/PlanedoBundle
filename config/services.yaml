@@ -26,4 +26,4 @@ services:
         alias: Crell\Bundle\Planedo\FeedReaderClient
 
     Psr\Clock\ClockInterface:
-        class: Navarr\WallClock\WallClock
+        class: Crell\Bundle\Planedo\UtcClock

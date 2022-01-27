@@ -3,6 +3,12 @@
     "description": "Feed aggregator bundle for Symfony 6 and later.",
     "type": "symfony-bundle",
     "license": "AGPL-3.0-or-later",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/php-fig/clock.git"
+        }
+    ],
     "authors": [
         {
             "name": "Larry Garfield",
