@@ -15,9 +15,10 @@ class FeedController extends AbstractController
 {
     public function __construct(
         protected FeedEntryRepository $repository,
+        protected readonly bool $plainTextFeeds = false,
     ) {}
 
-    public function atomFeed(Request $request, bool $plainTextFeeds = false): Response
+    public function atomFeed(Request $request): Response
     {
         $offset = max(0, $request->query->getInt('offset', 0));
 
@@ -25,11 +26,11 @@ class FeedController extends AbstractController
             offset: $offset,
             selfRoute: 'crell_planedo_atom_main',
             feedType: 'atom',
-            contentType: $plainTextFeeds ? 'text/plain' : 'application/atom+xml',
+            contentType: $this->plainTextFeeds ? 'text/plain' : 'application/atom+xml',
         );
     }
 
-    public function rssFeed(Request $request, bool $plainTextFeeds = false): Response
+    public function rssFeed(Request $request): Response
     {
         $offset = max(0, $request->query->getInt('offset', 0));
 
@@ -37,7 +38,7 @@ class FeedController extends AbstractController
             offset: $offset,
             selfRoute: 'crell_planedo_rss_main',
             feedType: 'rss',
-            contentType: $plainTextFeeds ? 'text/plain' : 'application/rss+xml',
+            contentType: $this->plainTextFeeds ? 'text/plain' : 'application/rss+xml',
         );
     }
 

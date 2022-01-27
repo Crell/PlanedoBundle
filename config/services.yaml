@@ -1,18 +1,9 @@
-parameters:
-    app.feeds.items-per-page: 10
-    app.feeds.purge-before: -30 days
-    app.feeds.use-plain-text: false
-
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-        bind:
-            $itemsPerPage: '%app.feeds.items-per-page%'
-            $purgeBefore: '%app.feeds.purge-before%'
-            $plainTextFeeds: '%app.feeds.use-plain-text%'
     Crell\Bundle\Planedo\:
         resource: '../src/'
         exclude:
