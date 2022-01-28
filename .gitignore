@@ -6,3 +6,4 @@ vendor
 .phpunit.result.cache
 build
 composer.lock
+tests/cache

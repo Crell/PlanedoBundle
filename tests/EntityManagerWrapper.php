@@ -11,11 +11,13 @@ use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
 use Crell\Bundle\Planedo\Repository\FeedRepository;
 use Crell\Bundle\Planedo\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 trait EntityManagerWrapper
 {
     private EntityManagerInterface $em;
+
+    private ContainerInterface $container;
 
     protected function entityManager(): EntityManagerInterface
     {
@@ -24,7 +26,7 @@ trait EntityManagerWrapper
 
     protected function getEntityManager(): EntityManagerInterface
     {
-        $container = self::getContainer();
+        $container = $this->container;
         /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
         return $em;
@@ -45,6 +47,6 @@ trait EntityManagerWrapper
         return $this->entityManager()->getRepository(User::class);
     }
 
-    abstract protected static function getContainer(): ContainerInterface;
+    //abstract protected function getContainer(): ContainerInterface;
 
 }
