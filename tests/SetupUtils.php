@@ -12,11 +12,19 @@ use Crell\Bundle\Planedo\Tests\Mocks\MockFeedReaderHttpClient;
 use Crell\Bundle\Planedo\Tests\Mocks\SettableClock;
 use Laminas\Feed\Reader\Http\ClientInterface;
 use Psr\Clock\ClockInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 trait SetupUtils
 {
     use EntityManagerWrapper;
+
+    private ContainerInterface $container;
+
+    protected function getContainer(): ContainerInterface
+    {
+        return $this->container;
+    }
 
     protected function assertRawEntryCount(int $expected): void
     {
@@ -45,7 +53,7 @@ trait SetupUtils
 
     protected function mockClock(\DateTimeImmutable $time): SettableClock
     {
-        $container = self::getContainer();
+        $container = $this->getContainer();
         $clock = new SettableClock($time);
         $container->set(ClockInterface::class, $clock);
         return $clock;
