@@ -35,7 +35,9 @@
         "symfony/yaml": "6.0.*",
         "doctrine/doctrine-bundle": "^2.4",
         "twig/twig": "^2.12|^3.0",
-        "symfony/password-hasher": "^6.0"
+        "symfony/password-hasher": "^6.0",
+        "symfonycasts/reset-password-bundle": "^1.11",
+        "symfony/mailer": "^6.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
