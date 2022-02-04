@@ -8,6 +8,17 @@ crell_planedo_logout:
   path: /logout
   controller: Crell\Bundle\Planedo\Controller\LoginController::logout
 
+crell_planedo_forgot_password_request:
+  path: /reset-password
+  controller: Crell\Bundle\Planedo\Controller\ResetPasswordController::request
+
+crell_planedo_check_email:
+  path: /check-email
+  controller: Crell\Bundle\Planedo\Controller\ResetPasswordController::checkEmail
+
+crell_planedo_reset_password:
+  path: /reset/{token}
+  controller: Crell\Bundle\Planedo\Controller\ResetPasswordController::reset
 
 crell_planedo_admin:
   path: /admin

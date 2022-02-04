@@ -44,7 +44,7 @@ class LoginController extends AbstractController
             'forgot_password_enabled' => true,
 
             // the path (i.e. a relative or absolute URL) to visit when clicking the "forgot password?" link (default: '#')
-            'forgot_password_path' => $this->generateUrl('app_forgot_password_request'),
+            'forgot_password_path' => $this->generateUrl('crell_planedo_forgot_password_request'),
 
             // the label displayed for the "forgot password?" link (the |trans filter is applied to it)
             'forgot_password_label' => 'Forgot your password?',
