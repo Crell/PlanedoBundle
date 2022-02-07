@@ -30,17 +30,6 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-//        $treeBuilder->getRootNode()
-//            ->children()
-//                ->arrayNode('twitter')
-//                    ->children()
-//                        ->integerNode('client_id')->end()
-//                        ->scalarNode('client_secret')->end()
-//                    ->end()
-//                ->end() // twitter
-//            ->end()
-//        ;
-
         return $treeBuilder;
     }
 }
