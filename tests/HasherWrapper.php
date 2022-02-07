@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 trait HasherWrapper
 {
+    private ContainerInterface $container;
+
     private UserPasswordHasherInterface $hasher;
 
     protected function hasher(): UserPasswordHasherInterface
@@ -18,11 +20,8 @@ trait HasherWrapper
 
     protected function getHasher(): UserPasswordHasherInterface
     {
-        $container = self::getContainer();
         /** @var UserPasswordHasherInterface $hasher */
-        $hasher = $container->get(UserPasswordHasherInterface::class);
+        $hasher = $this->container->get(UserPasswordHasherInterface::class);
         return $hasher;
     }
-
-    abstract protected static function getContainer(): ContainerInterface;
 }

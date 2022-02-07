@@ -21,7 +21,17 @@ trait SetupUtils
 
     private ContainerInterface $container;
 
-    protected function getContainer(): ContainerInterface
+    /**
+     * Get our actual test container.
+     *
+     * In order to have functional tests in a bundle, we need to custom override
+     * the kernel, which means its own container.  Which means the container()
+     * and getContainer() methods of KernelTestCase are no longer useful, so we
+     * need a different name for the actual container that we're using.
+     *
+     * Symfony really hates Bundles.
+     */
+    protected function getRealContainer(): ContainerInterface
     {
         return $this->container;
     }
@@ -38,7 +48,7 @@ trait SetupUtils
 
     protected function mockFeedClient(): void
     {
-        $container = self::getContainer();
+        $container = $this->getRealContainer();
 
         $mockClient = new MockFeedReaderHttpClient([
             'https://www.garfieldtech.com/blog/feed' => 'tests/feed-data/garfieldtech.rss',
@@ -61,7 +71,7 @@ trait SetupUtils
 
     protected function populateFeeds(): void
     {
-        $container = self::getContainer();
+        $container = self::container();
 
         /** @var MessageBusInterface $bus */
         $bus = $container->get(MessageBusInterface::class);

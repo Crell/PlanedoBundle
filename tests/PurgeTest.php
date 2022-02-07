@@ -41,8 +41,6 @@ class PurgeTest extends TestCase
         $kernel->boot();
         $container = $this->container = $kernel->getContainer();
 
-//        $container = self::getContainer();
-
         // The first will allow through a few items.
         $clock = $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
 
@@ -50,8 +48,6 @@ class PurgeTest extends TestCase
         $this->populateFeeds();
 
         $this->assertRawEntryCount(5);
-
-//        $container = self::getContainer();
 
         /** @var MessageBusInterface $bus */
         $bus = $container->get(MessageBusInterface::class);
