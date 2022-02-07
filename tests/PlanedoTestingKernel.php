@@ -38,10 +38,16 @@ class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
 
     protected array $config;
 
+    protected array $defaultConfig = [
+        'items_per_page' => 10,
+        'purge_before' => '-30 days',
+        'use_plain_text' => false,
+    ];
+
     public function __construct(array $config = [])
     {
         parent::__construct('test', true);
-        $this->config = $config;
+        $this->config = $config + $this->defaultConfig;
     }
 
     public function registerBundles(): iterable
@@ -66,6 +72,7 @@ class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
             $container->register(ClientInterface::class, FeedReaderClient::class);
             $container->loadFromExtension('crell_planedo', $this->config);
 
+            $this->loadExtensionConfigFixture('framework', $container);
             $this->loadExtensionConfigFixture('doctrine', $container);
             $this->loadExtensionConfigFixture('security', $container);
 
