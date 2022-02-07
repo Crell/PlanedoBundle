@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @group admin
@@ -13,6 +14,12 @@ class AdminTest extends WebTestCase
 {
     use UserUtils;
     use SetupUtils;
+
+    protected static function container(): ContainerInterface
+    {
+        // TODO: Implement container() method.
+    }
+
 
     /**
      * @test

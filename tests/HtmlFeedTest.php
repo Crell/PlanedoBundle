@@ -28,7 +28,7 @@ class HtmlFeedTest extends WebTestCase
         self::assertResponseIsSuccessful();
         self::assertResponseHeaderSame('content-type', 'text/html; charset=UTF-8');
 
-        $container = self::getContainer();
+        $container = self::container();
 
         // Confirm the number of articles on the first page.
         $articles = $crawler->filter('article');
@@ -60,7 +60,7 @@ class HtmlFeedTest extends WebTestCase
         self::assertResponseIsSuccessful();
         self::assertResponseHeaderSame('content-type', 'text/html; charset=UTF-8');
 
-        $container = self::getContainer();
+        $container = self::container();
 
         self::assertSelectorTextSame('div.sidebar aside.most-active > h2', 'Popular feeds');
         self::assertSelectorTextSame('div.sidebar aside.feed-links > h2', 'Feeds');
