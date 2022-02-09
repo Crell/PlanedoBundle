@@ -21,6 +21,13 @@ trait SetupUtils
 
     private ContainerInterface $container;
 
+    public function initialize(array $config = []): ContainerInterface
+    {
+        $kernel = new PlanedoTestingKernel($config);
+        $kernel->boot();
+        return $this->container = $kernel->getContainer();
+    }
+
     /**
      * Get our actual test container.
      *
