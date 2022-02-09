@@ -14,7 +14,7 @@ There are two ways to set up Planedo Bundle.
 
 If you want to just use Planedo as a stand-alone application and be done with it, install the Planedo application.
 
-```
+```shell
 composer project-create crell/planedo
 ```
 
@@ -22,7 +22,7 @@ That will create a new project pre-configured to use with Planedo.  Nearly all m
 
 Alternatively, you may install Planedo Bundle directly in Symfony 6 application of your choice, via composer.
 
-```
+```shell
 composer require crell/planedo-bundle
 ```
 
