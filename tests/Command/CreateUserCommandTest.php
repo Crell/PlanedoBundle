@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class CreateUserCommandTest extends KernelTestCase
 {
-    protected const Command = 'app:create-user';
+    protected const Command = 'plaendo:create-user';
 
     use EntityManagerWrapper;
     use UserUtils;

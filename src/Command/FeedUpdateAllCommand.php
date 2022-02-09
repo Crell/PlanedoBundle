@@ -12,7 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
-    name: 'app:feed:update-all',
+    name: 'planedo:feed:update-all',
     description: 'Add a short description for your command',
 )]
 class FeedUpdateAllCommand extends Command

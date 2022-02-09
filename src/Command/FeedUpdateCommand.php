@@ -14,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
-    name: 'app:feed:update',
+    name: 'planedo:feed:update',
     description: 'Update a feed',
 )]
 class FeedUpdateCommand extends Command

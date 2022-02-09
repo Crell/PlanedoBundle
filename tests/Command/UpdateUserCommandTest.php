@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class UpdateUserCommandTest extends KernelTestCase
 {
-    protected const Command = 'app:update-user';
+    protected const Command = 'planedo:update-user';
 
     use EntityManagerWrapper;
     use UserUtils;

@@ -17,7 +17,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsCommand(
-    name: 'app:update-user',
+    name: 'planedo:update-user',
     description: 'Updates an existing user',
 )]
 class UpdateUserCommand extends Command

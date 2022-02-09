@@ -15,7 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsCommand(
-    name: 'app:create-user',
+    name: 'planedo:create-user',
     description: 'Add a new administrative user',
 )]
 class CreateUserCommand extends Command

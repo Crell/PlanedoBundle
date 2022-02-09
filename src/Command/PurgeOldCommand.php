@@ -11,7 +11,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
-    name: 'app:purge-old',
+    name: 'planedo:purge-old',
     description: 'Purge old feed entries. The age to purge is controlled by the app.feeds.purge-before parameter.',
 )]
 class PurgeOldCommand extends Command
