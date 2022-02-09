@@ -17,29 +17,12 @@ class PurgeTest extends TestCase
 
     protected static Kernel $kernel;
 
-//    protected static function getContainer(): ContainerInterface
-//    {
-//        return self::$kernel->getContainer();
-//    }
-
-    public static function setUpBeforeClass(): void
-    {
-        parent::setUpBeforeClass();
-
-//        self::$kernel = new PlanedoTestingKernel();
-//        self::$kernel->boot();
-        //$container = self::$kernel->getContainer();
-    }
-
-
     /**
      * @test
      */
     public function old_entries_get_purged(): void
     {
-        $kernel = new PlanedoTestingKernel(['purge_before' => '-10 days']);
-        $kernel->boot();
-        $container = $this->container = $kernel->getContainer();
+        $container = $this->initialize(['purge_before' => '-10 days']);
 
         // The first will allow through a few items.
         $clock = $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
