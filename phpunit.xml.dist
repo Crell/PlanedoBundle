@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" backupGlobals="false" backupStaticAttributes="false" colors="true" verbose="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+
+<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+  backupGlobals="false"
+  colors="true"
+  bootstrap="vendor/autoload.php"
+>
+  <php>
+    <ini name="error_reporting" value="-1" />
+    <server name="KERNEL_CLASS" value="Crell\Bundle\Planedo\Tests\TestApplication\Kernel"/>
+    <server name="APP_ENV" value="test" force="true" />
+    <server name="SHELL_VERBOSITY" value="-1" />
+    <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
+    <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
+  </php>
+
   <coverage>
     <include>
       <directory suffix=".php">src/</directory>
@@ -10,12 +27,19 @@
       <text outputFile="build/coverage.txt"/>
     </report>
   </coverage>
+
   <testsuites>
     <testsuite name="Test Suite">
       <directory>tests</directory>
     </testsuite>
   </testsuites>
+
   <logging>
     <junit outputFile="build/report.junit.xml"/>
   </logging>
+
+  <listeners>
+    <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+  </listeners>
+
 </phpunit>
