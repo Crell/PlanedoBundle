@@ -24,7 +24,7 @@ class FeedController extends AbstractController
 
         return $this->makeFeed(
             offset: $offset,
-            selfRoute: 'crell_planedo_atom_main',
+            selfRoute: 'planedo_atom_main',
             feedType: 'atom',
             contentType: $this->plainTextFeeds ? 'text/plain' : 'application/atom+xml',
         );
@@ -36,7 +36,7 @@ class FeedController extends AbstractController
 
         return $this->makeFeed(
             offset: $offset,
-            selfRoute: 'crell_planedo_rss_main',
+            selfRoute: 'planedo_rss_main',
             feedType: 'rss',
             contentType: $this->plainTextFeeds ? 'text/plain' : 'application/rss+xml',
         );

@@ -2,7 +2,7 @@
 
 namespace Crell\Bundle\Planedo\Tests\TestApplication;
 
-use Crell\Bundle\Planedo\CrellPlanedoBundle;
+use Crell\Bundle\Planedo\PlanedoBundle;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
@@ -49,7 +49,7 @@ class Kernel extends SymfonyKernel
             new DoctrineBundle(),
             new DAMADoctrineTestBundle(),
             new DoctrineFixturesBundle(),
-            new CrellPlanedoBundle(),
+            new PlanedoBundle(),
         ];
     }
 

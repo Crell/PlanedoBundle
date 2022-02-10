@@ -11,7 +11,7 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('crell_planedo');
+        $treeBuilder = new TreeBuilder('planedo');
 
         $treeBuilder->getRootNode()
             ->children()

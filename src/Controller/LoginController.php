@@ -36,7 +36,7 @@ class LoginController extends AbstractController
             // the URL users are redirected to after the login (default: '/admin')
             // @TODO This is buggy. it's resulting in a double index.php in the URL,
             // which breaks.  WTF?
-            'target_path' => $this->generateUrl('crell_planedo_admin'),
+            'target_path' => $this->generateUrl('planedo_admin'),
 
             'username_label' => 'Email address',
 
@@ -44,7 +44,7 @@ class LoginController extends AbstractController
             'forgot_password_enabled' => true,
 
             // the path (i.e. a relative or absolute URL) to visit when clicking the "forgot password?" link (default: '#')
-            'forgot_password_path' => $this->generateUrl('crell_planedo_forgot_password_request'),
+            'forgot_password_path' => $this->generateUrl('planedo_forgot_password_request'),
 
             // the label displayed for the "forgot password?" link (the |trans filter is applied to it)
             'forgot_password_label' => 'Forgot your password?',

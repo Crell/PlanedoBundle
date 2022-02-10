@@ -21,11 +21,11 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
-                login_path: crell_planedo_login
-                check_path: crell_planedo_login
+                login_path: planedo_login
+                check_path: planedo_login
                 enable_csrf: true
             logout:
-                path: crell_planedo_logout
+                path: planedo_logout
             remember_me:
                 secret: '%kernel.secret%' # required
                 lifetime: 604800 # 1 week in seconds

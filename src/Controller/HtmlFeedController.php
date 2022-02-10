@@ -19,7 +19,7 @@ class HtmlFeedController extends AbstractController
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $this->repository->latestEntriesPaginator($offset);
 
-        return $this->render('@CrellPlanedo/html_feed/index.html.twig', [
+        return $this->render('@Planedo/html_feed/index.html.twig', [
             'controller_name' => 'HtmlFeedController',
             'entries' => $paginator,
             'previous' => $offset - $this->itemsPerPage,

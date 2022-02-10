@@ -49,7 +49,7 @@ class ResetPasswordController extends AbstractController
             );
         }
 
-        return $this->render('@CrellPlanedo/reset_password/request.html.twig', [
+        return $this->render('@Planedo/reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
@@ -66,7 +66,7 @@ class ResetPasswordController extends AbstractController
             $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
         }
 
-        return $this->render('@CrellPlanedo/reset_password/check_email.html.twig', [
+        return $this->render('@Planedo/reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
         ]);
     }
@@ -121,7 +121,7 @@ class ResetPasswordController extends AbstractController
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
 
-            return $this->redirectToRoute('crell_planedo_admin');
+            return $this->redirectToRoute('planedo_admin');
         }
 
         return $this->render('reset_password/reset.html.twig', [

@@ -1,4 +1,4 @@
-{% extends '@CrellPlanedo/base.html.twig' %}
+{% extends '@Planedo/base.html.twig' %}
 
 {% block body %}
     <h1>{% block title %}{% endblock %}</h1>
@@ -13,7 +13,7 @@
                 'Crell\\Bundle\\Planedo\\Controller\\BlogRollController::mostActive', {max: 3}
             )) }}
 
-            {{ include('@CrellPlanedo/_feeds.html.twig') }}
+            {{ include('@Planedo/_feeds.html.twig') }}
         </div>
     </div>
 {% endblock %}

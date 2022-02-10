@@ -6,7 +6,7 @@ namespace Crell\Bundle\Planedo;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class CrellPlanedoBundle extends Bundle
+class PlanedoBundle extends Bundle
 {
     /**
      * Override the base path so that we can put files in the package root.

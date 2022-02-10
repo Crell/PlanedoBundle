@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests\TestApplication;
 
 
-use Crell\Bundle\Planedo\CrellPlanedoBundle;
+use Crell\Bundle\Planedo\PlanedoBundle;
 use Crell\Bundle\Planedo\FeedReaderClient;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
@@ -63,7 +63,7 @@ class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
             new DoctrineBundle(),
             new DAMADoctrineTestBundle(),
             new DoctrineFixturesBundle(),
-            new CrellPlanedoBundle(),
+            new PlanedoBundle(),
         ];
     }
 
@@ -102,7 +102,7 @@ class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
 //
 //        $loader->load(function(ContainerBuilder $container) {
 //            $container->register(ClientInterface::class, FeedReaderClient::class);
-//            $container->loadFromExtension('crell_planedo', $this->config);
+//            $container->loadFromExtension('planedo', $this->config);
 //
 ////            $this->loadExtensionConfigFixture('framework', $container);
 ////            $this->loadExtensionConfigFixture('doctrine', $container);

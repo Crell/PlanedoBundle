@@ -55,17 +55,17 @@ Crell\Bundle\Planedo\CrellPlanedoBundle::class => ['all' => true],
 
 ### Routing
 
-Create a new file named `config/routes/crell_planedo.yaml` and give it the following content:
+Create a new file named `config/routes/planedo.yaml` and give it the following content:
 
 ```yaml
-# config/routes/crell_planedo.yaml
+# config/routes/planedo.yaml
 
-crell_planedo_admin:
-    resource: '@CrellPlanedoBundle/config/routes_admin.yaml'
+planedo_admin:
+    resource: '@PlanedoBundle/config/routes_admin.yaml'
     prefix: ''
 
-crell_planedo_public:
-    resource: '@CrellPlanedoBundle/config/routes_public.yaml'
+planedo_public:
+    resource: '@PlanedoBundle/config/routes_public.yaml'
     prefix: ''
 ```
 
@@ -103,11 +103,11 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
-                login_path: crell_planedo_login
-                check_path: crell_planedo_login
+                login_path: planedo_login
+                check_path: planedo_login
                 enable_csrf: true
             logout:
-                path: crell_planedo_logout
+                path: planedo_logout
             remember_me:
                 secret: '%kernel.secret%' # required
                 lifetime: 604800 # 1 week in seconds
@@ -122,7 +122,7 @@ You may also choose to ignore the provided user system and use your own.  In tha
 
 ## Configuration
 
-Planedo includes its own minimal configuration in `config/crell_planedo.yaml`.  There are three configuration options, all optional.  The defaults should be reasonable for most circumstances.
+Planedo includes its own minimal configuration in `config/planedo.yaml`.  There are three configuration options, all optional.  The defaults should be reasonable for most circumstances.
 
 * `items_per_page` (default 10): This integer specifies how many feed entries will be shown per page on HTML lists, and will be shown total in RSS and Atom feeds.
 * `purge_before` (default `-30 days`): Every time the purge cron job runs, any entries dated older than this will be deleted.  Entries older than this will also not be imported.  You may use any string that is valid according to PHP's [relative date format](https://www.php.net/manual/en/datetime.formats.relative.php).
@@ -131,9 +131,9 @@ Planedo includes its own minimal configuration in `config/crell_planedo.yaml`.  
 For example:
 
 ```yaml
-# config/crell_planedo.yaml
+# config/planedo.yaml
 
-crell_planedo:
+planedo:
     items_per_page: 20
     purge_before: -60 days
 ```

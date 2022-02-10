@@ -1,4 +1,4 @@
-{% extends '@CrellPlanedo/layout.html.twig' %}
+{% extends 'Planedo/layout.html.twig' %}
 
 {% block title %}Feeds on this site{% endblock %}
 
@@ -17,11 +17,11 @@
 
         <div>
             {% if previous >= 0 %}
-                <a href="{{ path('crell_planedo_html_main', { offset: previous }) }}" rel="prev">Previous</a>
+                <a href="{{ path('planedo_html_main', { offset: previous }) }}" rel="prev">Previous</a>
             {% endif %}
 
             {% if next < feeds|length %}
-                <a href="{{ path('crell_planedo_html_main', { offset: next }) }}" rel="next">Next</a>
+                <a href="{{ path('planedo_html_main', { offset: next }) }}" rel="next">Next</a>
             {% endif %}
         </div>
 
