@@ -28,6 +28,23 @@ composer require crell/planedo-bundle
 
 If you take this approach, there are a few manual steps necessary to wire the bundle into the application.
 
+### Add a dev-dependency
+
+At this time, Planedo uses the pre-release version of PSR-20 from the PHP-FIG.  It is not yet on Packagist, so you will need to include the following in your main application's `composer.json`:
+
+```json
+{
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/php-fig/clock.git"
+    }
+  ]
+}
+```
+
+That will allow Composer to download the appropriate package.  This step will be unnecessary once PSR-20 is released.
+
 ### Enable the bundle
 
 Add the bundle to your `bundles.php` file:
