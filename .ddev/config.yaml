@@ -3,8 +3,8 @@ type: php
 docroot: ""
 php_version: "8.1"
 webserver_type: nginx-fpm
-router_http_port: "80"
-router_https_port: "443"
+router_http_port: "8080"
+router_https_port: "8443"
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
@@ -82,7 +82,7 @@ web_environment: []
 # Please take care with this because it can cause great confusion.
 
 # upload_dir: custom/upload/dir
-# would set the destination path for ddev import-files to <docroot>/custom/upload/dir 
+# would set the destination path for ddev import-files to <docroot>/custom/upload/dir
 
 # working_dir:
 #   web: /var/www/html
