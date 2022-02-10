@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests;
 
+use Crell\Bundle\Planedo\Tests\TestApplication\Kernel;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\HttpKernel\Kernel;
 
 class DummyTest extends TestCase
 {
@@ -21,7 +21,7 @@ class DummyTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        self::$kernel = new PlanedoTestingKernel('test', true);
+        self::$kernel = new Kernel();
         self::$kernel->boot();
     }
 

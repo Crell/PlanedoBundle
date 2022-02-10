@@ -1,0 +1,21 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    Crell\Bundle\Planedo\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Message/'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    Laminas\Feed\Reader\Http\ClientInterface:
+        alias: Crell\Bundle\Planedo\FeedReaderClient
+
+    Psr\Clock\ClockInterface:
+        class: Crell\Bundle\Planedo\UtcClock

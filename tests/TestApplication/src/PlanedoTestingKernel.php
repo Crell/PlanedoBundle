@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Crell\Bundle\Planedo\Tests;
+namespace Crell\Bundle\Planedo\Tests\TestApplication;
 
 
 use Crell\Bundle\Planedo\CrellPlanedoBundle;
@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle;
 use Laminas\Feed\Reader\Http\ClientInterface;
 use Psr\Clock\ClockInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -22,6 +23,7 @@ use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Messenger\DependencyInjection\MessengerPass;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
@@ -33,7 +35,8 @@ use Symfony\Component\Yaml\Yaml;
 class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
 {
     use MicroKernelTrait {
-        MicroKernelTrait::registerContainerConfiguration as microkernelContainerConfig;
+//        MicroKernelTrait::registerContainerConfiguration as microkernelContainerConfig;
+            MicroKernelTrait::configureContainer as microkernelConfigureContainer;
     }
 
     protected array $config;
@@ -53,7 +56,6 @@ class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
     public function registerBundles(): iterable
     {
         return [
-            new CrellPlanedoBundle(),
             new FrameworkBundle(),
             new SecurityBundle(),
             new EasyAdminBundle(),
@@ -61,30 +63,60 @@ class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
             new DoctrineBundle(),
             new DAMADoctrineTestBundle(),
             new DoctrineFixturesBundle(),
+            new CrellPlanedoBundle(),
         ];
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader): void
+    public function configureContainer(ContainerConfigurator $container, LoaderInterface $loader, ContainerBuilder $builder): void
     {
-        $this->microkernelContainerConfig($loader);
+        $this->microkernelConfigureContainer($container, $loader, $builder);
 
-        $loader->load(function(ContainerBuilder $container) {
-            $container->register(ClientInterface::class, FeedReaderClient::class);
-            $container->loadFromExtension('crell_planedo', $this->config);
+        // Load package configuration for our dependencies.
+        $configDir = $this->getConfigDir();
+        $loader->load($configDir . '/*.yaml', 'glob');
+        $loader->load($configDir . '/{packages}/*.yaml', 'glob');
+        $loader->load($configDir . '/{packages}/' . $this->environment . '/*.yaml', 'glob');
+        $loader->load($configDir . '/{services}.yaml', 'glob');
+        $loader->load($configDir . '/{services}_' . $this->environment . '.yaml', 'glob');
 
-            $this->loadExtensionConfigFixture('framework', $container);
-            $this->loadExtensionConfigFixture('doctrine', $container);
-            $this->loadExtensionConfigFixture('security', $container);
+        $bundleConfigFile = realpath($this->getProjectDir() . '/../../config/services.yaml');
+        if (is_file($bundleConfigFile)) {
+            $container->import($bundleConfigFile);
+        }
 
-            $container->register(UserPasswordHasherInterface::class, UserPasswordHasher::class);
-        });
+            // Load our bundle's services from the bundle directly.
+//        $path = realpath($this->getProjectDir() . '/../../config/services.yaml');
+//        printf("\nPath: %s, Exists: %d\n", $path, file_exists($path));
+
+//        printf("\nContainer type: %s\n", get_class($container));
+
+
+
+
     }
 
-    protected function loadExtensionConfigFixture(string $key, ContainerBuilder $container): void
-    {
-        $config = Yaml::parseFile(__DIR__ . "/test-configs/$key.yaml");
-        $container->loadFromExtension($key, $config[$key]);
-    }
+
+//    public function registerContainerConfiguration(LoaderInterface $loader): void
+//    {
+//        $this->microkernelContainerConfig($loader);
+//
+//        $loader->load(function(ContainerBuilder $container) {
+//            $container->register(ClientInterface::class, FeedReaderClient::class);
+//            $container->loadFromExtension('crell_planedo', $this->config);
+//
+////            $this->loadExtensionConfigFixture('framework', $container);
+////            $this->loadExtensionConfigFixture('doctrine', $container);
+////            $this->loadExtensionConfigFixture('security', $container);
+//
+//            $container->register(UserPasswordHasherInterface::class, UserPasswordHasher::class);
+//        });
+//    }
+
+//    protected function loadExtensionConfigFixture(string $key, ContainerBuilder $container): void
+//    {
+//        $config = Yaml::parseFile(__DIR__ . "/test-configs/$key.yaml");
+//        $container->loadFromExtension($key, $config[$key]);
+//    }
 
     protected function buildContainer(): ContainerBuilder
     {

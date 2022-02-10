@@ -10,6 +10,8 @@ use Crell\Bundle\Planedo\Message\UpdateFeed;
 use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
 use Crell\Bundle\Planedo\Tests\Mocks\MockFeedReaderHttpClient;
 use Crell\Bundle\Planedo\Tests\Mocks\SettableClock;
+use Crell\Bundle\Planedo\Tests\TestApplication\Kernel;
+use Crell\Bundle\Planedo\Tests\TestApplication\PlanedoTestingKernel;
 use Laminas\Feed\Reader\Http\ClientInterface;
 use Psr\Clock\ClockInterface;
 use Psr\Container\ContainerInterface;
@@ -23,7 +25,7 @@ trait SetupUtils
 
     public function initialize(array $config = []): ContainerInterface
     {
-        $kernel = new PlanedoTestingKernel($config);
+        $kernel = new Kernel($config);
         $kernel->boot();
         return $this->container = $kernel->getContainer();
     }
