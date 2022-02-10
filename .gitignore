@@ -1,5 +1,8 @@
+.ddev/
 .env
+var
 vendor
+.phplint-cache
 .phpunit.result.cache
 build
 composer.lock
