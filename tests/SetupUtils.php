@@ -14,11 +14,7 @@ use Crell\Bundle\Planedo\Entity\Feed;
 use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Message\UpdateFeed;
 use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
-use Crell\Bundle\Planedo\Tests\Mocks\MockFeedReaderHttpClient;
-use Crell\Bundle\Planedo\Tests\Mocks\SettableClock;
 use Crell\Bundle\Planedo\Tests\TestApplication\Kernel;
-use Laminas\Feed\Reader\Http\ClientInterface;
-use Psr\Clock\ClockInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -77,4 +73,7 @@ trait SetupUtils
             $bus->dispatch(new UpdateFeed($feed->getId()));
         }
     }
+
+    // @todo Come back to this once the old tests aren't so broken.
+    //abstract protected static function getContainer(): ContainerInterface;
 }
