@@ -25,9 +25,9 @@ class PlanedoExtension extends Extension implements PrependExtensionInterface
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('planedo.itemsPerPage', $config['itemsPerPage']);
-        $container->setParameter('planedo.purgeBefore', $config['purgeBefore']);
-        $container->setParameter('planedo.usePlainText', $config['usePlainText']);
+        $container->setParameter('planedo.itemsPerPage', $config['items_per_page']);
+        $container->setParameter('planedo.purgeBefore', $config['purge_before']);
+        $container->setParameter('planedo.usePlainText', $config['use_plain_text']);
 
         // Load this bundle's services.
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));

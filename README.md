@@ -124,9 +124,9 @@ You may also choose to ignore the provided user system and use your own.  In tha
 
 Planedo includes its own minimal configuration in `config/planedo.yaml`.  There are three configuration options, all optional.  The defaults should be reasonable for most circumstances.
 
-* `itemsPerPage` (default 10): This integer specifies how many feed entries will be shown per page on HTML lists, and will be shown total in RSS and Atom feeds.
-* `purgeBefore` (default `-30 days`): Every time the purge cron job runs, any entries dated older than this will be deleted.  Entries older than this will also not be imported.  You may use any string that is valid according to PHP's [relative date format](https://www.php.net/manual/en/datetime.formats.relative.php).
-* `usePlainText` (default false): If set to true, RSS and Atom feeds will use a `text/plain` mime type instead of their appropriate XML mime type.  This is mainly useful for debugging and can be ignored 99% of the time.
+* `items_per_page` (default 10): This integer specifies how many feed entries will be shown per page on HTML lists, and will be shown total in RSS and Atom feeds.
+* `purge_before` (default `-30 days`): Every time the purge cron job runs, any entries dated older than this will be deleted.  Entries older than this will also not be imported.  You may use any string that is valid according to PHP's [relative date format](https://www.php.net/manual/en/datetime.formats.relative.php).
+* `use_plain_text` (default false): If set to true, RSS and Atom feeds will use a `text/plain` mime type instead of their appropriate XML mime type.  This is mainly useful for debugging and can be ignored 99% of the time.
 
 For example:
 
@@ -134,8 +134,8 @@ For example:
 # config/planedo.yaml
 
 planedo:
-    itemsPerPage: 20
-    purgeBefore: -60 days
+    items_per_page: 20
+    purge_before: -60 days
 ```
 
 ## Initial setup
@@ -160,7 +160,7 @@ The first update refetches feeds to get new entries:
 bin/console planedo:update-all
 ```
 
-The second update deletes old entries (where "old" is defined by the `purgeBefore` configuration setting):
+The second update deletes old entries (where "old" is defined by the `purge_before` configuration setting):
 
 ```shell
 bin/console planedo:purge-old
