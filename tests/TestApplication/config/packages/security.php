@@ -8,8 +8,8 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-use Symfony\Component\Security\Core\User\InMemoryUser;
 use Crell\Bundle\Planedo\Entity\User;
+use Symfony\Component\Security\Core\User\InMemoryUser;
 
 $container->loadFromExtension('security', [
     'enable_authenticator_manager' => true,

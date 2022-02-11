@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests;
 
-use Psr\Container\ContainerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 trait HasherWrapper
