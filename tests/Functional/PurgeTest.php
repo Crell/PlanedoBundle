@@ -8,26 +8,41 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\Tests;
+namespace Crell\Bundle\Planedo\Tests\Functional;
 
+use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
 use Crell\Bundle\Planedo\Message\PurgeOldEntries;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpKernel\Kernel;
+use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class PurgeTest extends TestCase
+/**
+ * See the TestApplication/config/packages/test/planedo.php file for non-default configuration.
+ */
+class PurgeTest extends KernelTestCase
 {
     use SetupUtils;
+    use DatabasePrimer;
+    use DatabaseFixtures;
+    use MockClock;
+    use MockFeedReaderClient;
 
-    protected static Kernel $kernel;
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        self::bootKernel();
+        $this->prime();
+        $this->addFixture(new FeedFixtures());
+        $this->addFixture(new FeedTestFixtures());
+        $this->executeFixtures();
+    }
 
     /**
      * @test
      */
     public function oldEntriesGetPurged(): void
     {
-        $container = $this->initialize(['purge_before' => '-10 days']);
-
         // The first will allow through a few items.
         $clock = $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
 
@@ -37,7 +52,7 @@ class PurgeTest extends TestCase
         $this->assertRawEntryCount(5);
 
         /** @var MessageBusInterface $bus */
-        $bus = $container->get(MessageBusInterface::class);
+        $bus = self::getContainer()->get(MessageBusInterface::class);
 
         // Fast forward time.
         $clock->set(new \DateTimeImmutable('31 Dec 2021 01:01:01 +0000'));
