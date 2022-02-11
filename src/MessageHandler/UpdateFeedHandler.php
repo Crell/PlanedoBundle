@@ -84,7 +84,6 @@ final class UpdateFeedHandler implements MessageHandlerInterface
             $feed->setLastUpdated(new \DateTimeImmutable(timezone: new \DateTimeZone('UTC')));
 
             $em->persist($feed);
-            $em->flush();
         });
     }
 
