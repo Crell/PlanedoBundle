@@ -8,11 +8,13 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\Tests;
+namespace Crell\Bundle\Planedo\Tests\Functional\Controller;
 
 use Crell\Bundle\Planedo\Entity\FeedEntry;
+use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedFixtures;
 use Crell\Bundle\Planedo\Tests\Functional\WebTestCase;
+use Crell\Bundle\Planedo\Tests\SetupUtils;
 use Laminas\Feed\Reader\Reader;
 
 /**
