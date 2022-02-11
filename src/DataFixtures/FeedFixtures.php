@@ -15,6 +15,11 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Fixtures for active development.
+ *
+ * If you are not actively developing on this Bundle, ignore this class.
+ */
 class FeedFixtures extends Fixture implements FixtureGroupInterface
 {
     public static function getGroups(): array

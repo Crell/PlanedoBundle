@@ -8,13 +8,16 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\DataFixtures;
+namespace Crell\Bundle\Planedo\Tests\Functional\DataFixtures;
 
 use Crell\Bundle\Planedo\Entity\Feed;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Extra fixtures for use in tests only.
+ */
 class FeedTestFixtures extends Fixture implements FixtureGroupInterface
 {
     public static function getGroups(): array
