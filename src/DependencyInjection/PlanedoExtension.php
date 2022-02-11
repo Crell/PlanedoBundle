@@ -30,7 +30,7 @@ class PlanedoExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('planedo.usePlainText', $config['use_plain_text']);
 
         // Load this bundle's services.
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(dirname(__DIR__) . '/../config'));
         $loader->load('services.yaml');
     }
 

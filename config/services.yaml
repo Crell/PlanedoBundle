@@ -4,11 +4,12 @@ services:
     autoconfigure: true
 
   Crell\Bundle\Planedo\:
-    resource: '../../../src/'
+    resource: '../src/'
     exclude:
-      - '../../../src/DependencyInjection/'
-      - '../../../src/Tests/'
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
       - '../src/Message/'
+      - '../tests/'
 
   Crell\Bundle\Planedo\Controller\BlogRollController:
     arguments:

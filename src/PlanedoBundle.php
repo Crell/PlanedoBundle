@@ -12,6 +12,10 @@ namespace Crell\Bundle\Planedo;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class PlanedoBundle extends Bundle
+class PlanedoBundle extends Bundle
 {
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
 }

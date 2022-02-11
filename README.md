@@ -61,11 +61,11 @@ Create a new file named `config/routes/planedo.yaml` and give it the following c
 # config/routes/planedo.yaml
 
 planedo_admin:
-    resource: '@PlanedoBundle/Resources/config/routes_admin.yaml'
+    resource: '@PlanedoBundle/config/routes_admin.yaml'
     prefix: ''
 
 planedo_public:
-    resource: '@PlanedoBundle/Resources/config/routes_public.yaml'
+    resource: '@PlanedoBundle/config/routes_public.yaml'
     prefix: ''
 ```
 
