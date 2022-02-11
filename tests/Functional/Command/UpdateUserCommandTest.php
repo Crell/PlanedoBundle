@@ -33,7 +33,9 @@ class UpdateUserCommandTest extends KernelTestCase
         parent::setUp();
         self::bootKernel();
         $this->prime();
-        $this->addFixture(new UserFixtures($this->getContainer()->get(UserPasswordHasherInterface::class)));
+        /** @var UserPasswordHasherInterface $hasher */
+        $hasher = self::getContainer()->get(UserPasswordHasherInterface::class);
+        $this->addFixture(new UserFixtures($hasher));
         $this->executeFixtures();
     }
 
@@ -55,7 +57,7 @@ class UpdateUserCommandTest extends KernelTestCase
         self::assertStringContainsString('User updated', $output);
         self::assertSame(Command::SUCCESS, $exitCode);
 
-        $userRepository = $this->getContainer()->get('doctrine')->getRepository(User::class);
+        $userRepository = self::getContainer()->get('doctrine')->getRepository(User::class);
         $foundUser = $userRepository->findOneByEmail('you@me.com');
         self::assertNotNull($foundUser);
     }
@@ -79,11 +81,11 @@ class UpdateUserCommandTest extends KernelTestCase
         self::assertStringContainsString('User updated', $output);
         self::assertSame(Command::SUCCESS, $exitCode);
 
-        $userRepository = $this->getContainer()->get('doctrine')->getRepository(User::class);
+        $userRepository = self::getContainer()->get('doctrine')->getRepository(User::class);
         $foundUser = $userRepository->findOneByEmail('me@me.com');
 
         self::markTestIncomplete('Testing the password hash is not working yet.');
-        $userPasswordHasher = $this->getContainer()->get(UserPasswordHasherInterface::class);
+        $userPasswordHasher = self::getContainer()->get(UserPasswordHasherInterface::class);
         $expectedHash = $userPasswordHasher->hashPassword($foundUser, $newPassword);
         self::assertEquals($expectedHash, $foundUser->getPassword());
     }
