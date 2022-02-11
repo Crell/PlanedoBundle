@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 trait MockFeedReaderClientTrait
 {
-    public function setFeedReaderClientMock()
+    public function mockFeedClient()
     {
         /** @var KernelInterface $kernel */
         $kernel = self::$kernel;

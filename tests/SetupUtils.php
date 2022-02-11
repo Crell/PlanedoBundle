@@ -61,30 +61,6 @@ trait SetupUtils
         self::assertCount($expected, $entries);
     }
 
-    protected function mockFeedClient(): void
-    {
-        $container = $this->getRealContainer();
-
-        $mockClient = new MockFeedReaderHttpClient([
-            'https://www.garfieldtech.com/blog/feed' => 'tests/feed-data/garfieldtech.rss',
-            'http://www.planet-php.org/rss/' => 'tests/feed-data/planetphp.092.rss',
-            'http://www.planet-php.org/rdf/' => 'tests/feed-data/planetphp.10.xml',
-            'https://www.php.net/feed.atom' => 'tests/feed-data/phpnet.atom',
-            'http://www.example.com/' => 'tests/feed-data/fake1.rss',
-        ]);
-
-        $container->set(ClientInterface::class, $mockClient);
-    }
-
-    protected function mockClock(\DateTimeImmutable $time): SettableClock
-    {
-        $container = $this->getContainer();
-        $clock = new SettableClock($time);
-        $container->set(ClockInterface::class, $clock);
-
-        return $clock;
-    }
-
     protected function populateFeeds(): void
     {
         $container = self::getContainer();

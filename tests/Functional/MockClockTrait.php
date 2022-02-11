@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 trait MockClockTrait
 {
-    public function setClockMock(DateTimeImmutable $datetime)
+    public function mockClock(DateTimeImmutable $datetime)
     {
         /** @var KernelInterface $kernel */
         $kernel = self::$kernel;

@@ -48,8 +48,8 @@ class FeedControllerTest extends WebTestCase
      */
     public function feedHasData(string $path, string $contentType): void
     {
-        $this->setClockMock(new \DateTimeImmutable('2021-11-15'));
-        $this->setFeedReaderClientMock();
+        $this->mockClock(new \DateTimeImmutable('2021-11-15'));
+        $this->mockFeedClient();
 
         $this->populateFeeds();
 
@@ -76,8 +76,8 @@ class FeedControllerTest extends WebTestCase
 
         $excludedContent = 'Description B';
 
-        $this->setClockMock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
-        $this->setFeedReaderClientMock();
+        $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
+        $this->mockFeedClient();
 
         $this->populateFeeds();
 
@@ -106,8 +106,8 @@ class FeedControllerTest extends WebTestCase
      */
     public function inactiveFeedsDontShow(string $path, string $contentType): void
     {
-        $this->setClockMock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
-        $this->setFeedReaderClientMock();
+        $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
+        $this->mockFeedClient();
 
         $this->populateFeeds();
 
