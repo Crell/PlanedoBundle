@@ -8,12 +8,13 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\Tests;
+namespace Crell\Bundle\Planedo\Tests\Functional;
 
 use Crell\Bundle\Planedo\Entity\Feed;
 use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Message\UpdateFeed;
 use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
+use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\TestApplication\Kernel;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;

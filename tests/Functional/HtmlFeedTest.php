@@ -13,7 +13,7 @@ namespace Crell\Bundle\Planedo\Tests\Functional;
 use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
 use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
-use Crell\Bundle\Planedo\Tests\SetupUtils;
+use Crell\Bundle\Planedo\Tests\Functional\SetupUtils;
 
 /**
  * @group public

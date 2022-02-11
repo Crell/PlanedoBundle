@@ -10,11 +10,12 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests\Functional\Controller;
 
+use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
 use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
-use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedFixtures;
+use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
 use Crell\Bundle\Planedo\Tests\Functional\WebTestCase;
-use Crell\Bundle\Planedo\Tests\SetupUtils;
+use Crell\Bundle\Planedo\Tests\Functional\SetupUtils;
 use Laminas\Feed\Reader\Reader;
 
 /**

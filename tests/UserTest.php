@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests;
 
+use Crell\Bundle\Planedo\Tests\Functional\SetupUtils;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
