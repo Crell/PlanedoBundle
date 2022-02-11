@@ -20,7 +20,7 @@ composer project-create crell/planedo
 
 That will create a new project pre-configured to use with Planedo.  Nearly all meaningful functionality is in the bundle, so you can modify the application itself to your heart's content.  Future updates to Planedo itself will come via updating the bundle through Composer.
 
-Alternatively, you may install Planedo Bundle directly in Symfony 6 application of your choice, via composer.
+Alternatively, you may install Planedo Bundle directly in Symfony 5.4/6 application of your choice, via composer.
 
 ```shell
 composer require crell/planedo-bundle
@@ -73,50 +73,7 @@ The above setup assumes that you want Planedo's routes to be at the root of your
 
 ### User and password management
 
-Planedo provides its own user accounts and password handling.  To use the provided tools, set the following configuration files:
-
-```yaml
-# config/reset_password.yaml
-
-symfonycasts_reset_password:
-    request_password_repository: Crell\Bundle\Planedo\Repository\ResetPasswordRequestRepository
-```
-
-```yaml
-# config/security.yaml
-
-security:
-    // ...
-    password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-        Crell\Bundle\Planedo\Entity\User:
-            algorithm: auto
-
-    providers:
-        app_user_provider:
-            entity:
-                class: Crell\Bundle\Planedo\Entity\User
-                property: email
-    firewalls:
-        // ...
-        main:
-            lazy: true
-            provider: app_user_provider
-            form_login:
-                login_path: planedo_login
-                check_path: planedo_login
-                enable_csrf: true
-            logout:
-                path: planedo_logout
-            remember_me:
-                secret: '%kernel.secret%' # required
-                lifetime: 604800 # 1 week in seconds
-
-    access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-```
-
-If you set a prefix on the Planedo admin routes, adjust the `access_control` section accordingly.
+Planedo provides its own user accounts and password handling.  A mechanism to disable is coming soon.
 
 You may also choose to ignore the provided user system and use your own.  In that case, ensure that users who should have access to the Planedo administrative area are given the `ROLE_ADMIN` role.  How you end up doing that is up to you.
 
