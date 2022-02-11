@@ -79,7 +79,7 @@ class FeedCrudController extends AbstractCrudController
     {
         $ids = $context->getEntityIds();
         foreach ($ids as $id) {
-            $bus->dispatch(new UpdateFeed($id));
+            $bus->dispatch(new UpdateFeed((int)$id));
         }
 
         $this->addFlash('notice', sprintf('Update queued for %d feeds.', count($ids)));
