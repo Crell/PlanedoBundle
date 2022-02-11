@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests\Functional\Controller;
 
 use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
-use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
+use Crell\Bundle\Planedo\Tests\Functional\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
 use Crell\Bundle\Planedo\Tests\Functional\MockClock;
 use Crell\Bundle\Planedo\Tests\Functional\MockFeedReaderClient;

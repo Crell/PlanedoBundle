@@ -14,7 +14,7 @@ use Crell\Bundle\Planedo\Entity\Feed;
 use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Message\UpdateFeed;
 use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
-use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
+use Crell\Bundle\Planedo\Tests\Functional\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\TestApplication\Kernel;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;

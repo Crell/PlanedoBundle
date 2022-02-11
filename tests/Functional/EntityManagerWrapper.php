@@ -8,7 +8,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\Tests;
+namespace Crell\Bundle\Planedo\Tests\Functional;
 
 use Crell\Bundle\Planedo\Entity\Feed;
 use Crell\Bundle\Planedo\Entity\FeedEntry;
@@ -17,13 +17,10 @@ use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
 use Crell\Bundle\Planedo\Repository\FeedRepository;
 use Crell\Bundle\Planedo\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Container\ContainerInterface;
 
 trait EntityManagerWrapper
 {
     private EntityManagerInterface $em;
-
-    private ContainerInterface $container;
 
     protected function entityManager(): EntityManagerInterface
     {
@@ -32,9 +29,8 @@ trait EntityManagerWrapper
 
     protected function getEntityManager(): EntityManagerInterface
     {
-        $container = self::getContainer();
         /** @var EntityManagerInterface $em */
-        $em = $container->get(EntityManagerInterface::class);
+        $em = self::getContainer()->get(EntityManagerInterface::class);
 
         return $em;
     }
