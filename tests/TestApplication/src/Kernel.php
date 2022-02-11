@@ -28,14 +28,6 @@ class Kernel extends SymfonyKernel
 {
     use MicroKernelTrait;
 
-    protected array $config;
-
-    protected array $defaultConfig = [
-        'items_per_page' => 10,
-        'purge_before' => '-30 days',
-        'use_plain_text' => false,
-    ];
-
     public function __construct()
     {
         parent::__construct('test', true);
