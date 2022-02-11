@@ -8,17 +8,20 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\Tests\Functional;
+namespace Crell\Bundle\Planedo\Tests\Functional\Controller;
 
 use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
 use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
+use Crell\Bundle\Planedo\Tests\Functional\MockClockTrait;
+use Crell\Bundle\Planedo\Tests\Functional\MockFeedReaderClientTrait;
 use Crell\Bundle\Planedo\Tests\Functional\SetupUtils;
+use Crell\Bundle\Planedo\Tests\Functional\WebTestCase;
 
 /**
  * @group public
  */
-class HtmlFeedTest extends WebTestCase
+class HtmlFeedControllerTest extends WebTestCase
 {
     use SetupUtils;
     use EntityManagerWrapper;
