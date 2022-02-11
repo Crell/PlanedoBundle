@@ -8,11 +8,12 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\Tests;
+namespace Crell\Bundle\Planedo\Tests\Functional;
 
-use Crell\Bundle\Planedo\Tests\Functional\SetupUtils;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
+use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
+use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
+use Crell\Bundle\Planedo\Tests\UserUtils;
 
 /**
  * @group admin
@@ -20,11 +21,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class AdminTest extends WebTestCase
 {
     use UserUtils;
+    use EntityManagerWrapper;
     use SetupUtils;
 
-    protected static function container(): ContainerInterface
+    public function setUp(): void
     {
-        // TODO: Implement container() method.
+        parent::setUp();
+        $this->addFixture(new FeedFixtures());
+        $this->addFixture(new FeedTestFixtures());
+        $this->executeFixtures();
     }
 
     /**
@@ -32,12 +37,10 @@ class AdminTest extends WebTestCase
      */
     public function anonUserGetsLoginFormOnAdmin(): void
     {
-        $client = static::createClient();
+        // Don't login first!
 
-        // Don't login.
-
-        $client->request('GET', '/admin');
-        $crawler = $client->followRedirect();
+        $this->client->request('GET', '/admin');
+        $crawler = $this->client->followRedirect();
 
         self::assertResponseIsSuccessful();
 
@@ -53,20 +56,24 @@ class AdminTest extends WebTestCase
      */
     public function feedIndexLoads(): void
     {
-        $client = static::createClient();
-
         $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
         $this->mockFeedClient();
         $this->populateFeeds();
 
+        // It is not at all clear why we need to send a dummy request
+        // before logging in.  If we don't, the loginUser() call fails with
+        // a message that we cannot get a container from a non-booted kernel,
+        // yet the kernel is definitely booted by this point.
+        $this->client->request('GET', '/admin');
+
         // Login.
         $adminUser = $this->createUser('me@me.com', 'asdf');
-        $client->loginUser($adminUser);
+        $this->client->loginUser($adminUser);
 
-        $client->request('GET', '/admin');
-        $client->followRedirect();
+        $this->client->request('GET', '/admin');
+        $this->client->followRedirect();
 
-        $crawler = $client->clickLink('Feeds');
+        $crawler = $this->client->clickLink('Feeds');
 
         self::assertResponseIsSuccessful();
         self::assertEquals('Feeds', $crawler->filter('title')->text());
@@ -77,20 +84,24 @@ class AdminTest extends WebTestCase
      */
     public function feedEntryIndexLoads(): void
     {
-        $client = static::createClient();
-
         $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
         $this->mockFeedClient();
         $this->populateFeeds();
 
+        // It is not at all clear why we need to send a dummy request
+        // before logging in.  If we don't, the loginUser() call fails with
+        // a message that we cannot get a container from a non-booted kernel,
+        // yet the kernel is definitely booted by this point.
+        $this->client->request('GET', '/admin');
+
         // Login.
         $adminUser = $this->createUser('me@me.com', 'asdf');
-        $client->loginUser($adminUser);
+        $this->client->loginUser($adminUser);
 
-        $client->request('GET', '/admin');
-        $client->followRedirect();
+        $this->client->request('GET', '/admin');
+        $this->client->followRedirect();
 
-        $crawler = $client->clickLink('Feed Entries');
+        $crawler = $this->client->clickLink('Feed Entries');
 
         self::assertResponseIsSuccessful();
         self::assertEquals('Feed entries', $crawler->filter('title')->text());

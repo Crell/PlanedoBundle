@@ -9,6 +9,7 @@ declare(strict_types=1);
  */
 
 use Symfony\Component\Security\Core\User\InMemoryUser;
+use Crell\Bundle\Planedo\Entity\User;
 
 $container->loadFromExtension('security', [
     'enable_authenticator_manager' => true,
