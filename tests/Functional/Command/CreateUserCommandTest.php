@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests\Functional\Command;
 
 use Crell\Bundle\Planedo\Entity\User;
-use Crell\Bundle\Planedo\Tests\Functional\DatabasePrimer;
+use Crell\Bundle\Planedo\Tests\Functional\DatabasePrimerTrait;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
@@ -22,11 +22,13 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class CreateUserCommandTest extends KernelTestCase
 {
+    use DatabasePrimerTrait;
+
     public function setUp(): void
     {
         parent::setUp();
         self::bootKernel();
-        DatabasePrimer::prime(self::$kernel);
+        $this->prime();
     }
 
     /**
@@ -43,10 +45,10 @@ class CreateUserCommandTest extends KernelTestCase
         ]);
         $output = $commandTester->getDisplay();
         self::assertStringContainsString('User created', $output);
+        self::assertSame(Command::SUCCESS, $exitCode);
 
         $userRepository = $this->getContainer()->get('doctrine')->getRepository(User::class);
         $foundUser = $userRepository->findOneByEmail('me@me.com');
         self::assertNotNull($foundUser);
-        self::assertSame(Command::SUCCESS, $exitCode);
     }
 }

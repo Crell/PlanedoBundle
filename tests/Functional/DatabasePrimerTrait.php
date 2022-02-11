@@ -13,10 +13,13 @@ namespace Crell\Bundle\Planedo\Tests\Functional;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class DatabasePrimer
+trait DatabasePrimerTrait
 {
-    public static function prime(KernelInterface $kernel): void
+    public function prime(): void
     {
+        /** @var KernelInterface $kernel */
+        $kernel = self::$kernel;
+
         // Make sure we are in the test environment
         if ('test' !== $kernel->getEnvironment()) {
             throw new \LogicException('Primer must be executed in the test environment');
