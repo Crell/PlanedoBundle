@@ -32,6 +32,12 @@
     <testsuite name="Test Suite">
       <directory>tests</directory>
     </testsuite>
+    <testsuite name="Unit">
+      <directory>tests/Unit</directory>
+    </testsuite>
+    <testsuite name="Functional">
+      <directory>tests/Functional</directory>
+    </testsuite>
   </testsuites>
 
   <logging>
