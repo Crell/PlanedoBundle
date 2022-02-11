@@ -54,12 +54,14 @@ class Kernel extends SymfonyKernel
 
     public function getCacheDir(): string
     {
-        return sys_get_temp_dir() . '/com.github.crell.planedobundle/tests/var/' . $this->environment . '/log';
+        return $this->getProjectDir() . '/var/cache/' . $this->environment;
+//        return sys_get_temp_dir() . '/com.github.crell.planedobundle/tests/var/' . $this->environment . '/cache';
     }
 
     public function getLogDir(): string
     {
-        return sys_get_temp_dir() . '/com.github.crell.planedobundle/tests/var/' . $this->environment . '/log';
+        return $this->getProjectDir() . '/var/cache/' . $this->environment;
+//        return sys_get_temp_dir() . '/com.github.crell.planedobundle/tests/var/' . $this->environment . '/log';
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
