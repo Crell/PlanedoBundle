@@ -56,7 +56,7 @@ class FeedRepository extends ServiceEntityRepository
 
         return $this->getEntityManager()
             ->createQuery("SELECT f FROM $class f
-                WHERE f.active = true 
+                WHERE f.active = true
                 ORDER BY SIZE(f.entries) DESC, f.title ASC")
             ->setMaxResults($limit)
             ->execute();
@@ -65,6 +65,20 @@ class FeedRepository extends ServiceEntityRepository
     public function getActiveFeedCount(): int
     {
         return $this->count(['active' => 'true']);
+    }
+
+    public function findOneByFeedLink(string $link): ?Feed
+    {
+        $class = Feed::class;
+
+        $ret = $this->getEntityManager()
+            ->createQuery("SELECT f FROM $class f
+                WHERE f.feedLink = :link")
+            ->setMaxResults(1)
+            ->setParameter('link', $link)
+            ->execute();
+
+        return $ret[0] ?? null;
     }
 
     // /**
