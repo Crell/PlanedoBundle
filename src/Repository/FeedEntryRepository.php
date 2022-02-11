@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Repository;
 
 use Crell\Bundle\Planedo\Entity\FeedEntry;
@@ -43,7 +51,7 @@ class FeedEntryRepository extends ServiceEntityRepository
      * Purge feed entries older than a certain timestamp.
      *
      * @param \DateTimeImmutable $threshold
-     *   The date older than which entries should be purged.
+     *                                      The date older than which entries should be purged
      */
     public function deleteOlderThan(\DateTimeImmutable $threshold): void
     {
@@ -59,7 +67,7 @@ class FeedEntryRepository extends ServiceEntityRepository
      * Marks multiple entries as approved, so they show in feeds.
      *
      * @param string ...$ids
-     *   A list of the IDs (links) to approve.
+     *                       A list of the IDs (links) to approve.
      */
     public function approve(string ...$ids): void
     {
@@ -77,7 +85,7 @@ class FeedEntryRepository extends ServiceEntityRepository
      * Marks multiple entries as not approved, so they do not show in feeds.
      *
      * @param string ...$ids
-     *   A list of the IDs (links) to reject.
+     *                       A list of the IDs (links) to reject.
      */
     public function reject(string ...$ids): void
     {

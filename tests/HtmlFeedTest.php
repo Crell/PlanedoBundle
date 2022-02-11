@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -15,7 +23,7 @@ class HtmlFeedTest extends WebTestCase
     /**
      * @test
      */
-    public function main_feed_has_data(): void
+    public function mainFeedHasData(): void
     {
         $client = static::createClient();
 
@@ -47,7 +55,7 @@ class HtmlFeedTest extends WebTestCase
     /**
      * @test
      */
-    public function sidebars_display(): void
+    public function sidebarsDisplay(): void
     {
         $client = static::createClient();
 
@@ -72,7 +80,7 @@ class HtmlFeedTest extends WebTestCase
     /**
      * @test
      */
-    public function rejected_entries_dont_show(): void
+    public function rejectedEntriesDontShow(): void
     {
         $entryToExclude = 'https://www.example.com/blog/b';
 
@@ -106,7 +114,7 @@ class HtmlFeedTest extends WebTestCase
     /**
      * @test
      */
-    public function inactive_feeds_dont_show(): void
+    public function inactiveFeedsDontShow(): void
     {
         $entryToExclude = 'https://www.example.com/blog/b';
 
@@ -118,14 +126,13 @@ class HtmlFeedTest extends WebTestCase
         $this->mockFeedClient();
         $this->populateFeeds();
 
-
         // Disable one feed, even though its data has been fetched.
 
         $em = $this->entityManager();
 
         $feeds = $this->feedRepo()->findAll();
         foreach ($feeds as $f) {
-            if ($f->getFeedLink() === 'https://www.garfieldtech.com/blog/feed') {
+            if ('https://www.garfieldtech.com/blog/feed' === $f->getFeedLink()) {
                 $f->setActive(false);
                 $em->persist($f);
             }

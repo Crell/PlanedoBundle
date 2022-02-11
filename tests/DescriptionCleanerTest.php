@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Tests;
 
 use Crell\Bundle\Planedo\Entity\FeedEntry;
@@ -13,7 +19,7 @@ class DescriptionCleanerTest extends TestCase
      * @test
      * @dataProvider descriptionCleanerExamples()
      */
-    public function description_cleaner(string $unclean, string $clean, string $link, string $title): void
+    public function descriptionCleaner(string $unclean, string $clean, string $link, string $title): void
     {
         $entry = (new FeedEntry())
             ->setDescription($unclean)
@@ -130,6 +136,5 @@ END;
                 'link' => 'https://www.garfieldtech.com/blog/aoc2021-day5',
                 'title' => 'Advent of Functional PHP: Day 5',
         ];
-
     }
 }

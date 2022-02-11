@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Command;
 
 use Crell\Bundle\Planedo\Message\UpdateFeed;
@@ -28,12 +36,12 @@ class FeedUpdateAllCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $result = $this->conn->executeQuery("SELECT id from feed");
+        $result = $this->conn->executeQuery('SELECT id from feed');
 
         $count = 0;
         while ($record = $result->fetchAssociative()) {
             $this->bus->dispatch(new UpdateFeed($record['id']));
-            $count++;
+            ++$count;
         }
 
         $io->success(sprintf('%d feeds queued for updating.', $count));

@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Crell\Bundle\Planedo\Tests\TestApplication;
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
 
+namespace Crell\Bundle\Planedo\Tests\TestApplication;
 
 use Crell\Bundle\Planedo\CrellPlanedoBundle;
 use Crell\Bundle\Planedo\FeedReaderClient;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle;
 use Laminas\Feed\Reader\Http\ClientInterface;
 use Psr\Clock\ClockInterface;
-use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -25,11 +27,9 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\Messenger\DependencyInjection\MessengerPass;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Yaml\Yaml;
 
 class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
@@ -84,17 +84,12 @@ class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
             $container->import($bundleConfigFile);
         }
 
-            // Load our bundle's services from the bundle directly.
+        // Load our bundle's services from the bundle directly.
 //        $path = realpath($this->getProjectDir() . '/../../config/services.yaml');
 //        printf("\nPath: %s, Exists: %d\n", $path, file_exists($path));
 
 //        printf("\nContainer type: %s\n", get_class($container));
-
-
-
-
     }
-
 
 //    public function registerContainerConfiguration(LoaderInterface $loader): void
 //    {
@@ -104,9 +99,9 @@ class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
 //            $container->register(ClientInterface::class, FeedReaderClient::class);
 //            $container->loadFromExtension('crell_planedo', $this->config);
 //
-////            $this->loadExtensionConfigFixture('framework', $container);
-////            $this->loadExtensionConfigFixture('doctrine', $container);
-////            $this->loadExtensionConfigFixture('security', $container);
+    ////            $this->loadExtensionConfigFixture('framework', $container);
+    ////            $this->loadExtensionConfigFixture('doctrine', $container);
+    ////            $this->loadExtensionConfigFixture('security', $container);
 //
 //            $container->register(UserPasswordHasherInterface::class, UserPasswordHasher::class);
 //        });
@@ -120,7 +115,7 @@ class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
 
     protected function buildContainer(): ContainerBuilder
     {
-        $container =  parent::buildContainer();
+        $container = parent::buildContainer();
 
         $container->setParameter('kernel.secret', 'beep');
 
@@ -148,5 +143,4 @@ class PlanedoTestingKernel extends Kernel implements CompilerPassInterface
     {
         return \dirname(__DIR__);
     }
-
 }

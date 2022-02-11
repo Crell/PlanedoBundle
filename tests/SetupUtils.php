@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Tests;
 
 use Crell\Bundle\Planedo\Entity\Feed;
@@ -11,7 +17,6 @@ use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
 use Crell\Bundle\Planedo\Tests\Mocks\MockFeedReaderHttpClient;
 use Crell\Bundle\Planedo\Tests\Mocks\SettableClock;
 use Crell\Bundle\Planedo\Tests\TestApplication\Kernel;
-use Crell\Bundle\Planedo\Tests\TestApplication\PlanedoTestingKernel;
 use Laminas\Feed\Reader\Http\ClientInterface;
 use Psr\Clock\ClockInterface;
 use Psr\Container\ContainerInterface;
@@ -27,6 +32,7 @@ trait SetupUtils
     {
         $kernel = new Kernel($config);
         $kernel->boot();
+
         return $this->container = $kernel->getContainer();
     }
 
@@ -75,6 +81,7 @@ trait SetupUtils
         $container = $this->getContainer();
         $clock = new SettableClock($time);
         $container->set(ClockInterface::class, $clock);
+
         return $clock;
     }
 

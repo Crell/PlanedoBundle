@@ -2,8 +2,7 @@
 .env
 var
 vendor
+*.cache
 .phplint-cache
-.phpunit.result.cache
 build
 composer.lock
-tests/cache

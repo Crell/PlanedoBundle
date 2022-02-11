@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Command;
 
 use Crell\Bundle\Planedo\Entity\User;
@@ -56,11 +64,13 @@ class UpdateUserCommand extends Command
 
         if (!$newEmail && !$passwordChangeRequested) {
             $io->error('You must specify a new email address or prompt for a password change.');
+
             return Command::INVALID;
         }
 
         if (!$user) {
             $io->error(sprintf('No such user found: %s', $email));
+
             return Command::FAILURE;
         }
 
@@ -68,6 +78,7 @@ class UpdateUserCommand extends Command
             if (!is_string($answer) || strlen($answer) < 2) {
                 throw new \RuntimeException('Your response must be at least two characters.');
             }
+
             return $answer;
         };
 
@@ -86,6 +97,7 @@ class UpdateUserCommand extends Command
 
             if ($password !== $password2) {
                 $io->error('Passwords did not match');
+
                 return Command::INVALID;
             }
 

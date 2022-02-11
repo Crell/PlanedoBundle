@@ -8,11 +8,6 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\Message;
-
-final class PurgeOldEntries
-{
-    public function __construct()
-    {
-    }
-}
+$container->loadFromExtension('symfonycasts_reset_password', [
+    'request_password_repository' => \Crell\Bundle\Planedo\Repository\ResetPasswordRequestRepository::class,
+]);

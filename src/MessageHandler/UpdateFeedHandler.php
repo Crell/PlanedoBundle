@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\MessageHandler;
 
 use Crell\Bundle\Planedo\Entity\Feed;
@@ -39,6 +47,7 @@ final class UpdateFeedHandler implements MessageHandlerInterface
 
         if (is_null($feed)) {
             $this->logger->warning('Tried to fetch feed for {id}, but no feed was found.', ['id' => $message->feedId]);
+
             return;
         }
 
@@ -54,6 +63,7 @@ final class UpdateFeedHandler implements MessageHandlerInterface
                 'name' => $feed->getTitle(),
                 'exception' => $e,
             ]);
+
             return;
         }
 
@@ -78,7 +88,7 @@ final class UpdateFeedHandler implements MessageHandlerInterface
         });
     }
 
-    protected function updateFeedEntry(EntryInterface $item, EntityManagerInterface $em, Feed $feed): FeedEntry
+    private function updateFeedEntry(EntryInterface $item, EntityManagerInterface $em, Feed $feed): FeedEntry
     {
         $entry = $em->find(FeedEntry::class, $item->getLink()) ?? new FeedEntry();
 
@@ -104,7 +114,7 @@ final class UpdateFeedHandler implements MessageHandlerInterface
         return $entry;
     }
 
-    protected function updateFeed(Feed $feed, FeedInterface $feedData): Feed
+    private function updateFeed(Feed $feed, FeedInterface $feedData): Feed
     {
         $optional = [
             'Link',

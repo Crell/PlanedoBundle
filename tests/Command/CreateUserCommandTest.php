@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Tests\Command;
 
 use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
@@ -14,11 +20,10 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class CreateUserCommandTest extends KernelTestCase
 {
-    protected const Command = 'plaendo:create-user';
-
     use EntityManagerWrapper;
     use UserUtils;
     use CommandUtils;
+    protected const Command = 'plaendo:create-user';
 
     /**
      * @test
@@ -36,7 +41,7 @@ class CreateUserCommandTest extends KernelTestCase
         );
 
         $output = $tester->getDisplay();
-        $this->assertStringContainsString('User created', $output);
+        self::assertStringContainsString('User created', $output);
 
         $foundUser = $this->userRepo()->findOneByEmail('me@me.com');
 

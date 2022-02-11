@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Controller\Admin;
 
 use Crell\Bundle\Planedo\Entity\Feed;
@@ -77,8 +85,7 @@ class DashboardController extends AbstractDashboardController
 
             // you can use any type of menu item, except submenus
             ->addMenuItems([
-                MenuItem::linkToRoute('Profile', 'fa fa-id-card', 'crell_planedo_user_settings',),
+                MenuItem::linkToRoute('Profile', 'fa fa-id-card', 'crell_planedo_user_settings', ),
             ]);
     }
-
 }

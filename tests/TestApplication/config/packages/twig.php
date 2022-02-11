@@ -8,11 +8,6 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\Message;
-
-final class PurgeOldEntries
-{
-    public function __construct()
-    {
-    }
-}
+$container->loadFromExtension('twig', [
+    'default_path' => '%kernel.project_dir%/templates',
+]);

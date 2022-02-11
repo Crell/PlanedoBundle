@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -18,7 +24,7 @@ class UserTest extends WebTestCase
     /**
      * @test
      */
-    public function user_change_own_email(): void
+    public function userChangeOwnEmail(): void
     {
         $client = static::createClient();
 
@@ -33,7 +39,7 @@ class UserTest extends WebTestCase
         self::assertResponseIsSuccessful();
 
         $client->submitForm('Save', [
-            'user_settings[email]' => 'other@me.com'
+            'user_settings[email]' => 'other@me.com',
         ]);
 
         $client->followRedirect();
@@ -45,7 +51,7 @@ class UserTest extends WebTestCase
     /**
      * @test
      */
-    public function user_change_own_password(): void
+    public function userChangeOwnPassword(): void
     {
         $newPassword = 'qwerty';
 
@@ -70,7 +76,7 @@ class UserTest extends WebTestCase
 
         $foundUser = $this->userRepo()->findOneByEmail('me@me.com');
 
-        $this->markTestIncomplete('Testing the password hash is not working yet.');
+        self::markTestIncomplete('Testing the password hash is not working yet.');
 
         $expectedHash = $this->hasher()->hashPassword($foundUser, $newPassword);
         self::assertEquals($expectedHash, $foundUser->getPassword());
@@ -79,7 +85,7 @@ class UserTest extends WebTestCase
     /**
      * @test
      */
-    public function user_change_own_email_and_password(): void
+    public function userChangeOwnEmailAndPassword(): void
     {
         $newPassword = 'qwerty';
 
@@ -106,10 +112,8 @@ class UserTest extends WebTestCase
         $foundUser = $this->userRepo()->findOneByEmail('other@me.com');
         self::assertNotNull($foundUser);
 
-        $this->markTestIncomplete('Testing the password hash is not working yet.');
+        self::markTestIncomplete('Testing the password hash is not working yet.');
         $expectedHash = $this->hasher()->hashPassword($foundUser, $newPassword);
         self::assertEquals($expectedHash, $foundUser->getPassword());
-
     }
-
 }

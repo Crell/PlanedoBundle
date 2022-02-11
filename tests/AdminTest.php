@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -20,11 +26,10 @@ class AdminTest extends WebTestCase
         // TODO: Implement container() method.
     }
 
-
     /**
      * @test
      */
-    public function anon_user_gets_login_form_on_admin(): void
+    public function anonUserGetsLoginFormOnAdmin(): void
     {
         $client = static::createClient();
 
@@ -45,7 +50,7 @@ class AdminTest extends WebTestCase
     /**
      * @test
      */
-    public function feed_index_loads(): void
+    public function feedIndexLoads(): void
     {
         $client = static::createClient();
 
@@ -69,7 +74,7 @@ class AdminTest extends WebTestCase
     /**
      * @test
      */
-    public function feed_entry_index_loads(): void
+    public function feedEntryIndexLoads(): void
     {
         $client = static::createClient();
 

@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Command;
 
 use Crell\Bundle\Planedo\Entity\Feed;
@@ -42,16 +50,19 @@ class FeedUpdateCommand extends Command
         // the object itself, though.
         if (!$this->em->getRepository(Feed::class)->find($feedId)) {
             $io->error(sprintf('No feed found with id %d.', $feedId));
+
             return Command::INVALID;
         }
 
         if ($feedId) {
             $this->bus->dispatch(new UpdateFeed($feedId));
             $io->success('Feed queued for updating.');
+
             return Command::SUCCESS;
         }
 
         $io->error('You must specify a feed id.');
+
         return Command::INVALID;
     }
 }

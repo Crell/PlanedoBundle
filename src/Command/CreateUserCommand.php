@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Command;
 
 use Crell\Bundle\Planedo\Entity\User;
@@ -45,6 +53,7 @@ class CreateUserCommand extends Command
             if (!is_string($answer) || strlen($answer) < 2) {
                 throw new \RuntimeException('Your response must be at least two characters.');
             }
+
             return $answer;
         };
 
@@ -66,8 +75,8 @@ class CreateUserCommand extends Command
                 'email' => $email,
             ]);
             $io->success('User created.');
-            return Command::SUCCESS;
 
+            return Command::SUCCESS;
         } catch (\Exception $e) {
             $this->logger->error('Failed creating user: {email}', [
                 'email' => $email,

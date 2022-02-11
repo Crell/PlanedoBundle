@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Repository;
 
 use Crell\Bundle\Planedo\Entity\Feed;
@@ -39,11 +47,13 @@ class FeedRepository extends ServiceEntityRepository
      * Gets the feeds with the most number of feed entries.
      *
      * @param int $limit
+     *
      * @return Feed[]
      */
     public function getMostActive(int $limit): array
     {
         $class = Feed::class;
+
         return $this->getEntityManager()
             ->createQuery("SELECT f FROM $class f
                 WHERE f.active = true 

@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Tests;
 
 use Crell\Bundle\Planedo\Message\PurgeOldEntries;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -20,7 +24,7 @@ class PurgeTest extends TestCase
     /**
      * @test
      */
-    public function old_entries_get_purged(): void
+    public function oldEntriesGetPurged(): void
     {
         $container = $this->initialize(['purge_before' => '-10 days']);
 

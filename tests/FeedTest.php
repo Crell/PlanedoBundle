@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Tests;
 
 use Crell\Bundle\Planedo\Entity\FeedEntry;
@@ -30,7 +38,7 @@ class FeedTest extends WebTestCase
      * @test
      * @dataProvider feedTypeProvider()
      */
-    public function feed_has_data(string $path, string $contentType): void
+    public function feedHasData(string $path, string $contentType): void
     {
         $client = static::createClient();
 
@@ -57,7 +65,7 @@ class FeedTest extends WebTestCase
      * @test
      * @dataProvider feedTypeProvider()
      */
-    public function rejected_entries_dont_show(string $path, string $contentType): void
+    public function rejectedEntriesDontShow(string $path, string $contentType): void
     {
         $entryToExclude = 'https://www.example.com/blog/b';
 
@@ -92,7 +100,7 @@ class FeedTest extends WebTestCase
      * @test
      * @dataProvider feedTypeProvider()
      */
-    public function inactive_feeds_dont_show(string $path, string $contentType): void
+    public function inactiveFeedsDontShow(string $path, string $contentType): void
     {
         $client = static::createClient();
 
@@ -105,7 +113,7 @@ class FeedTest extends WebTestCase
 
         $feeds = $this->feedRepo()->findAll();
         foreach ($feeds as $f) {
-            if ($f->getFeedLink() === 'https://www.garfieldtech.com/blog/feed') {
+            if ('https://www.garfieldtech.com/blog/feed' === $f->getFeedLink()) {
                 $f->setActive(false);
                 $em->persist($f);
             }

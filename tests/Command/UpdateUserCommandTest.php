@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the package crell/planedo-bundle.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Crell\Bundle\Planedo\Tests\Command;
 
 use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
@@ -15,17 +21,16 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class UpdateUserCommandTest extends KernelTestCase
 {
-    protected const Command = 'planedo:update-user';
-
     use EntityManagerWrapper;
     use UserUtils;
     use HasherWrapper;
     use CommandUtils;
+    protected const Command = 'planedo:update-user';
 
     /**
      * @test
      */
-    public function change_email(): void
+    public function changeEmail(): void
     {
         $kernel = self::bootKernel();
         $application = new Application($kernel);
@@ -40,7 +45,7 @@ class UpdateUserCommandTest extends KernelTestCase
 
         // The output of the command in the console.
         $output = $tester->getDisplay();
-        $this->assertStringContainsString('User updated', $output);
+        self::assertStringContainsString('User updated', $output);
 
         $foundUser = $this->userRepo()->findOneByEmail('you@me.com');
 
@@ -50,7 +55,7 @@ class UpdateUserCommandTest extends KernelTestCase
     /**
      * @test
      */
-    public function change_password(): void
+    public function changePassword(): void
     {
         $newPassword = 'qwer';
 
@@ -69,15 +74,14 @@ class UpdateUserCommandTest extends KernelTestCase
 
         // The output of the command in the console.
         $output = $tester->getDisplay();
-        $this->assertStringContainsString('User updated', $output);
+        self::assertStringContainsString('User updated', $output);
 
         $foundUser = $this->userRepo()->findOneByEmail('me@me.com');
 
-        $this->markTestIncomplete('Testing the password hash is not working yet.');
+        self::markTestIncomplete('Testing the password hash is not working yet.');
 
         $expectedHash = $this->hasher()->hashPassword($foundUser, $newPassword);
 
         self::assertEquals($expectedHash, $foundUser->getPassword());
     }
-
 }
