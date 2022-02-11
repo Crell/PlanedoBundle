@@ -20,7 +20,7 @@ abstract class WebTestCase extends SymfonyWebTestCase
     use MockClockTrait;
     use MockFeedReaderClientTrait;
 
-    protected ?KernelBrowser $client = null;
+    protected readonly KernelBrowser $client;
 
     public function setUp(): void
     {
