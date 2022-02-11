@@ -74,8 +74,6 @@ class FeedControllerTest extends WebTestCase
 
         $excludedContent = 'Description B';
 
-        $client = static::createClient();
-
         $this->setClockMock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
         $this->setFeedReaderClientMock();
 
@@ -89,12 +87,12 @@ class FeedControllerTest extends WebTestCase
         $em->persist($entry);
         $em->flush();
 
-        $crawler = $client->request('GET', $path);
+        $crawler = $this->client->request('GET', $path);
         self::assertResponseIsSuccessful();
         self::assertResponseHeaderSame('content-type', $contentType);
 
         // Confirm the rejected entry is not in the feed.
-        $feed = Reader::importString($client->getResponse()->getContent());
+        $feed = Reader::importString($this->client->getResponse()->getContent());
         foreach ($feed as $entry) {
             self::assertNotEquals($entryToExclude, $entry->getId(), 'Rejected entry found in feed.');
         }
@@ -106,8 +104,6 @@ class FeedControllerTest extends WebTestCase
      */
     public function inactiveFeedsDontShow(string $path, string $contentType): void
     {
-        $client = static::createClient();
-
         $this->setClockMock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
         $this->setFeedReaderClientMock();
 
@@ -125,12 +121,12 @@ class FeedControllerTest extends WebTestCase
         }
         $em->flush();
 
-        $crawler = $client->request('GET', $path);
+        $crawler = $this->client->request('GET', $path);
         self::assertResponseIsSuccessful();
         self::assertResponseHeaderSame('content-type', $contentType);
 
         // Confirm that the disabled feed doesn't show.
-        $feed = Reader::importString($client->getResponse()->getContent());
+        $feed = Reader::importString($this->client->getResponse()->getContent());
         foreach ($feed as $entry) {
             self::assertNotEquals('garfieldtech', $entry->getPermalink());
         }
