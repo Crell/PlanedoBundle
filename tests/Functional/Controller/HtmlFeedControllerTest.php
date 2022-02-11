@@ -63,7 +63,7 @@ class HtmlFeedControllerTest extends WebTestCase
         self::assertCount(0, $prev);
 
         // Only 11 items would have survived the old-data filter when adding.
-        //$this->assertRawEntryCount(11);
+        $this->assertRawEntryCount(11);
     }
 
     /**
