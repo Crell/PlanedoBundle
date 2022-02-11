@@ -23,8 +23,7 @@ class UserSettingsController extends AbstractController
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly AdminUrlGenerator $adminUrlGenerator,
-    ) {
-    }
+    ) {}
 
     public function index(#[CurrentUser] $user, Request $request): Response
     {

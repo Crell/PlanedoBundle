@@ -25,8 +25,7 @@ class UserSettingsType extends AbstractType
 {
     public function __construct(
         private readonly UserPasswordHasherInterface $hasher,
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

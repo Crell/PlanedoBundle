@@ -20,8 +20,7 @@ class BlogRollController extends AbstractController
     public function __construct(
         protected FeedRepository $repository,
         protected int $itemsPerPage,
-    ) {
-    }
+    ) {}
 
     public function index(Request $request): Response
     {

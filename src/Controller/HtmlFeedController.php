@@ -20,8 +20,7 @@ class HtmlFeedController extends AbstractController
     public function __construct(
         protected FeedEntryRepository $repository,
         protected int $itemsPerPage,
-    ) {
-    }
+    ) {}
 
     public function index(Request $request): Response
     {

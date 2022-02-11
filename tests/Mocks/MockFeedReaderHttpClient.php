@@ -18,8 +18,7 @@ class MockFeedReaderHttpClient implements ClientInterface
     public function __construct(
         /** URL -> file name. */
         protected array $map,
-    ) {
-    }
+    ) {}
 
     /**
      * @param string $uri

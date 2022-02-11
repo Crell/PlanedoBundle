@@ -19,8 +19,7 @@ class UserFixtures extends Fixture
 {
     public function __construct(
         protected UserPasswordHasherInterface $userPasswordHasher,
-    ) {
-    }
+    ) {}
 
     public function load(ObjectManager $manager): void
     {

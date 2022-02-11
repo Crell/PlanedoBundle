@@ -24,8 +24,7 @@ class FeedController extends AbstractController
     public function __construct(
         protected FeedEntryRepository $repository,
         protected readonly bool $plainTextFeeds = false,
-    ) {
-    }
+    ) {}
 
     public function atomFeed(Request $request): Response
     {
