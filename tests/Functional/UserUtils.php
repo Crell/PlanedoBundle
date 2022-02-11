@@ -8,9 +8,10 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\Tests;
+namespace Crell\Bundle\Planedo\Tests\Functional;
 
 use Crell\Bundle\Planedo\Entity\User;
+use Crell\Bundle\Planedo\Tests\HasherWrapper;
 
 trait UserUtils
 {
