@@ -45,7 +45,9 @@ services:
       $client: '@planedo.client.feedreader'
 
   planedo.clock:
+    public: true
     class: Crell\Bundle\Planedo\UtcClock
 
   planedo.client.feedreader:
+    public: true
     class: Crell\Bundle\Planedo\FeedReaderClient

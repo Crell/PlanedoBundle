@@ -13,7 +13,7 @@ namespace Crell\Bundle\Planedo\Tests\Functional\Command;
 use Crell\Bundle\Planedo\Entity\User;
 use Crell\Bundle\Planedo\Tests\Functional\DatabaseFixtureTrait;
 use Crell\Bundle\Planedo\Tests\Functional\DatabasePrimerTrait;
-use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\UserFixture;
+use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\UserFixtures;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
@@ -33,7 +33,7 @@ class UpdateUserCommandTest extends KernelTestCase
         parent::setUp();
         self::bootKernel();
         $this->prime();
-        $this->addFixture(new UserFixture($this->getContainer()->get(UserPasswordHasherInterface::class)));
+        $this->addFixture(new UserFixtures($this->getContainer()->get(UserPasswordHasherInterface::class)));
         $this->executeFixtures();
     }
 

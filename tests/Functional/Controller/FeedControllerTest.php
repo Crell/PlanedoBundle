@@ -11,16 +11,24 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests;
 
 use Crell\Bundle\Planedo\Entity\FeedEntry;
+use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedFixtures;
+use Crell\Bundle\Planedo\Tests\Functional\WebTestCase;
 use Laminas\Feed\Reader\Reader;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @group public
  */
-class FeedTest extends WebTestCase
+class FeedControllerTest extends WebTestCase
 {
     use EntityManagerWrapper;
     use SetupUtils;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->addFixture(new FeedFixtures());
+        $this->executeFixtures();
+    }
 
     public function feedTypeProvider(): iterable
     {
@@ -40,22 +48,17 @@ class FeedTest extends WebTestCase
      */
     public function feedHasData(string $path, string $contentType): void
     {
-        $client = static::createClient();
+        $this->setClockMock(new \DateTimeImmutable('2021-11-15'));
+        $this->setFeedReaderClientMock();
 
-        $this->mockClock(new \DateTimeImmutable('2021-11-15'));
-        $this->mockFeedClient();
-        $this->populateFeeds();
-
-        $crawler = $client->request('GET', $path);
-
+        $this->client->request('GET', $path);
         self::assertResponseIsSuccessful();
         self::assertResponseHeaderSame('content-type', $contentType);
 
-        $feed = Reader::importString($client->getResponse()->getContent());
+        $feed = Reader::importString($this->client->getResponse()->getContent());
 
         // Confirm the number of articles in the first page of the feed.
-        $container = self::container();
-        self::assertCount($container->getParameter('planedo.itemsPerPage'), $feed);
+        self::assertCount(self::$kernel->getContainer()->getParameter('planedo.itemsPerPage'), $feed);
 
         // Only 11 items would have survived the old-data filter when adding.
         $this->assertRawEntryCount(11);
@@ -73,8 +76,9 @@ class FeedTest extends WebTestCase
 
         $client = static::createClient();
 
-        $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
-        $this->mockFeedClient();
+        $this->setClockMock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
+        $this->setFeedReaderClientMock();
+
         $this->populateFeeds();
 
         $em = $this->entityManager();
@@ -104,8 +108,9 @@ class FeedTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
-        $this->mockFeedClient();
+        $this->setClockMock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
+        $this->setFeedReaderClientMock();
+
         $this->populateFeeds();
 
         // Disable one feed, even though its data has been fetched.
