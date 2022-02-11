@@ -16,26 +16,28 @@ $container->loadFromExtension('security', [
         InMemoryUser::class => 'plaintext',
     ],
     'providers' => [
-        'test_users' => [
-            'memory' => [
-                'users' => [
-                    'admin' => [
-                        'password' => '1234',
-                        'roles' => ['ROLE_ADMIN'],
-                    ],
-                ],
+        'app_user_provider' => [
+            'entity' => [
+                'class' => User::class,
+                'property' => 'email',
             ],
         ],
     ],
     'firewalls' => [
-        'secure_admin' => [
-            'pattern' => '^/secure_admin',
-            'provider' => 'test_users',
-            'http_basic' => null,
-            'logout' => null,
+        'main' => [
+            'lazy' => true,
+            'provider' => 'app_user_provider',
+            'form_login' => [
+                'login_path' => 'planedo_login',
+                'check_path' => 'planedo_login',
+                'enable_csrf' => false,
+            ],
+            'logout' => [
+                'path' => 'planedo_logout',
+            ],
         ],
     ],
     'access_control' => [
-        ['path' => '^/secure_admin', 'roles' => ['ROLE_ADMIN']],
+        ['path' => '^/admin', 'roles' => ['ROLE_ADMIN']],
     ],
 ]);
