@@ -34,8 +34,8 @@ class FeedEntryRepository extends ServiceEntityRepository
         $class = FeedEntry::class;
         // Filter out unapproved entries and entries of a feed that is disabled.
         $query = $this->getEntityManager()
-            ->createQuery("SELECT e FROM $class e 
-                JOIN e.feed f 
+            ->createQuery("SELECT e FROM $class e
+                JOIN e.feed f
                 WHERE e.approved = :approved
                     AND f.active = :activeFeed
                 ORDER BY e.dateModified DESC")
@@ -51,7 +51,7 @@ class FeedEntryRepository extends ServiceEntityRepository
      * Purge feed entries older than a certain timestamp.
      *
      * @param \DateTimeImmutable $threshold
-     *                                      The date older than which entries should be purged
+     *   The date older than which entries should be purged
      */
     public function deleteOlderThan(\DateTimeImmutable $threshold): void
     {
@@ -67,7 +67,7 @@ class FeedEntryRepository extends ServiceEntityRepository
      * Marks multiple entries as approved, so they show in feeds.
      *
      * @param string ...$ids
-     *                       A list of the IDs (links) to approve.
+     *   A list of the IDs (links) to approve.
      */
     public function approve(string ...$ids): void
     {
@@ -85,7 +85,7 @@ class FeedEntryRepository extends ServiceEntityRepository
      * Marks multiple entries as not approved, so they do not show in feeds.
      *
      * @param string ...$ids
-     *                       A list of the IDs (links) to reject.
+     *   A list of the IDs (links) to reject.
      */
     public function reject(string ...$ids): void
     {
