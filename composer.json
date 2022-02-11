@@ -43,7 +43,6 @@
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.7",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
-        "friendsofphp/php-cs-fixer": "^3.6",
         "overtrue/phplint": "^4.1",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": "^9.5",
@@ -63,12 +62,6 @@
         }
     },
     "scripts": {
-        "test:php:cgl": [
-            "php-cs-fixer fix -v --dry-run --diff"
-        ],
-        "test:php:cgl:fix": [
-            "php-cs-fixer fix"
-        ],
         "test:php:unit": [
             "simple-phpunit -c phpunit.xml.dist"
         ],
@@ -77,7 +70,6 @@
         ],
         "test": [
             "@test:php:lint",
-            "@test:php:cgl",
             "@test:php:unit"
         ]
     },
