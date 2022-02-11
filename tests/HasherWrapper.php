@@ -15,8 +15,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 trait HasherWrapper
 {
-    private ContainerInterface $container;
-
     private UserPasswordHasherInterface $hasher;
 
     protected function hasher(): UserPasswordHasherInterface
@@ -27,7 +25,7 @@ trait HasherWrapper
     protected function getHasher(): UserPasswordHasherInterface
     {
         /** @var UserPasswordHasherInterface $hasher */
-        $hasher = $this->container->get(UserPasswordHasherInterface::class);
+        $hasher = self::getContainer()->get(UserPasswordHasherInterface::class);
 
         return $hasher;
     }
