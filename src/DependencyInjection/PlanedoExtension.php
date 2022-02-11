@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class PlanedoExtension extends Extension implements PrependExtensionInterface
 {
@@ -35,13 +36,24 @@ class PlanedoExtension extends Extension implements PrependExtensionInterface
 
     public function prepend(ContainerBuilder $container): void
     {
-        // dd($container->getExtensions());
-
         if ($container->hasExtension('symfonycasts_reset_password')) {
             $container->prependExtensionConfig(
                 'symfonycasts_reset_password',
                 [
                     'request_password_repository' => ResetPasswordRequestRepository::class,
+                ]
+            );
+        }
+        if ($container->hasExtension('security')) {
+            $container->prependExtensionConfig(
+                'security',
+                [
+                    'password_hashers' => [
+                        PasswordAuthenticatedUserInterface::class => 'auto',
+                        User::class => [
+                            'algorithm' => 'auto',
+                        ],
+                    ],
                 ]
             );
         }
