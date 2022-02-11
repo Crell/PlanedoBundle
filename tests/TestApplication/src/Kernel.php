@@ -10,8 +10,7 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests\TestApplication;
 
-use Crell\Bundle\Planedo\CrellPlanedoBundle;
-use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
+use Crell\Bundle\Planedo\PlanedoBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
 use EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle;
@@ -48,12 +47,11 @@ class Kernel extends SymfonyKernel
             new FrameworkBundle(),
             new TwigBundle(),
             new DoctrineBundle(),
-            new DAMADoctrineTestBundle(),
             new DoctrineFixturesBundle(),
             new SecurityBundle(),
             new SymfonyCastsResetPasswordBundle(),
             new EasyAdminBundle(),
-            new CrellPlanedoBundle(),
+            new PlanedoBundle(),
         ];
     }
 
@@ -64,12 +62,12 @@ class Kernel extends SymfonyKernel
 
     public function getCacheDir(): string
     {
-        return sys_get_temp_dir().'/com.github.crell.planedobundle/tests/var/'.$this->environment.'/log';
+        return sys_get_temp_dir() . '/com.github.crell.planedobundle/tests/var/' . $this->environment . '/log';
     }
 
     public function getLogDir(): string
     {
-        return sys_get_temp_dir().'/com.github.crell.planedobundle/tests/var/'.$this->environment.'/log';
+        return sys_get_temp_dir() . '/com.github.crell.planedobundle/tests/var/' . $this->environment . '/log';
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void

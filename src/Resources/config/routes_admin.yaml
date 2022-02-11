@@ -1,29 +1,29 @@
 # Admin-facing routes
 
-crell_planedo_login:
+planedo_login:
   path: /login
   controller: Crell\Bundle\Planedo\Controller\LoginController::index
 
-crell_planedo_logout:
+planedo_logout:
   path: /logout
   controller: Crell\Bundle\Planedo\Controller\LoginController::logout
 
-crell_planedo_forgot_password_request:
+planedo_forgot_password_request:
   path: /reset-password
   controller: Crell\Bundle\Planedo\Controller\ResetPasswordController::request
 
-crell_planedo_check_email:
+planedo_check_email:
   path: /check-email
   controller: Crell\Bundle\Planedo\Controller\ResetPasswordController::checkEmail
 
-crell_planedo_reset_password:
+planedo_reset_password:
   path: /reset/{token}
   controller: Crell\Bundle\Planedo\Controller\ResetPasswordController::reset
 
-crell_planedo_admin:
+planedo_admin:
   path: /admin
   controller: Crell\Bundle\Planedo\Controller\Admin\DashboardController::index
 
-crell_planedo_user_settings:
+planedo_user_settings:
   path: /admin/user-settings
   controller: Crell\Bundle\Planedo\Controller\UserSettingsController::index

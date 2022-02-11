@@ -1,0 +1,51 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Crell\Bundle\Planedo\:
+    resource: '../../../src/'
+    exclude:
+      - '../../../src/DependencyInjection/'
+      - '../../../src/Tests/'
+      - '../src/Message/'
+
+  Crell\Bundle\Planedo\Controller\BlogRollController:
+    arguments:
+      $itemsPerPage: '%planedo.itemsPerPage%'
+
+  Crell\Bundle\Planedo\Controller\FeedController:
+    arguments:
+      $plainTextFeeds: '%planedo.usePlainText%'
+
+  Crell\Bundle\Planedo\Controller\HtmlFeedController:
+    arguments:
+      $itemsPerPage: '%planedo.itemsPerPage%'
+
+  Crell\Bundle\Planedo\MessageHandler\PurgeOldEntriesHandler:
+    arguments:
+      $clock: '@planedo.clock'
+      $purgeBefore: '%planedo.purgeBefore%'
+
+  Crell\Bundle\Planedo\MessageHandler\UpdateFeedHandler:
+    arguments:
+      $clock: '@planedo.clock'
+      $purgeBefore: '%planedo.purgeBefore%'
+
+  Crell\Bundle\Planedo\Repository\FeedEntryRepository:
+    arguments:
+      $itemsPerPage: '%planedo.itemsPerPage%'
+
+  Crell\Bundle\Planedo\Repository\FeedRepository:
+    arguments:
+      $itemsPerPage: '%planedo.itemsPerPage%'
+
+  Crell\Bundle\Planedo\FeedReader:
+    arguments:
+      $client: '@planedo.client.feedreader'
+
+  planedo.clock:
+    class: Crell\Bundle\Planedo\UtcClock
+
+  planedo.client.feedreader:
+    class: Crell\Bundle\Planedo\FeedReaderClient

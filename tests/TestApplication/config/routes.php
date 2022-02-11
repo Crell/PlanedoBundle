@@ -11,6 +11,6 @@ declare(strict_types=1);
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return function (RoutingConfigurator $routes) {
-    $routes->import('../../../config/routes_admin.yaml')->prefix('/');
-    $routes->import('../../../config/routes_public.yaml')->prefix('/');
+    $routes->import('@PlanedoBundle/Resources/config/routes_admin.yaml')->prefix('/');
+    $routes->import('@PlanedoBundle/Resources/config/routes_public.yaml')->prefix('/');
 };

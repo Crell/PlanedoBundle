@@ -23,7 +23,7 @@ class CreateUserCommandTest extends KernelTestCase
     use EntityManagerWrapper;
     use UserUtils;
     use CommandUtils;
-    protected const Command = 'plaendo:create-user';
+    protected const Command = 'planedo:create-user';
 
     /**
      * @test

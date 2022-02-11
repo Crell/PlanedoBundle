@@ -8,6 +8,10 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-$container->loadFromExtension('symfonycasts_reset_password', [
-    'request_password_repository' => \Crell\Bundle\Planedo\Repository\ResetPasswordRequestRepository::class,
-]);
+namespace Crell\Bundle\Planedo;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+final class PlanedoBundle extends Bundle
+{
+}

@@ -39,13 +39,13 @@ class UserSettingsController extends AbstractController
             $this->addFlash('success', 'User information updated.');
 
             $url = $this->adminUrlGenerator
-                ->setRoute('crell_planedo_user_settings')
+                ->setRoute('planedo_user_settings')
                 ->generateUrl();
 
             return $this->redirect($url);
         }
 
-        return $this->renderForm('@CrellPlanedo/user_settings/index.html.twig', [
+        return $this->renderForm('@Planedo/user_settings/index.html.twig', [
             'form' => $form,
         ]);
     }

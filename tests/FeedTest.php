@@ -55,7 +55,7 @@ class FeedTest extends WebTestCase
 
         // Confirm the number of articles in the first page of the feed.
         $container = self::container();
-        self::assertCount($container->getParameter('app.feeds.items-per-page'), $feed);
+        self::assertCount($container->getParameter('planedo.itemsPerPage'), $feed);
 
         // Only 11 items would have survived the old-data filter when adding.
         $this->assertRawEntryCount(11);
