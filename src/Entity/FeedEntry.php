@@ -81,6 +81,9 @@ class FeedEntry
         $regex = "%<a[^<>]*href=\"?{$link}\"?.*{$title}.*</a>%isU";
         $description = preg_replace($regex, '', $this->description);
 
+        // Remove unnessesary whitespace from lines
+        $description = implode("\n", array_map(function ($line) { return trim($line); }, explode("\n", $description)));
+
         return $description;
     }
 

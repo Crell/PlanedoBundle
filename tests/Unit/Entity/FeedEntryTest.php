@@ -8,30 +8,29 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Crell\Bundle\Planedo\Tests;
+namespace Crell\Bundle\Planedo\Tests\Unit\Entity;
 
 use Crell\Bundle\Planedo\Entity\FeedEntry;
 use PHPUnit\Framework\TestCase;
 
-class DescriptionCleanerTest extends TestCase
+class FeedEntryTest extends TestCase
 {
     /**
      * @test
-     * @dataProvider descriptionCleanerExamples()
+     * @dataProvider descriptionCleanerDataProvider()
      */
-    public function descriptionCleaner(string $unclean, string $clean, string $link, string $title): void
+    public function descriptionCleanerTest(string $unclean, string $clean, string $link, string $title): void
     {
         $entry = (new FeedEntry())
             ->setDescription($unclean)
             ->setLink($link)
             ->setTitle($title);
-
         $result = $entry->getDescription();
 
         self::assertEquals($clean, $result);
     }
 
-    public function descriptionCleanerExamples(): iterable
+    public function descriptionCleanerDataProvider(): iterable
     {
         yield 'Empty string' => [
             'unclean' => '',
@@ -99,9 +98,9 @@ class DescriptionCleanerTest extends TestCase
 END;
         $clean = <<<END
 <article data-history-node-id="303" role="article" about="https://www.garfieldtech.com/blog/aoc2021-day5" class="node node--type-story node--promoted node--view-mode-teaser clearfix"><header><h2 class="node__title">
-        
-      </h2>
-      </header>
+
+</h2>
+</header>
 </article>
 END;
 
@@ -123,10 +122,10 @@ END;
 END;
         $clean = <<<END
 <article data-history-node-id="303" role="article" about="https://www.garfieldtech.com/blog/aoc2021-day5" class="node node--type-story node--promoted node--view-mode-teaser clearfix"><header><h2 class="node__title">
-        
-      </h2>
-      </header>
-      <a href="https://duckduckgo.com/">Search</a>
+
+</h2>
+</header>
+<a href="https://duckduckgo.com/">Search</a>
 </article>
 END;
 
