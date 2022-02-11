@@ -15,7 +15,7 @@ use DateTimeImmutable;
 use Psr\Clock\ClockInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-trait MockClockTrait
+trait MockClock
 {
     public function mockClock(DateTimeImmutable $datetime): ClockInterface
     {

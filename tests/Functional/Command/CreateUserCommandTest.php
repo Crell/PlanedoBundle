@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests\Functional\Command;
 
 use Crell\Bundle\Planedo\Entity\User;
-use Crell\Bundle\Planedo\Tests\Functional\DatabasePrimerTrait;
+use Crell\Bundle\Planedo\Tests\Functional\DatabasePrimer;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
@@ -22,7 +22,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class CreateUserCommandTest extends KernelTestCase
 {
-    use DatabasePrimerTrait;
+    use DatabasePrimer;
 
     public function setUp(): void
     {

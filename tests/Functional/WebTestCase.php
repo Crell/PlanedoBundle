@@ -15,10 +15,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
 
 abstract class WebTestCase extends SymfonyWebTestCase
 {
-    use DatabasePrimerTrait;
-    use DatabaseFixtureTrait;
-    use MockClockTrait;
-    use MockFeedReaderClientTrait;
+    use DatabasePrimer;
+    use DatabaseFixtures;
+    use MockClock;
+    use MockFeedReaderClient;
 
     protected readonly KernelBrowser $client;
 

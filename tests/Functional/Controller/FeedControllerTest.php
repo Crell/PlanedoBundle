@@ -30,6 +30,7 @@ class FeedControllerTest extends WebTestCase
     {
         parent::setUp();
         $this->addFixture(new FeedFixtures());
+        $this->addFixture(new FeedTestFixtures());
         $this->executeFixtures();
     }
 
@@ -76,8 +77,6 @@ class FeedControllerTest extends WebTestCase
     public function rejectedEntriesDontShow(string $path, string $contentType): void
     {
         $entryToExclude = 'https://www.example.com/blog/b';
-
-        $excludedContent = 'Description B';
 
         $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));
         $this->mockFeedClient();

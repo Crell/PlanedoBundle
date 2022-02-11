@@ -13,7 +13,7 @@ namespace Crell\Bundle\Planedo\Tests\Functional;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-trait DatabasePrimerTrait
+trait DatabasePrimer
 {
     public function prime(): void
     {

@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests\Functional\Command;
 
 use Crell\Bundle\Planedo\Entity\User;
-use Crell\Bundle\Planedo\Tests\Functional\DatabaseFixtureTrait;
-use Crell\Bundle\Planedo\Tests\Functional\DatabasePrimerTrait;
+use Crell\Bundle\Planedo\Tests\Functional\DatabaseFixtures;
+use Crell\Bundle\Planedo\Tests\Functional\DatabasePrimer;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\UserFixtures;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -25,8 +25,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UpdateUserCommandTest extends KernelTestCase
 {
-    use DatabasePrimerTrait;
-    use DatabaseFixtureTrait;
+    use DatabasePrimer;
+    use DatabaseFixtures;
 
     public function setUp(): void
     {

@@ -13,10 +13,10 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class FeedDataTest extends KernelTestCase
 {
-    use DatabasePrimerTrait;
-    use DatabaseFixtureTrait;
-    use MockClockTrait;
-    use MockFeedReaderClientTrait;
+    use DatabasePrimer;
+    use DatabaseFixtures;
+    use MockClock;
+    use MockFeedReaderClient;
 
     use SetupUtils;
 

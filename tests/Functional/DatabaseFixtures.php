@@ -15,7 +15,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 
-trait DatabaseFixtureTrait
+trait DatabaseFixtures
 {
     private ?ORMExecutor $fixtureExecutor = null;
     private ?ContainerAwareLoader $fixtureLoader = null;

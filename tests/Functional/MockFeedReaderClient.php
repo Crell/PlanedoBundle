@@ -13,7 +13,7 @@ namespace Crell\Bundle\Planedo\Tests\Functional;
 use Crell\Bundle\Planedo\Tests\Mocks\MockFeedReaderHttpClient;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-trait MockFeedReaderClientTrait
+trait MockFeedReaderClient
 {
     public function mockFeedClient()
     {

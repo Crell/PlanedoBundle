@@ -13,8 +13,8 @@ namespace Crell\Bundle\Planedo\Tests\Functional\Controller;
 use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
 use Crell\Bundle\Planedo\Tests\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
-use Crell\Bundle\Planedo\Tests\Functional\MockClockTrait;
-use Crell\Bundle\Planedo\Tests\Functional\MockFeedReaderClientTrait;
+use Crell\Bundle\Planedo\Tests\Functional\MockClock;
+use Crell\Bundle\Planedo\Tests\Functional\MockFeedReaderClient;
 use Crell\Bundle\Planedo\Tests\Functional\SetupUtils;
 use Crell\Bundle\Planedo\Tests\Functional\WebTestCase;
 
@@ -25,8 +25,8 @@ class HtmlFeedControllerTest extends WebTestCase
 {
     use SetupUtils;
     use EntityManagerWrapper;
-    use MockClockTrait;
-    use MockFeedReaderClientTrait;
+    use MockClock;
+    use MockFeedReaderClient;
 
     public function setUp(): void
     {
