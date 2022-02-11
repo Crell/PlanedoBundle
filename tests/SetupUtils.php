@@ -87,7 +87,7 @@ trait SetupUtils
 
     protected function populateFeeds(): void
     {
-        $container = self::container();
+        $container = self::getContainer();
 
         /** @var MessageBusInterface $bus */
         $bus = $container->get(MessageBusInterface::class);

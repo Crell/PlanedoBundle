@@ -32,7 +32,7 @@ trait EntityManagerWrapper
 
     protected function getEntityManager(): EntityManagerInterface
     {
-        $container = $this->container;
+        $container = self::getContainer();
         /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
 

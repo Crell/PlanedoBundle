@@ -51,6 +51,8 @@ class FeedControllerTest extends WebTestCase
         $this->setClockMock(new \DateTimeImmutable('2021-11-15'));
         $this->setFeedReaderClientMock();
 
+        $this->populateFeeds();
+
         $this->client->request('GET', $path);
         self::assertResponseIsSuccessful();
         self::assertResponseHeaderSame('content-type', $contentType);
@@ -58,7 +60,7 @@ class FeedControllerTest extends WebTestCase
         $feed = Reader::importString($this->client->getResponse()->getContent());
 
         // Confirm the number of articles in the first page of the feed.
-        self::assertCount(self::$kernel->getContainer()->getParameter('planedo.itemsPerPage'), $feed);
+        self::assertCount(self::getContainer()->getParameter('planedo.itemsPerPage'), $feed);
 
         // Only 11 items would have survived the old-data filter when adding.
         $this->assertRawEntryCount(11);
