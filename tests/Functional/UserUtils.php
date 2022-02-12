@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests\Functional;
 
 use Crell\Bundle\Planedo\Entity\User;
-use Crell\Bundle\Planedo\Tests\Functional\HasherWrapper;
 
 trait UserUtils
 {

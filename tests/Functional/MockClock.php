@@ -13,6 +13,7 @@ namespace Crell\Bundle\Planedo\Tests\Functional;
 use Crell\Bundle\Planedo\Tests\Mocks\SettableClock;
 use DateTimeImmutable;
 use Psr\Clock\ClockInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 trait MockClock
@@ -27,4 +28,6 @@ trait MockClock
 
         return $clock;
     }
+
+    abstract protected static function getContainer(): ContainerInterface;
 }

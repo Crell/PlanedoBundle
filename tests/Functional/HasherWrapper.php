@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Tests\Functional;
 
+use Psr\Container\ContainerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 trait HasherWrapper
@@ -28,4 +29,6 @@ trait HasherWrapper
 
         return $hasher;
     }
+
+    abstract protected static function getContainer(): ContainerInterface;
 }

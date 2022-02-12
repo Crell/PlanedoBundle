@@ -23,31 +23,6 @@ trait SetupUtils
 {
     use EntityManagerWrapper;
 
-    private ContainerInterface $container;
-
-    public function initialize(array $config = []): ContainerInterface
-    {
-        $kernel = new Kernel($config);
-        $kernel->boot();
-
-        return $this->container = $kernel->getContainer();
-    }
-
-    /**
-     * Get our actual test container.
-     *
-     * In order to have functional tests in a bundle, we need to custom override
-     * the kernel, which means its own container.  Which means the container()
-     * and getContainer() methods of KernelTestCase are no longer useful, so we
-     * need a different name for the actual container that we're using.
-     *
-     * Symfony really hates Bundles.
-     */
-    protected function getRealContainer(): ContainerInterface
-    {
-        return $this->container;
-    }
-
     protected function assertRawEntryCount(int $expected): void
     {
         $em = $this->entityManager();
@@ -75,6 +50,5 @@ trait SetupUtils
         }
     }
 
-    // @todo Come back to this once the old tests aren't so broken.
-    //abstract protected static function getContainer(): ContainerInterface;
+    abstract protected static function getContainer(): ContainerInterface;
 }
