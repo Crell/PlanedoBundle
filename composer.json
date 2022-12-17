@@ -3,12 +3,6 @@
     "description": "Feed aggregator bundle for Symfony 6 and later.",
     "type": "symfony-bundle",
     "license": "AGPL-3.0-or-later",
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/php-fig/clock.git"
-        }
-    ],
     "authors": [
         {
             "name": "Larry Garfield",
@@ -22,7 +16,7 @@
         "easycorp/easyadmin-bundle": "^4.0",
         "laminas/laminas-feed": "^2.15",
         "nyholm/psr7": "^1.4",
-        "psr/clock": "@dev",
+        "psr/clock": "1.0.0",
         "psr/http-client": "^1.0",
         "symfony/form": "^5.4 || ^6.0",
         "symfony/framework-bundle": "^5.4 || ^6.0",
