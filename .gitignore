@@ -1,5 +1,6 @@
 .ddev/
 .vscode/
+.idea
 .env
 var
 vendor
