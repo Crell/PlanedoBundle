@@ -23,6 +23,7 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: xdebug
           tools: composer:v2
+          extensions: intl
 
       - name: Cache composer dependencies
         uses: actions/cache@v2
