@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 class FeedEntry
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 750)]
     private string $link;
 
     #[ORM\ManyToOne(targetEntity: Feed::class, inversedBy: 'entries')]
