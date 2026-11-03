@@ -12,13 +12,15 @@ namespace Crell\Bundle\Planedo;
 
 use Laminas\Feed\Reader\Http\ClientInterface as FeedReaderHttpClientInterface;
 use Laminas\Feed\Reader\Http\Psr7ResponseDecorator;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 use Symfony\Component\HttpClient\Psr18Client;
 
 class FeedReaderClient implements FeedReaderHttpClientInterface
 {
-    private Psr18Client $client;
+    private ClientInterface&RequestFactoryInterface $client;
 
-    public function __construct(?Psr18Client $psrClient = null)
+    public function __construct((ClientInterface&RequestFactoryInterface)|null $psrClient = null)
     {
         $this->client = $psrClient ?? new Psr18Client();
     }
