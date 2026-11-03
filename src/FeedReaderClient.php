@@ -20,10 +20,7 @@ class FeedReaderClient implements FeedReaderHttpClientInterface
 {
     private ClientInterface&RequestFactoryInterface $client;
 
-    public function __construct((ClientInterface&RequestFactoryInterface)|null $psrClient = null)
-    {
-        $this->client = $psrClient ?? new Psr18Client();
-    }
+    public function __construct(ClientInterface&RequestFactoryInterface $psrClient = new Psr18Client()) {}
 
     public function get($uri): Psr7ResponseDecorator
     {
