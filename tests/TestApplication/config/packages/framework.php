@@ -8,12 +8,16 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-$container->loadFromExtension('framework', [
-    'secret' => 'F00',
-    'csrf_protection' => true,
-    'session' => [
-        'handler_id' => null,
-        'storage_factory_id' => 'session.storage.factory.mock_file',
-    ],
-    'test' => true,
-]);
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $container): void {
+    $container->extension('framework', [
+        'secret' => 'F00',
+        'csrf_protection' => true,
+        'session' => [
+            'handler_id' => null,
+            'storage_factory_id' => 'session.storage.factory.mock_file',
+        ],
+        'test' => true,
+    ]);
+};

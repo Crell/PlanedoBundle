@@ -14,9 +14,10 @@ use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Message\RejectEntries;
 use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class RejectEntriesHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class RejectEntriesHandler
 {
     private FeedEntryRepository $entryRepo;
 
@@ -26,7 +27,7 @@ final class RejectEntriesHandler implements MessageHandlerInterface
         $this->entryRepo = $this->em->getRepository(FeedEntry::class);
     }
 
-    public function __invoke(RejectEntries $message)
+    public function __invoke(RejectEntries $message): void
     {
         $this->entryRepo->reject(...$message->entryIds);
     }

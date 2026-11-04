@@ -21,7 +21,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
     name: 'planedo:feed:update-all',
-    description: 'Add a short description for your command',
+    description: 'Queue every feed for updating',
 )]
 class FeedUpdateAllCommand extends Command
 {
@@ -40,7 +40,7 @@ class FeedUpdateAllCommand extends Command
 
         $count = 0;
         while ($record = $result->fetchAssociative()) {
-            $this->bus->dispatch(new UpdateFeed($record['id']));
+            $this->bus->dispatch(new UpdateFeed((int) $record['id']));
             ++$count;
         }
 

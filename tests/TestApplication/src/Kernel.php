@@ -18,11 +18,12 @@ use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
-use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel as SymfonyKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\UX\TwigComponent\TwigComponentBundle;
 use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
+use Twig\Extra\TwigExtraBundle\TwigExtraBundle;
 
 class Kernel extends SymfonyKernel
 {
@@ -42,6 +43,10 @@ class Kernel extends SymfonyKernel
             new DoctrineFixturesBundle(),
             new SecurityBundle(),
             new SymfonyCastsResetPasswordBundle(),
+            // EasyAdmin 5 builds its UI from Twig Components and uses the twig/html-extra
+            // functions, so both of these bundles are mandatory.
+            new TwigComponentBundle(),
+            new TwigExtraBundle(),
             new EasyAdminBundle(),
             new PlanedoBundle(),
         ];
@@ -55,13 +60,11 @@ class Kernel extends SymfonyKernel
     public function getCacheDir(): string
     {
         return $this->getProjectDir() . '/var/cache/' . $this->environment;
-//        return sys_get_temp_dir() . '/com.github.crell.planedobundle/tests/var/' . $this->environment . '/cache';
     }
 
     public function getLogDir(): string
     {
-        return $this->getProjectDir() . '/var/cache/' . $this->environment;
-//        return sys_get_temp_dir() . '/com.github.crell.planedobundle/tests/var/' . $this->environment . '/log';
+        return $this->getProjectDir() . '/var/log/' . $this->environment;
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
@@ -69,11 +72,13 @@ class Kernel extends SymfonyKernel
         $routes->import($this->getProjectDir() . '/config/routes.php');
     }
 
-    protected function configureContainer(ContainerBuilder $containerBuilder, LoaderInterface $loader): void
+    protected function configureContainer(ContainerConfigurator $container): void
     {
-        $loader->load($this->getProjectDir() . '/config/{packages}/*.php', 'glob');
-        $loader->load($this->getProjectDir() . '/config/{packages}/' . $this->environment . '/*.php', 'glob');
-        $loader->load($this->getProjectDir() . '/config/{services}.php', 'glob');
-        $loader->load($this->getProjectDir() . '/config/{services}_' . $this->environment . '.php', 'glob');
+        $configDir = $this->getProjectDir() . '/config';
+
+        $container->import($configDir . '/{packages}/*.php');
+        $container->import($configDir . '/{packages}/' . $this->environment . '/*.php');
+        $container->import($configDir . '/{services}.php');
+        $container->import($configDir . '/{services}_' . $this->environment . '.php');
     }
 }

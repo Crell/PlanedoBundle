@@ -17,9 +17,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Clock\ClockInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class PurgeOldEntriesHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class PurgeOldEntriesHandler
 {
     private FeedEntryRepository $entryRepo;
 
@@ -32,7 +33,7 @@ final class PurgeOldEntriesHandler implements MessageHandlerInterface
         $this->entryRepo = $this->em->getRepository(FeedEntry::class);
     }
 
-    public function __invoke(PurgeOldEntries $message)
+    public function __invoke(PurgeOldEntries $message): void
     {
         $deleteBefore = $this->clock->now()->modify($this->purgeBefore);
 

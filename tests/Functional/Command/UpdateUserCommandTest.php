@@ -14,21 +14,21 @@ use Crell\Bundle\Planedo\Entity\User;
 use Crell\Bundle\Planedo\Tests\Functional\DatabaseFixtures;
 use Crell\Bundle\Planedo\Tests\Functional\DatabasePrimer;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\UserFixtures;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-/**
- * @group cli
- */
+#[Group('cli')]
 class UpdateUserCommandTest extends KernelTestCase
 {
     use DatabasePrimer;
     use DatabaseFixtures;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         self::bootKernel();
@@ -41,9 +41,7 @@ class UpdateUserCommandTest extends KernelTestCase
 
     protected const Command = 'planedo:update-user';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function changeEmail(): void
     {
         $command = (new Application(static::$kernel))->find('planedo:update-user');
@@ -62,9 +60,7 @@ class UpdateUserCommandTest extends KernelTestCase
         self::assertNotNull($foundUser);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function changePassword(): void
     {
         $newPassword = 'qwer';

@@ -1,6 +1,6 @@
 {
     "name": "crell/planedo-bundle",
-    "description": "Feed aggregator bundle for Symfony 6 and later.",
+    "description": "Feed aggregator bundle for Symfony 8 and later.",
     "type": "symfony-bundle",
     "license": "AGPL-3.0-or-later",
     "authors": [
@@ -12,38 +12,41 @@
         }
     ],
     "require": {
-        "php": "~8.1",
+        "php": ">=8.4",
         "ext-intl": "*",
-        "easycorp/easyadmin-bundle": "^4.0",
-        "laminas/laminas-feed": "^2.15",
-        "nyholm/psr7": "^1.4",
-        "psr/clock": "1.0.0",
+        "doctrine/dbal": "^4.2",
+        "doctrine/doctrine-bundle": "^3.0",
+        "doctrine/orm": "^3.3",
+        "easycorp/easyadmin-bundle": "^5.0",
+        "laminas/laminas-feed": "^2.23",
+        "nyholm/psr7": "^1.8",
+        "psr/clock": "^1.0",
         "psr/http-client": "^1.0",
-        "symfony/form": "^5.4 || ^6.0",
-        "symfony/framework-bundle": "^5.4 || ^6.0",
-        "symfony/config": "^5.4 || ^6.0",
-        "symfony/dependency-injection": "^5.4 || ^6.0",
-        "symfony/http-client": "^5.4 || ^6.0",
-        "symfony/http-kernel": "^5.4 || ^6.0",
-        "symfony/messenger": "^5.4 || ^6.0",
-        "symfony/security-bundle": "^5.4 || ^6.0",
-        "symfony/twig-bundle": "^5.4 || ^6.0",
-        "symfony/yaml": "^5.4 || ^6.0",
-        "doctrine/doctrine-bundle": "^2.4",
-        "twig/twig": "^2.12|^3.0",
-        "symfony/password-hasher": "^5.4 || ^6.0",
-        "symfonycasts/reset-password-bundle": "^1.11",
-        "symfony/mailer": "^5.4 || ^6.0"
+        "symfony/config": "^8.0",
+        "symfony/console": "^8.0",
+        "symfony/dependency-injection": "^8.0",
+        "symfony/form": "^8.0",
+        "symfony/framework-bundle": "^8.0",
+        "symfony/http-client": "^8.0",
+        "symfony/http-kernel": "^8.0",
+        "symfony/mailer": "^8.0",
+        "symfony/messenger": "^8.0",
+        "symfony/password-hasher": "^8.0",
+        "symfony/security-bundle": "^8.0",
+        "symfony/twig-bundle": "^8.0",
+        "symfony/validator": "^8.0",
+        "symfony/yaml": "^8.0",
+        "symfonycasts/reset-password-bundle": "^1.24",
+        "twig/twig": "^3.21"
     },
     "require-dev": {
-        "dama/doctrine-test-bundle": "^6.7",
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
-        "overtrue/phplint": "^4.1",
-        "phpstan/phpstan": "^1.0",
-        "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "^5.4 || ^6.0",
-        "symfony/css-selector": "^5.4 || ^6.0",
-        "symfony/phpunit-bridge": "^5.4 || ^6.0"
+        "doctrine/doctrine-fixtures-bundle": "^4.0",
+        "overtrue/phplint": "^9.0",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^13.0",
+        "symfony/browser-kit": "^8.0",
+        "symfony/css-selector": "^8.0",
+        "symfony/phpunit-bridge": "^8.0"
     },
     "autoload": {
         "psr-4": {
@@ -58,10 +61,13 @@
     },
     "scripts": {
         "test:php:unit": [
-            "simple-phpunit -c phpunit.xml.dist"
+            "phpunit -c phpunit.xml.dist"
         ],
         "test:php:lint": [
             "phplint"
+        ],
+        "test:php:stan": [
+            "phpstan analyse"
         ],
         "test": [
             "@test:php:lint",
@@ -73,7 +79,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "2.0-dev"
         }
     }
 }

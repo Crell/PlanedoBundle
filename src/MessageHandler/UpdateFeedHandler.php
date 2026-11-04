@@ -23,9 +23,10 @@ use Laminas\Feed\Reader\Feed\FeedInterface;
 use Psr\Clock\ClockInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class UpdateFeedHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class UpdateFeedHandler
 {
     private FeedRepository $feedRepo;
     private FeedEntryRepository $entryRepo;

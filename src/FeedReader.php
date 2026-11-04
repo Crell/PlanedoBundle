@@ -27,7 +27,7 @@ class FeedReader
         Reader::setHttpClient($this->client);
     }
 
-    public function import(string $uri, ?string $etag = null, string $lastModified = null): Feed\FeedInterface
+    public function import(string $uri, ?string $etag = null, ?string $lastModified = null): Feed\FeedInterface
     {
         return Reader::import($uri, $etag, $lastModified);
     }

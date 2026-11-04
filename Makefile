@@ -1,4 +1,4 @@
-compose_command = docker-compose run -u $(id -u ${USER}):$(id -g ${USER}) --rm php81
+compose_command = docker-compose run -u $(id -u ${USER}):$(id -g ${USER}) --rm php84
 
 .PHONY: build
 build:

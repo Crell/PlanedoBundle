@@ -13,6 +13,7 @@ namespace Crell\Bundle\Planedo\Tests\Functional;
 use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
 use Crell\Bundle\Planedo\Message\PurgeOldEntries;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -27,7 +28,7 @@ class PurgeTest extends KernelTestCase
     use MockClock;
     use MockFeedReaderClient;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -38,9 +39,7 @@ class PurgeTest extends KernelTestCase
         $this->executeFixtures();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function oldEntriesGetPurged(): void
     {
         // The first will allow through a few items.

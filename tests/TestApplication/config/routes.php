@@ -10,7 +10,11 @@ declare(strict_types=1);
 
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
-return function (RoutingConfigurator $routes) {
+return static function (RoutingConfigurator $routes): void {
+    // EasyAdmin 5 generates the dashboard, CRUD and #[AdminRoute] routes
+    // through its own route loader; this import is mandatory.
+    $routes->import('.', 'easyadmin.routes');
+
     $routes->import('@PlanedoBundle/config/routes_admin.yaml')->prefix('/');
     $routes->import('@PlanedoBundle/config/routes_public.yaml')->prefix('/');
 };

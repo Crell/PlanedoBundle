@@ -32,7 +32,7 @@ class CreateUserCommand extends Command
         private UserPasswordHasherInterface $hasher,
         private EntityManagerInterface $em,
         private LoggerInterface $logger = new NullLogger(),
-        string $name = null,
+        ?string $name = null,
     ) {
         parent::__construct($name);
     }

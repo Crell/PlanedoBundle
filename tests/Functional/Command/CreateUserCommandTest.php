@@ -12,28 +12,26 @@ namespace Crell\Bundle\Planedo\Tests\Functional\Command;
 
 use Crell\Bundle\Planedo\Entity\User;
 use Crell\Bundle\Planedo\Tests\Functional\DatabasePrimer;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 
-/**
- * @group cli
- */
+#[Group('cli')]
 class CreateUserCommandTest extends KernelTestCase
 {
     use DatabasePrimer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         self::bootKernel();
         $this->prime();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createUser(): void
     {
         $command = (new Application(static::$kernel))->find('planedo:create-user');

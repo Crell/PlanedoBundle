@@ -13,20 +13,37 @@ namespace Crell\Bundle\Planedo\Controller\Admin;
 use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Message\ApproveEntries;
 use Crell\Bundle\Planedo\Message\RejectEntries;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\BatchActionDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+/**
+ * Feed entries are identified by their own URL, which contains slashes.
+ * EasyAdmin 5 puts entity ids into the URL path with a "no slashes" requirement,
+ * so the single-entity actions below either carry the id in the query string
+ * (approve/reject) or relax the requirement (detail).
+ *
+ * @extends AbstractCrudController<FeedEntry>
+ */
 class FeedEntryCrudController extends AbstractCrudController
 {
+    public function __construct(
+        private readonly MessageBusInterface $bus,
+        private readonly AdminUrlGeneratorInterface $adminUrlGenerator,
+    ) {}
+
     public static function getEntityFqcn(): string
     {
         return FeedEntry::class;
@@ -53,19 +70,18 @@ class FeedEntryCrudController extends AbstractCrudController
             // @todo This contains HTML, so figure out how to format nicely.
             TextField::new('summary')->setDisabled()->onlyOnDetail(),
             TextField::new('feed.title', 'Feed')->setDisabled()->onlyOnIndex(),
-//            AssociationField::new('feed')->setDisabled()->onlyOnIndex(),
         ];
     }
 
     public function configureActions(Actions $actions): Actions
     {
         $rejectEntry = Action::new('rejectEntry', 'Reject')
-            ->displayAsLink()
+            ->renderAsLink()
             ->linkToCrudAction('rejectEntry')
             ->displayIf(static fn (FeedEntry $entry): bool => $entry->isApproved());
 
         $approveEntry = Action::new('approveEntry', 'Approve')
-            ->displayAsLink()
+            ->renderAsLink()
             ->linkToCrudAction('approveEntry')
             ->displayIf(static fn (FeedEntry $entry): bool => !$entry->isApproved());
 
@@ -98,49 +114,87 @@ class FeedEntryCrudController extends AbstractCrudController
         return $actions;
     }
 
-    public function batchRejectEntries(BatchActionDto $context, MessageBusInterface $bus): Response
+    #[AdminRoute('/batch-reject', name: 'batch_reject', options: ['methods' => ['POST']])]
+    public function batchRejectEntries(BatchActionDto $batchActionDto, Request $request): Response
     {
-        $ids = $context->getEntityIds();
-        $bus->dispatch(new RejectEntries(...$ids));
+        $this->assertBatchActionIsValid($batchActionDto);
+
+        $ids = array_map(strval(...), $batchActionDto->getEntityIds());
+        $this->bus->dispatch(new RejectEntries(...$ids));
 
         $this->addFlash('notice', sprintf('%d entries rejected.', count($ids)));
 
-        return $this->redirect($context->getReferrerUrl());
+        return $this->redirect($this->referrerOrIndex($request));
     }
 
-    public function rejectEntry(AdminContext $context, MessageBusInterface $bus): Response
+    #[AdminRoute('/reject', name: 'reject')]
+    public function rejectEntry(AdminContext $context): Response
     {
         /** @var FeedEntry $entry */
         $entry = $context->getEntity()->getInstance();
 
-        $bus->dispatch(new RejectEntries($entry->getId()));
+        $this->bus->dispatch(new RejectEntries($entry->getId()));
 
         $this->addFlash('notice', sprintf('Rejected entry: %s', $entry->getTitle()));
 
-        return $this->redirect($context->getReferrer());
+        return $this->redirect($this->referrerOrIndex($context->getRequest()));
     }
 
-    public function batchApproveEntries(BatchActionDto $context, MessageBusInterface $bus): Response
+    #[AdminRoute('/batch-approve', name: 'batch_approve', options: ['methods' => ['POST']])]
+    public function batchApproveEntries(BatchActionDto $batchActionDto, Request $request): Response
     {
-        $ids = $context->getEntityIds();
-        foreach ($ids as $id) {
-            $bus->dispatch(new ApproveEntries($id));
-        }
+        $this->assertBatchActionIsValid($batchActionDto);
+
+        $ids = array_map(strval(...), $batchActionDto->getEntityIds());
+        $this->bus->dispatch(new ApproveEntries(...$ids));
 
         $this->addFlash('notice', sprintf('%d entries approved.', count($ids)));
 
-        return $this->redirect($context->getReferrerUrl());
+        return $this->redirect($this->referrerOrIndex($request));
     }
 
-    public function approveEntry(AdminContext $context, MessageBusInterface $bus): Response
+    #[AdminRoute('/approve', name: 'approve')]
+    public function approveEntry(AdminContext $context): Response
     {
         /** @var FeedEntry $entry */
         $entry = $context->getEntity()->getInstance();
 
-        $bus->dispatch(new ApproveEntries($entry->getId()));
+        $this->bus->dispatch(new ApproveEntries($entry->getId()));
 
         $this->addFlash('notice', sprintf('Approved entry: %s', $entry->getTitle()));
 
-        return $this->redirect($context->getReferrer());
+        return $this->redirect($this->referrerOrIndex($context->getRequest()));
+    }
+
+    /**
+     * Declared after the other custom actions on purpose: EasyAdmin registers
+     * custom routes in method order and this one is a catch-all.
+     */
+    #[AdminRoute('/{entityId<.+>}', name: 'detail', options: ['methods' => ['GET']])]
+    public function detail(AdminContext $context): KeyValueStore|Response
+    {
+        return parent::detail($context);
+    }
+
+    /**
+     * EasyAdmin 5 no longer tracks the referrer itself, so fall back to the
+     * browser-provided header and, failing that, this controller's index page.
+     */
+    private function referrerOrIndex(Request $request): string
+    {
+        return $request->headers->get('referer')
+            ?? $this->adminUrlGenerator->setController(static::class)->setAction(Action::INDEX)->generateUrl();
+    }
+
+    private function assertBatchActionIsValid(BatchActionDto $batchActionDto): void
+    {
+        if (static::getEntityFqcn() !== $batchActionDto->getEntityFqcn()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $tokenId = 'ea-batch-action-' . $batchActionDto->getName() . '-' . $batchActionDto->getEntityFqcn();
+        if (!$this->isCsrfTokenValid($tokenId, $batchActionDto->getCsrfToken())) {
+            throw $this->createAccessDeniedException();
+        }
     }
 }

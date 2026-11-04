@@ -11,16 +11,16 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests\Functional\Controller;
 
 use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
-use Crell\Bundle\Planedo\Tests\Functional\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
+use Crell\Bundle\Planedo\Tests\Functional\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\Functional\MockClock;
 use Crell\Bundle\Planedo\Tests\Functional\MockFeedReaderClient;
 use Crell\Bundle\Planedo\Tests\Functional\SetupUtils;
 use Crell\Bundle\Planedo\Tests\Functional\WebTestCase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @group public
- */
+#[Group('public')]
 class HtmlFeedControllerTest extends WebTestCase
 {
     use SetupUtils;
@@ -28,7 +28,7 @@ class HtmlFeedControllerTest extends WebTestCase
     use MockClock;
     use MockFeedReaderClient;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->addFixture(new FeedFixtures());
@@ -36,9 +36,7 @@ class HtmlFeedControllerTest extends WebTestCase
         $this->executeFixtures();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function mainFeedHasData(): void
     {
         $this->mockClock(new \DateTimeImmutable('2021-11-15'));
@@ -66,9 +64,7 @@ class HtmlFeedControllerTest extends WebTestCase
         $this->assertRawEntryCount(11);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function sidebarsDisplay(): void
     {
         $this->mockClock(new \DateTimeImmutable('2021-11-15'));

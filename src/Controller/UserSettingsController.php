@@ -10,22 +10,31 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\Controller;
 
+use Crell\Bundle\Planedo\Entity\User;
 use Crell\Bundle\Planedo\Form\UserSettingsType;
 use Doctrine\ORM\EntityManagerInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
+/**
+ * Lets the logged-in user edit their own account.
+ *
+ * This is a plain Symfony controller integrated into the EasyAdmin backend
+ * via the #[AdminRoute] attribute, so EasyAdmin generates the route
+ * "planedo_admin_user_settings" at "/admin/user-settings" (relative to the
+ * dashboard route) and renders it inside the admin layout.
+ */
 class UserSettingsController extends AbstractController
 {
     public function __construct(
         private readonly EntityManagerInterface $em,
-        private readonly AdminUrlGenerator $adminUrlGenerator,
     ) {}
 
-    public function index(#[CurrentUser] $user, Request $request): Response
+    #[AdminRoute('/user-settings', name: 'user_settings')]
+    public function index(#[CurrentUser] User $user, Request $request): Response
     {
         $form = $this->createForm(UserSettingsType::class, $user);
 
@@ -37,14 +46,10 @@ class UserSettingsController extends AbstractController
 
             $this->addFlash('success', 'User information updated.');
 
-            $url = $this->adminUrlGenerator
-                ->setRoute('planedo_user_settings')
-                ->generateUrl();
-
-            return $this->redirect($url);
+            return $this->redirectToRoute('planedo_admin_user_settings');
         }
 
-        return $this->renderForm('@Planedo/user_settings/index.html.twig', [
+        return $this->render('@Planedo/user_settings/index.html.twig', [
             'form' => $form,
         ]);
     }

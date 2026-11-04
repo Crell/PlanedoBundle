@@ -64,7 +64,7 @@ class FeedRepository extends ServiceEntityRepository
 
     public function getActiveFeedCount(): int
     {
-        return $this->count(['active' => 'true']);
+        return $this->count(['active' => true]);
     }
 
     public function findOneByFeedLink(string $link): ?Feed

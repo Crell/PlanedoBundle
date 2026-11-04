@@ -4,7 +4,7 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Planedo is a blog aggregator bundle for Symfony 6.  It aims to be a mostly out-of-the-box setup for a Planet-style blog aggregator, or as close to that as Bundles allow anyway.
+Planedo is a blog aggregator bundle for Symfony 8.  It aims to be a mostly out-of-the-box setup for a Planet-style blog aggregator, or as close to that as Bundles allow anyway.
 
 "Planedo" is Esperanto for "Planet," as in blog-aggregator "planet."
 
@@ -20,7 +20,7 @@ composer project-create crell/planedo
 
 That will create a new project pre-configured to use with Planedo.  Nearly all meaningful functionality is in the bundle, so you can modify the application itself to your heart's content.  Future updates to Planedo itself will come via updating the bundle through Composer.
 
-Alternatively, you may install Planedo Bundle directly in Symfony 5.4/6 application of your choice, via composer.
+Alternatively, you may install Planedo Bundle directly in a Symfony 8 application of your choice, via composer.
 
 ```shell
 composer require crell/planedo-bundle
@@ -28,22 +28,12 @@ composer require crell/planedo-bundle
 
 If you take this approach, there are a few manual steps necessary to wire the bundle into the application.
 
-### Add a dev-dependency
+### Requirements
 
-At this time, Planedo uses the pre-release version of PSR-20 from the PHP-FIG.  It is not yet on Packagist, so you will need to include the following in your main application's `composer.json`:
-
-```json
-{
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/php-fig/clock.git"
-    }
-  ]
-}
-```
-
-That will allow Composer to download the appropriate package.  This step will be unnecessary once PSR-20 is released.
+* PHP 8.4 or later
+* Symfony 8.0 or later
+* Doctrine ORM 3 / DBAL 4 (via DoctrineBundle 3)
+* EasyAdmin 5
 
 ### Enable the bundle
 
@@ -51,6 +41,14 @@ Add the bundle to your `bundles.php` file:
 
 ```php
 Crell\Bundle\Planedo\PlanedoBundle::class => ['all' => true],
+```
+
+Planedo's admin area is built on EasyAdmin 5, which in turn renders its UI with Symfony UX Twig Components and the Twig html-extra functions.  If you do not use Symfony Flex, make sure these bundles are enabled as well and that a `config/packages/twig_component.yaml` exists (see the [EasyAdmin installation docs](https://symfony.com/bundles/EasyAdminBundle/current/index.html)):
+
+```php
+EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
+Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
+Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
 ```
 
 ### Routing
@@ -69,7 +67,19 @@ planedo_public:
     prefix: ''
 ```
 
-The above setup assumes that you want Planedo's routes to be at the root of your site.  If not, add a `prefix` for either the front-end or admin routes as you prefer.
+The above setup assumes that you want Planedo's routes to be at the root of your site.  If not, add a `prefix` for either the front-end or the login/password-reset routes as you prefer.
+
+EasyAdmin 5 generates the admin dashboard route (`/admin`) and all CRUD routes beneath it from the `#[AdminDashboard]` attribute on Planedo's dashboard controller.  For those routes to exist, your application must enable EasyAdmin's route loader.  Symfony Flex creates this file for you when EasyAdmin is installed; otherwise create it manually:
+
+```yaml
+# config/routes/easyadmin.yaml
+
+easyadmin:
+    resource: .
+    type: easyadmin.routes
+```
+
+If you need the admin area under a different path, extend `Crell\Bundle\Planedo\Controller\Admin\DashboardController` and put your own `#[AdminDashboard(routePath: '/your-path', routeName: 'planedo_admin')]` attribute on the subclass.
 
 ### User and password management
 
@@ -107,6 +117,16 @@ You will be prompted for a password, or you may provide one on the command line.
 
 You may now go to `<planedo admin prefix>/admin` to login, then start adding feeds.
 
+### Web server note
+
+Feed entries are identified by their own URL, so the admin "detail" page of a feed entry has a URL like `/admin/feed-entry/https://example.com/post`.  If your web server collapses consecutive slashes (nginx does by default via `merge_slashes on`), disable that for the admin area or those detail pages will not resolve.
+
+## Database
+
+Planedo ships its Doctrine entities and a set of migrations in the `migrations/` directory for MySQL/MariaDB.  Either copy them into your application's migrations directory or generate a migration with `bin/console doctrine:migrations:diff` after enabling the bundle.
+
+If you are upgrading from a 1.x release of this bundle, note that the `authors` columns changed from the Doctrine `array` type (removed in DBAL 4) to `json`.  The `Version20261019000000` migration converts existing data in place.
+
 ## Setting up cron tasks
 
 Regardless of how you run Planedo, you will need to setup two cron tasks through the cron runner of your choice.  How often you run them is up to you, but at least daily is recommended.
@@ -114,7 +134,7 @@ Regardless of how you run Planedo, you will need to setup two cron tasks through
 The first update refetches feeds to get new entries:
 
 ```shell
-bin/console planedo:update-all
+bin/console planedo:feed:update-all
 ```
 
 The second update deletes old entries (where "old" is defined by the `purge_before` configuration setting):

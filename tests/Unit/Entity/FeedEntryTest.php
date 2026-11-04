@@ -11,14 +11,14 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests\Unit\Entity;
 
 use Crell\Bundle\Planedo\Entity\FeedEntry;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class FeedEntryTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider descriptionCleanerDataProvider()
-     */
+    #[Test]
+    #[DataProvider('descriptionCleanerDataProvider')]
     public function descriptionCleanerTest(string $unclean, string $clean, string $link, string $title): void
     {
         $entry = (new FeedEntry())
@@ -30,7 +30,7 @@ class FeedEntryTest extends TestCase
         self::assertEquals($clean, $result);
     }
 
-    public function descriptionCleanerDataProvider(): iterable
+    public static function descriptionCleanerDataProvider(): iterable
     {
         yield 'Empty string' => [
             'unclean' => '',

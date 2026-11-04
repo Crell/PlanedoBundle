@@ -26,10 +26,13 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * @extends AbstractCrudController<User>
+ */
 class UserCrudController extends AbstractCrudController
 {
     public function __construct(
-        private UserPasswordHasherInterface $hasher,
+        private readonly UserPasswordHasherInterface $hasher,
     ) {}
 
     public static function getEntityFqcn(): string
@@ -51,9 +54,9 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            FormField::addPanel('User information')->setIcon('fa fa-user'),
+            FormField::addFieldset('User information')->setIcon('fa fa-user'),
             TextField::new('email'),
-            FormField::addPanel('Change password')->setIcon('fa fa-key'),
+            FormField::addFieldset('Change password')->setIcon('fa fa-key'),
             Field::new('plainPassword', 'New password')->onlyOnForms()
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([

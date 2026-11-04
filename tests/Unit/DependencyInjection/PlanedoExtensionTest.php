@@ -16,15 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class PlanedoExtensionTest extends TestCase
 {
-    /** @var ContainerBuilder */
-    protected $configuration;
-
-    protected function tearDown(): void
-    {
-        $this->configuration = null;
-    }
-
-    public function testDefault()
+    public function testDefault(): void
     {
         $container = new ContainerBuilder();
         $loader = new PlanedoExtension();

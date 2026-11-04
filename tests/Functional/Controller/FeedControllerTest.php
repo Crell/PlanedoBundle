@@ -12,21 +12,22 @@ namespace Crell\Bundle\Planedo\Tests\Functional\Controller;
 
 use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
 use Crell\Bundle\Planedo\Entity\FeedEntry;
-use Crell\Bundle\Planedo\Tests\Functional\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
+use Crell\Bundle\Planedo\Tests\Functional\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\Functional\SetupUtils;
 use Crell\Bundle\Planedo\Tests\Functional\WebTestCase;
 use Laminas\Feed\Reader\Reader;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @group public
- */
+#[Group('public')]
 class FeedControllerTest extends WebTestCase
 {
     use EntityManagerWrapper;
     use SetupUtils;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->addFixture(new FeedFixtures());
@@ -34,7 +35,7 @@ class FeedControllerTest extends WebTestCase
         $this->executeFixtures();
     }
 
-    public function feedTypeProvider(): iterable
+    public static function feedTypeProvider(): iterable
     {
         yield 'Atom' => [
             'path' => '/atom',
@@ -46,10 +47,8 @@ class FeedControllerTest extends WebTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider feedTypeProvider()
-     */
+    #[Test]
+    #[DataProvider('feedTypeProvider')]
     public function feedHasData(string $path, string $contentType): void
     {
         $this->mockClock(new \DateTimeImmutable('2021-11-15'));
@@ -70,10 +69,8 @@ class FeedControllerTest extends WebTestCase
         $this->assertRawEntryCount(11);
     }
 
-    /**
-     * @test
-     * @dataProvider feedTypeProvider()
-     */
+    #[Test]
+    #[DataProvider('feedTypeProvider')]
     public function rejectedEntriesDontShow(string $path, string $contentType): void
     {
         $entryToExclude = 'https://www.example.com/blog/b';
@@ -102,10 +99,8 @@ class FeedControllerTest extends WebTestCase
         }
     }
 
-    /**
-     * @test
-     * @dataProvider feedTypeProvider()
-     */
+    #[Test]
+    #[DataProvider('feedTypeProvider')]
     public function inactiveFeedsDontShow(string $path, string $contentType): void
     {
         $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));

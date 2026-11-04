@@ -12,9 +12,11 @@ namespace Crell\Bundle\Planedo\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Routes for this controller are defined in config/routes_admin.yaml.
+ */
 class LoginController extends AbstractController
 {
     public function index(AuthenticationUtils $authenticationUtils): Response
@@ -41,9 +43,7 @@ class LoginController extends AbstractController
             // this parameter, the login form won't include a CSRF token
             'csrf_token_intention' => 'authenticate',
 
-            // the URL users are redirected to after the login (default: '/admin')
-            // @TODO This is buggy. it's resulting in a double index.php in the URL,
-            // which breaks.  WTF?
+            // the URL users are redirected to after the login
             'target_path' => $this->generateUrl('planedo_admin'),
 
             'username_label' => 'Email address',
@@ -60,25 +60,11 @@ class LoginController extends AbstractController
             // whether to enable or not the "remember me" checkbox (default: false)
             'remember_me_enabled' => true,
         ]);
-
-        /*
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('login/index.html.twig', [
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ]);
-        */
     }
 
-    #[Route('/logout', name: 'app_logout', methods: ['GET'])]
     public function logout(): never
     {
         // controller can be blank: it will never be called!
-        throw new \Exception('Don\'t forget to activate logout in security.yaml');
+        throw new \LogicException('Don\'t forget to activate logout in security.yaml');
     }
 }

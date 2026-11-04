@@ -1,37 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
+<!-- https://docs.phpunit.de/en/13.0/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/13.4/phpunit.xsd"
   backupGlobals="false"
   colors="true"
-  bootstrap="vendor/autoload.php"
+  bootstrap="tests/bootstrap.php"
+  cacheDirectory=".phpunit.cache"
 >
   <php>
     <ini name="error_reporting" value="-1" />
     <server name="KERNEL_CLASS" value="Crell\Bundle\Planedo\Tests\TestApplication\Kernel"/>
     <server name="APP_ENV" value="test" force="true" />
     <server name="SHELL_VERBOSITY" value="-1" />
-    <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-    <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
     <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
   </php>
 
-  <coverage>
-    <include>
-      <directory suffix=".php">src/</directory>
-    </include>
-    <report>
-      <clover outputFile="build/logs/clover.xml"/>
-      <html outputDirectory="build/coverage"/>
-      <text outputFile="build/coverage.txt"/>
-    </report>
-  </coverage>
-
   <testsuites>
-    <testsuite name="Test Suite">
-      <directory>tests</directory>
-    </testsuite>
     <testsuite name="Unit">
       <directory>tests/Unit</directory>
     </testsuite>
@@ -40,12 +25,17 @@
     </testsuite>
   </testsuites>
 
+  <source>
+    <include>
+      <directory suffix=".php">src/</directory>
+    </include>
+  </source>
+
   <logging>
     <junit outputFile="build/report.junit.xml"/>
   </logging>
 
-  <listeners>
-    <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-  </listeners>
-
+  <extensions>
+    <bootstrap class="Symfony\Bridge\PhpUnit\SymfonyExtension"/>
+  </extensions>
 </phpunit>

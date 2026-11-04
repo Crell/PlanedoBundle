@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Entity;
 
 use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FeedEntryRepository::class)]
@@ -33,7 +34,7 @@ class FeedEntry
     #[ORM\Column(type: 'boolean')]
     private bool $approved = true;
 
-    #[ORM\Column(type: 'array')]
+    #[ORM\Column(type: Types::JSON)]
     private array $authors = [];
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]

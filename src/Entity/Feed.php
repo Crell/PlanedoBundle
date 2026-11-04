@@ -13,6 +13,7 @@ namespace Crell\Bundle\Planedo\Entity;
 use Crell\Bundle\Planedo\Repository\FeedRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FeedRepository::class)]
@@ -59,7 +60,7 @@ class Feed
     #[ORM\Column(type: 'string', length: 255)]
     private string $link = '';
 
-    #[ORM\Column(type: 'array')]
+    #[ORM\Column(type: Types::JSON)]
     private array $authors = [];
 
     #[ORM\Column(type: 'string', length: 255)]

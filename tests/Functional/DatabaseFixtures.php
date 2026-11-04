@@ -12,20 +12,20 @@ namespace Crell\Bundle\Planedo\Tests\Functional;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 
 trait DatabaseFixtures
 {
     private ?ORMExecutor $fixtureExecutor = null;
-    private ?ContainerAwareLoader $fixtureLoader = null;
+    private ?Loader $fixtureLoader = null;
 
-    protected function addFixture(FixtureInterface $fixture)
+    protected function addFixture(FixtureInterface $fixture): void
     {
         $this->getFixtureLoader()->addFixture($fixture);
     }
 
-    protected function executeFixtures()
+    protected function executeFixtures(): void
     {
         $this->getFixtureExecutor()->execute($this->getFixtureLoader()->getFixtures());
     }
@@ -40,10 +40,10 @@ trait DatabaseFixtures
         return $this->fixtureExecutor;
     }
 
-    private function getFixtureLoader(): ContainerAwareLoader
+    private function getFixtureLoader(): Loader
     {
         if (null === $this->fixtureLoader) {
-            $this->fixtureLoader = new ContainerAwareLoader(self::$kernel->getContainer());
+            $this->fixtureLoader = new Loader();
         }
 
         return $this->fixtureLoader;

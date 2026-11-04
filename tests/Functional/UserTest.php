@@ -11,19 +11,19 @@ declare(strict_types=1);
 namespace Crell\Bundle\Planedo\Tests\Functional;
 
 use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
-use Crell\Bundle\Planedo\Tests\Functional\EntityManagerWrapper;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
+use Crell\Bundle\Planedo\Tests\Functional\EntityManagerWrapper;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @group admin
- */
+#[Group('admin')]
 class UserTest extends WebTestCase
 {
     use UserUtils;
     use EntityManagerWrapper;
     use SetupUtils;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->addFixture(new FeedFixtures());
@@ -31,9 +31,7 @@ class UserTest extends WebTestCase
         $this->executeFixtures();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function userChangeOwnEmail(): void
     {
         // It is not at all clear why we need to send a dummy request
@@ -61,9 +59,7 @@ class UserTest extends WebTestCase
         self::assertNotNull($user);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function userChangeOwnPassword(): void
     {
         // It is not at all clear why we need to send a dummy request
@@ -99,9 +95,7 @@ class UserTest extends WebTestCase
         self::assertEquals($expectedHash, $foundUser->getPassword());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function userChangeOwnEmailAndPassword(): void
     {
         // It is not at all clear why we need to send a dummy request

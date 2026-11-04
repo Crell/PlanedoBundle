@@ -8,6 +8,8 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
 /*
  * Non-default configuration to use for tests.
  *
@@ -15,8 +17,9 @@ declare(strict_types=1);
  * it's non-obvious how to do that.  The best we can do is replicate
  * what a full on application would let you do.
  */
-
-$container->loadFromExtension('planedo', [
-    'items_per_page' => 5,
-    'purge_before' => '-10 days',
-]);
+return static function (ContainerConfigurator $container): void {
+    $container->extension('planedo', [
+        'items_per_page' => 5,
+        'purge_before' => '-10 days',
+    ]);
+};

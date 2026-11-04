@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Crell\Bundle\Planedo\DependencyInjection;
 
+use Crell\Bundle\Planedo\Entity\User;
 use Crell\Bundle\Planedo\Repository\ResetPasswordRequestRepository;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

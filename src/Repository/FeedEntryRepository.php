@@ -12,7 +12,7 @@ namespace Crell\Bundle\Planedo\Repository;
 
 use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -55,7 +55,7 @@ class FeedEntryRepository extends ServiceEntityRepository
      */
     public function deleteOlderThan(\DateTimeImmutable $threshold): void
     {
-        $this->_em->createQueryBuilder()
+        $this->getEntityManager()->createQueryBuilder()
             ->delete(FeedEntry::class, 'e')
             ->where('e.dateModified < :threshold')
             ->setParameter('threshold', $threshold)
@@ -71,12 +71,12 @@ class FeedEntryRepository extends ServiceEntityRepository
      */
     public function approve(string ...$ids): void
     {
-        $this->_em->createQueryBuilder()
+        $this->getEntityManager()->createQueryBuilder()
             ->update(FeedEntry::class, 'e')
             ->set('e.approved', ':approved')
             ->where('e.link IN (:ids)')
             ->setParameter('approved', true)
-            ->setParameter('ids', $ids, Connection::PARAM_STR_ARRAY)
+            ->setParameter('ids', $ids, ArrayParameterType::STRING)
             ->getQuery()
             ->getResult();
     }
@@ -89,19 +89,19 @@ class FeedEntryRepository extends ServiceEntityRepository
      */
     public function reject(string ...$ids): void
     {
-        $this->_em->createQueryBuilder()
+        $this->getEntityManager()->createQueryBuilder()
             ->update(FeedEntry::class, 'e')
             ->set('e.approved', ':approved')
             ->where('e.link IN (:ids)')
             ->setParameter('approved', false)
-            ->setParameter('ids', $ids, Connection::PARAM_STR_ARRAY)
+            ->setParameter('ids', $ids, ArrayParameterType::STRING)
             ->getQuery()
             ->getResult();
     }
 
     public function getApprovedEntryCount(): int
     {
-        return $this->count(['approved' => 'true']);
+        return $this->count(['approved' => true]);
     }
 
     // /**

@@ -12,6 +12,7 @@ namespace Crell\Bundle\Planedo\Controller\Admin;
 
 use Crell\Bundle\Planedo\Entity\Feed;
 use Crell\Bundle\Planedo\Message\UpdateFeed;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -22,11 +23,21 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+/**
+ * @extends AbstractCrudController<Feed>
+ */
 class FeedCrudController extends AbstractCrudController
 {
+    public function __construct(
+        private readonly MessageBusInterface $bus,
+        private readonly AdminUrlGeneratorInterface $adminUrlGenerator,
+    ) {}
+
     public static function getEntityFqcn(): string
     {
         return Feed::class;
@@ -58,11 +69,11 @@ class FeedCrudController extends AbstractCrudController
         $actions->add(Crud::PAGE_EDIT, Action::DELETE);
 
         $updateFeed = Action::new('updateFeed', 'Update')
-            ->displayAsLink()
+            ->renderAsLink()
             ->linkToCrudAction('updateFeed');
 
         $actions->add(Crud::PAGE_EDIT, $updateFeed);
-        $actions->add(Action::INDEX, $updateFeed);
+        $actions->add(Crud::PAGE_INDEX, $updateFeed);
 
         $updateFeeds = Action::new('updateFeeds', 'Update')
             ->linkToCrudAction('batchUpdateFeeds')
@@ -75,19 +86,23 @@ class FeedCrudController extends AbstractCrudController
         return $actions;
     }
 
-    public function batchUpdateFeeds(BatchActionDto $context, MessageBusInterface $bus): Response
+    #[AdminRoute('/batch-update', name: 'batch_update', options: ['methods' => ['POST']])]
+    public function batchUpdateFeeds(BatchActionDto $batchActionDto, Request $request): Response
     {
-        $ids = $context->getEntityIds();
+        $this->assertBatchActionIsValid($batchActionDto);
+
+        $ids = $batchActionDto->getEntityIds();
         foreach ($ids as $id) {
-            $bus->dispatch(new UpdateFeed((int)$id));
+            $this->bus->dispatch(new UpdateFeed((int) $id));
         }
 
         $this->addFlash('notice', sprintf('Update queued for %d feeds.', count($ids)));
 
-        return $this->redirect($context->getReferrerUrl());
+        return $this->redirect($this->referrerOrIndex($request));
     }
 
-    public function updateFeed(AdminContext $context, MessageBusInterface $bus): Response
+    #[AdminRoute('/{entityId}/update', name: 'update')]
+    public function updateFeed(AdminContext $context): Response
     {
         /** @var Feed $feed */
         $feed = $context->getEntity()->getInstance();
@@ -95,13 +110,35 @@ class FeedCrudController extends AbstractCrudController
         if (!$feed->isActive()) {
             $this->addFlash('warning', sprintf('Feed %s (%d) is inactive, so will not be updated.', $feed->getTitle(), $feed->getId()));
 
-            return $this->redirect($context->getReferrer());
+            return $this->redirect($this->referrerOrIndex($context->getRequest()));
         }
 
-        $bus->dispatch(new UpdateFeed($feed->getId()));
+        $this->bus->dispatch(new UpdateFeed($feed->getId()));
 
         $this->addFlash('notice', sprintf('Feed %s (%d) queued for updating', $feed->getTitle(), $feed->getId()));
 
-        return $this->redirect($context->getReferrer());
+        return $this->redirect($this->referrerOrIndex($context->getRequest()));
+    }
+
+    /**
+     * EasyAdmin 5 no longer tracks the referrer itself, so fall back to the
+     * browser-provided header and, failing that, this controller's index page.
+     */
+    private function referrerOrIndex(Request $request): string
+    {
+        return $request->headers->get('referer')
+            ?? $this->adminUrlGenerator->setController(static::class)->setAction(Action::INDEX)->generateUrl();
+    }
+
+    private function assertBatchActionIsValid(BatchActionDto $batchActionDto): void
+    {
+        if (static::getEntityFqcn() !== $batchActionDto->getEntityFqcn()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $tokenId = 'ea-batch-action-' . $batchActionDto->getName() . '-' . $batchActionDto->getEntityFqcn();
+        if (!$this->isCsrfTokenValid($tokenId, $batchActionDto->getCsrfToken())) {
+            throw $this->createAccessDeniedException();
+        }
     }
 }

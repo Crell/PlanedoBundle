@@ -44,7 +44,13 @@ class FeedUpdateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $feedId = $input->getArgument('feedId');
+        $feedId = (int) $input->getArgument('feedId');
+
+        if ($feedId <= 0) {
+            $io->error('You must specify a numeric feed id.');
+
+            return Command::INVALID;
+        }
 
         // Verify that the Feed exists. We don't actually need
         // the object itself, though.
@@ -54,15 +60,9 @@ class FeedUpdateCommand extends Command
             return Command::INVALID;
         }
 
-        if ($feedId) {
-            $this->bus->dispatch(new UpdateFeed($feedId));
-            $io->success('Feed queued for updating.');
+        $this->bus->dispatch(new UpdateFeed($feedId));
+        $io->success('Feed queued for updating.');
 
-            return Command::SUCCESS;
-        }
-
-        $io->error('You must specify a feed id.');
-
-        return Command::INVALID;
+        return Command::SUCCESS;
     }
 }

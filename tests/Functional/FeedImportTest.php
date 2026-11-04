@@ -6,6 +6,7 @@ namespace Crell\Bundle\Planedo\Tests\Functional;
 
 use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class FeedImportTest extends KernelTestCase
@@ -17,7 +18,7 @@ class FeedImportTest extends KernelTestCase
 
     use SetupUtils;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         self::bootKernel();
@@ -27,9 +28,7 @@ class FeedImportTest extends KernelTestCase
         $this->executeFixtures();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function stuff(): void
     {
         $this->mockClock(new \DateTimeImmutable('2021-11-15'));

@@ -8,3 +8,4 @@ vendor
 .phplint-cache
 build
 composer.lock
+.phpunit.cache

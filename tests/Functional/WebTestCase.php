@@ -22,7 +22,7 @@ abstract class WebTestCase extends SymfonyWebTestCase
 
     protected readonly KernelBrowser $client;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->client = static::createClient();

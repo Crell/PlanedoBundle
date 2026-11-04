@@ -7,6 +7,7 @@ namespace Crell\Bundle\Planedo\Tests\Functional;
 use Crell\Bundle\Planedo\DataFixtures\FeedFixtures;
 use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Tests\Functional\DataFixtures\FeedTestFixtures;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class FeedDataTest extends KernelTestCase
@@ -18,7 +19,7 @@ class FeedDataTest extends KernelTestCase
 
     use SetupUtils;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         self::bootKernel();
@@ -28,9 +29,7 @@ class FeedDataTest extends KernelTestCase
         $this->executeFixtures();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function rejectedEntriesDontShow(): void
     {
         $entryToExclude = 'https://www.example.com/blog/b';
@@ -54,9 +53,7 @@ class FeedDataTest extends KernelTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function inactiveFeedsDontShow(): void
     {
         $this->mockClock(new \DateTimeImmutable('02 Dec 2021 01:01:01 +0000'));

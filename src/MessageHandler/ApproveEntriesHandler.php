@@ -14,9 +14,10 @@ use Crell\Bundle\Planedo\Entity\FeedEntry;
 use Crell\Bundle\Planedo\Message\ApproveEntries;
 use Crell\Bundle\Planedo\Repository\FeedEntryRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class ApproveEntriesHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class ApproveEntriesHandler
 {
     private FeedEntryRepository $entryRepo;
 
@@ -26,7 +27,7 @@ final class ApproveEntriesHandler implements MessageHandlerInterface
         $this->entryRepo = $this->em->getRepository(FeedEntry::class);
     }
 
-    public function __invoke(ApproveEntries $message)
+    public function __invoke(ApproveEntries $message): void
     {
         $this->entryRepo->approve(...$message->entryIds);
     }
